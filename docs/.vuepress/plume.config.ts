@@ -1,5 +1,6 @@
 import { defineThemeConfig } from 'vuepress-theme-plume'
-
+import { enNotes, zhNotes } from './notes.ts'
+import { enNavbar, zhNavbar } from './navbar.ts'
 
 export default defineThemeConfig({
   logo: '/logo.png',
@@ -13,6 +14,8 @@ export default defineThemeConfig({
   locales: {
     '/': {
       home: '/',
+      notes: zhNotes,
+      navbar: zhNavbar,
       footer: { message: '', copyright: 'Copyright © 2023-present 智能精准分析化学实验室' },
       profile: {
         avatar: '/avatar.jpg',
@@ -25,6 +28,8 @@ export default defineThemeConfig({
     },
     '/en/': {
       home: '/en/',
+      notes: enNotes,
+      navbar: enNavbar,
       footer: { message: '', copyright: 'Copyright © 2023-present IPAC Lab' },
       profile: {
         avatar: '/avatar.jpg',
