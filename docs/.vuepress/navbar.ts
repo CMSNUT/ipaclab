@@ -83,16 +83,16 @@ export const zhNavbar = [
     icon: 'icon-park-outline:guide-board',
     items: [
       {
-        text: 'python',
+        text: '经典机器学习',
         // icon: 'logos:vue',
-        link: '/notes/machine-learning/python/教程列表.md',
+        link: '/notes/machine-learning/cml/教程列表.md',
         activeMatch: '^/python/',
       },
       {
-        text: '入门教程',
+        text: '深度学习',
         // icon: 'logos:vue',
-        link: '/notes/machine-learning/R/教程列表.md',
-        activeMatch: '^/R/',
+        link: '/notes/machine-learning/dl/教程列表.md',
+        activeMatch: '^/dl/',
       },
     ],
   },
