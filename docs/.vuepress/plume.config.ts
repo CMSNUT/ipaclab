@@ -4,13 +4,14 @@ import { enNavbar, zhNavbar } from './navbar.ts'
 
 export default defineThemeConfig({
   logo: '/logo.png',
+
   social: [
     { icon: 'github', link: 'https://cmsnut.github.io/ipaclab/' },
-    // { icon: 'bilibili', link: 'https://pengzhanbo.cn' },
-    // { icon: 'zhihu', link: 'https://pengzhanbo.cn' },
+    { icon: 'bilibili', link: 'https://aikemi.cn' },
+    { icon: 'zhihu', link: 'https://aikemi.cn' },
   ],
-
   navbarSocialInclude: ['github'],
+
   locales: {
     '/': {
       home: '/',
@@ -28,7 +29,7 @@ export default defineThemeConfig({
     },
     '/en/': {
       home: '/en/',
-      notes: enNotes,
+      // notes: enNotes,
       navbar: enNavbar,
       footer: { message: '', copyright: 'Copyright © 2023-present IPAC Lab' },
       profile: {
@@ -36,8 +37,8 @@ export default defineThemeConfig({
         name: 'IPAC Lab',
         description: 'Asking for Science',
         circle: true,
-        location: '中国陕西汉中',
-        organization: '陕西理工大学',
+        location: 'Hanzhong, Shaanxi, China',
+        organization: 'Shaanxi University of Technology',
       },
     },
   },

@@ -20,6 +20,9 @@ importers:
       flowchart.ts:
         specifier: ^3.0.0
         version: 3.0.0
+      ipaclab:
+        specifier: 'link:'
+        version: 'link:'
       mermaid:
         specifier: ^10.9.1
         version: 10.9.1

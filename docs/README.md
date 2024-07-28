@@ -10,7 +10,7 @@ config:
     hero:
       name: 智能精准分析化学
       tagline: IPAC Lab
-      text: 思想有多远，路就有多远
+      text: 思想有多远 路就有多远
       actions:
         -
           text: IPAC Lab
