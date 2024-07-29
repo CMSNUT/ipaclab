@@ -26,6 +26,12 @@ export default defineThemeConfig({
         location: '中国陕西汉中',
         organization: '陕西理工大学',
       },
+      encrypt: {
+        rules: {
+          // 可以是 文件夹的路径，对该目录下所有文章加密
+          '/notes/projects/': 'ipac3426',
+        }
+      }
     },
     '/en/': {
       home: '/en/',

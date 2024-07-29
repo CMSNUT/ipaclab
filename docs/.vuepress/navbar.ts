@@ -16,7 +16,7 @@ export const zhNavbar = [
       {
         text: '实验设计',
         // icon: 'logos:vue',
-        link: '/notes/lab-guide/doe/概述.md',
+        link: '/notes/lab-guide/doe/1.概述.md',
         activeMatch: '^/doe/',
       },
       {
@@ -70,10 +70,10 @@ export const zhNavbar = [
         activeMatch: '^/datasets/',
       },
       {
-        text: '入门教程',
+        text: '初级教程',
         // icon: 'logos:vue',
-        link: '/notes/bioinformatics/tutorials/教程列表.md',
-        activeMatch: '^/tutorials/',
+        link: '/notes/bioinformatics/primer/教程列表.md',
+        activeMatch: '^/primer/',
       },
     ],
   },
@@ -96,62 +96,13 @@ export const zhNavbar = [
       },
     ],
   },
-  // {
-  //   text: '项目管理',
-  //   icon: 'icon-park-outline:guide-board',
-  //   items: [
-  //     {
-  //       text: '国家级',
-  //       // icon: 'logos:vue',
-  //       link: '/notes/projects/nsf/项目列表.md',
-  //       activeMatch: '^/nsf/',
-  //     },
-  //     {
-  //       text: '省部级',
-  //       // icon: 'logos:vue',
-  //       link: '/notes/projects/pmsf/项目列表.md',
-  //       activeMatch: '^/pmsf/',
-  //     },
-  //     {
-  //       text: '省部级',
-  //       // icon: 'logos:vue',
-  //       link: '/notes/projects/pmsf/项目列表.md',
-  //       activeMatch: '^/pmsf/',
-  //     },
-  //   ],
-  // },
+  {
+    text: '项目管理',
+    icon: 'icon-park-outline:guide-board',
+    link: '/notes/projects/项目列表.md',
+    activeMatch: '^/projects/',
+  },
 ] as NavItem[]
 
 export const enNavbar = [
-  // {
-  //   text: 'Guide',
-  //   icon: 'icon-park-outline:guide-board',
-  //   link: '/en/guide/intro/',
-  //   activeMatch: '^/en/guide/',
-  // },
-  // {
-  //   text: 'Config',
-  //   icon: 'icon-park-outline:setting-two',
-  //   link: '/en/config/intro/',
-  //   activeMatch: '^/en/config/',
-  // },
-  // {
-  //   text: 'Blog',
-  //   link: '/en/blog/',
-  //   icon: 'material-symbols:article-outline',
-  //   activeMatch: '^/en/(blog|article)/',
-  // },
-  // {
-  //   text: 'More',
-  //   icon: 'icon-park-outline:more-three',
-  //   items: [
-  //     {
-  //       text: 'Vuepress',
-  //       items: [
-  //         { text: 'Official Docs', link: 'https://v2.vuepress.vuejs.org' },
-  //         { text: 'Ecosystem', link: 'https://ecosystem.vuejs.press/' },
-  //       ],
-  //     },
-  //   ],
-  // },
 ] as NavItem[]
