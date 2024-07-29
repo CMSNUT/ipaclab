@@ -19,11 +19,9 @@
   "dependencies": {
     "@vue/repl": "^4.3.1",
     "@vuepress/bundler-vite": "2.0.0-rc.14",
-    "kotlin-playground": "^1.30.0",
     "markmap-lib": "^0.17.0",
     "markmap-toolbar": "^0.17.0",
     "reveal.js": "^5.1.0",
-    "sandpack-vue3": "^3.1.11",
     "vue": "^3.4.34",
     "vuepress": "2.0.0-rc.14",
     "vuepress-theme-plume": "1.0.0-rc.82"
