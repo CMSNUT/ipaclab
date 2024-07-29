@@ -1,21 +1,40 @@
 {
   "name": "ipaclab",
+  "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "packageManager": "pnpm@9.6.0",
+  "description": "IPAC Lab Blog Site",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
-    "deploy": "bash deploy.sh"
+    "build": "vuepress build docs --clean-cache --clean-temp",
+    "deploy": "bash deploy.sh",
+    "lint:fix": "prettier . --write"
   },
   "keywords": [],
   "author": "Aikemi",
   "license": "GPL-3.0",
-  "devDependencies": {
+  "dependencies": {
+    "@iconify/json": "^2.2.232",
+    "@vue/repl": "^4.3.1",
     "@vuepress/bundler-vite": "2.0.0-rc.14",
+    "kotlin-playground": "^1.30.0",
+    "markmap-lib": "^0.17.0",
+    "markmap-toolbar": "^0.17.0",
+    "reveal.js": "^5.1.0",
+    "sandpack-vue3": "^3.1.11",
     "vue": "^3.4.34",
     "vuepress": "2.0.0-rc.14",
     "vuepress-theme-plume": "1.0.0-rc.82"
+  },
+  "devDependencies": {
+    "@pengzhanbo/prettier-config": "^1.12.0",
+    "@types/express": "^4.17.21",
+    "http-server": "^14.1.1",
+    "prettier": "^3.3.3",
+    "tsconfig-vuepress": "^4.5.0",
+    "typescript": "^5.5.4"
   }
 }

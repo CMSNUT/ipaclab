@@ -3,13 +3,16 @@ import { enNotes, zhNotes } from './notes.ts'
 import { enNavbar, zhNavbar } from './navbar.ts'
 
 export default defineThemeConfig({
-  logo: '/logo.png',
+  docsRepo: 'https://github.com/cmsnut/ipaclab',
+  contributors: false,
 
+  logo: '/logo.png',
   social: [
     { icon: 'github', link: 'https://cmsnut.github.io/ipaclab/' },
     { icon: 'bilibili', link: 'https://aikemi.cn' },
     { icon: 'zhihu', link: 'https://aikemi.cn' },
   ],
+
   navbarSocialInclude: ['github'],
 
   locales: {
@@ -26,16 +29,12 @@ export default defineThemeConfig({
         location: '中国陕西汉中',
         organization: '陕西理工大学',
       },
-      encrypt: {
-        rules: {
-          // 可以是 文件夹的路径，对该目录下所有文章加密
-          '/notes/projects/': 'ipac3426',
-        }
-      }
+      editLinkText: '在 GitHub 上编辑此页',
+      externalLinkIcon: false as any,
     },
     '/en/': {
       home: '/en/',
-      // notes: enNotes,
+      notes: enNotes,
       navbar: enNavbar,
       footer: { message: '', copyright: 'Copyright © 2023-present IPAC Lab' },
       profile: {
@@ -46,6 +45,8 @@ export default defineThemeConfig({
         location: 'Hanzhong, Shaanxi, China',
         organization: 'Shaanxi University of Technology',
       },
+      editLinkText: 'Edit this page on GitHub',
+      externalLinkIcon: false as any,
     },
   },
 })
