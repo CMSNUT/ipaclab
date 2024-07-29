@@ -67,12 +67,15 @@ export default defineUserConfig({
         repl: true, // :::go-repl   :::kotlin-repl  :::rust-repl
         plot: true, // <Plot>悬停时可见</Plot>  <Plot trigger="click">点击时可见</Plot>
       },
-      watermark: {
-        enabled: false,
-        watermarkOptions: {
-          content: 'IPAC Lab',
-        },
-      },
+      // watermark: {
+      //   // enabled: false,
+      //   enabled: page => true,
+      //   delay: 500,
+      //   fullPage: true,
+      //   watermarkOptions: {
+      //     content: 'IPAC Lab',
+      //   },
+      // },
     },
   }),
   bundler: viteBundler(),
