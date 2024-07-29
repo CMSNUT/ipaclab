@@ -17,7 +17,6 @@
   "author": "Aikemi",
   "license": "GPL-3.0",
   "dependencies": {
-    "@iconify/json": "^2.2.232",
     "@vue/repl": "^4.3.1",
     "@vuepress/bundler-vite": "2.0.0-rc.14",
     "kotlin-playground": "^1.30.0",

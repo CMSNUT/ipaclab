@@ -16,7 +16,7 @@ export const zhNavbar = [
       {
         text: '实验设计',
         // icon: 'logos:vue',
-        link: '/notes/lab-guide/doe/1.概述.md',
+        link: '/notes/lab-guide/doe/1.基础知识/1.概述.md',
         activeMatch: '^/doe/',
       },
       {
@@ -106,104 +106,5 @@ export const zhNavbar = [
 
 
 export const enNavbar = [
-  // {
-  //   text: 'Blog',
-  //   link: '/en/blog/',
-  //   icon: 'material-symbols:article-outline',
-  //   activeMatch: '^/(blog|article)/',
-  // },
 
-  // {
-  //   text: 'Lab Guide',
-  //   icon: 'icon-park-outline:guide-board',
-  //   items: [
-  //     {
-  //       text: 'DoE',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/lab-guide/doe/1.概述.md',
-  //       activeMatch: '^/doe/',
-  //     },
-  //     {
-  //       text: 'Instruments',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/lab-guide/instruments/实验仪器.md',
-  //       activeMatch: '^/instruments/',
-  //     },
-  //   ],
-  // },
-
-  // {
-  //   text: 'Chemometrics',
-  //   icon: 'icon-park-outline:guide-board',
-  //   items: [
-  //     {
-  //       text: 'Data Pretreatment',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/chemometrics/pretreatment/教程列表.md',
-  //       activeMatch: '^/pretreatment/',
-  //     },
-  //     {
-  //       text: 'Multivariate Calibration',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/chemometrics/multivariate-calibration/教程列表.md',
-  //       activeMatch: '^/multivariate-calibration/',
-  //     },
-  //     {
-  //       text: 'Multivariate Resolution',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/chemometrics/multivariate-resolution/教程列表.md',
-  //       activeMatch: '^/multivariate-resolution/',
-  //     },
-  //     {
-  //       text: 'Pattern Recognition',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/chemometrics/pattern-recognition/教程列表.md',
-  //       activeMatch: '^/pattern-recognition/',
-  //     },
-  //   ],
-  // },
-
-  // {
-  //   text: '生物信息学',
-  //   icon: 'icon-park-outline:guide-board',
-  //   items: [
-  //     {
-  //       text: 'Medical Datasets',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/bioinformatics/datasets/数据列表.md',
-  //       activeMatch: '^/datasets/',
-  //     },
-  //     {
-  //       text: 'Primer Courses',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/bioinformatics/primer/教程列表.md',
-  //       activeMatch: '^/primer/',
-  //     },
-  //   ],
-  // },
-
-  // {
-  //   text: 'Machine Learning',
-  //   icon: 'icon-park-outline:guide-board',
-  //   items: [
-  //     {
-  //       text: 'Classic Machine Learning',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/machine-learning/cml/教程列表.md',
-  //       activeMatch: '^/cml/',
-  //     },
-  //     {
-  //       text: 'Deep Learning',
-  //       // icon: 'logos:vue',
-  //       link: '/en/notes/machine-learning/dl/教程列表.md',
-  //       activeMatch: '^/dl/',
-  //     },
-  //   ],
-  // },
-  // {
-  //   text: 'Projects',
-  //   icon: 'icon-park-outline:guide-board',
-  //   link: '/en/notes/projects/项目列表.md',
-  //   activeMatch: '^/projects/',
-  // },
 ] as NavItem[]

@@ -3,10 +3,10 @@ import { enNotes, zhNotes } from './notes.ts'
 import { enNavbar, zhNavbar } from './navbar.ts'
 
 export default defineThemeConfig({
-  docsRepo: 'https://github.com/cmsnut/ipaclab',
+  logo: '/logo.png',
+  docsRepo: 'https://github.com/cmsnut/ipaclab/',
   contributors: false,
 
-  logo: '/logo.png',
   social: [
     { icon: 'github', link: 'https://cmsnut.github.io/ipaclab/' },
     { icon: 'bilibili', link: 'https://aikemi.cn' },
@@ -14,16 +14,15 @@ export default defineThemeConfig({
   ],
 
   navbarSocialInclude: ['github'],
-
   locales: {
     '/': {
-      home: '/',
+      // home: '/',
       notes: zhNotes,
       navbar: zhNavbar,
       footer: { message: '', copyright: 'Copyright © 2023-present 智能精准分析化学实验室' },
       profile: {
         avatar: '/avatar.jpg',
-        name: '智能精准分析化学实验室',
+        name: 'IPAC Lab',
         description: '锲而不舍 砥砺前行',
         circle: true,
         location: '中国陕西汉中',
@@ -33,7 +32,7 @@ export default defineThemeConfig({
       externalLinkIcon: false as any,
     },
     '/en/': {
-      home: '/en/',
+      // home: '/en/',
       notes: enNotes,
       navbar: enNavbar,
       footer: { message: '', copyright: 'Copyright © 2023-present IPAC Lab' },
@@ -49,4 +48,11 @@ export default defineThemeConfig({
       externalLinkIcon: false as any,
     },
   },
+
+  encrypt: {
+    rules: {
+      '^/projects/': 'ipac3426',
+    },
+  },
+  autoFrontmatter: { exclude: ['**/*.snippet.*'] },
 })
