@@ -6,59 +6,59 @@ export const zhNotes = definePlumeNotesConfig({
   notes: [
     {
       dir: 'lab-guide/doe/',
-      link: '/doe/',
+      link: '/lab-guide/doe/',
       sidebar: 'auto',
     },
     {
       dir: 'lab-guide/instruments/',
-      link: '/instruments/',
+      link: '/lab-guide/instruments/',
       sidebar: 'auto',
     },
     {
       dir: 'chemometrics/pretreatment/',
-      link: '/pretreatment/',
+      link: '/chemometrics/pretreatment/',
       sidebar: 'auto',
     },
     {
       dir: 'chemometrics/multivariate-calibration/',
-      link: '/multivariate-calibration/',
+      link: '/chemometrics/multivariate-calibration/',
       sidebar: 'auto',
     },
     {
       dir: 'chemometrics/multivariate-resolution/',
-      link: '/multivariate-resolution/',
+      link: '/chemometrics/multivariate-resolution/',
       sidebar: 'auto',
     },
     {
       dir: 'chemometrics/pattern-recognition/',
-      link: '/pattern-recognition/',
+      link: '/chemometrics/pattern-recognition/',
       sidebar: 'auto',
     },
     {
       dir: 'bioinformatics/datasets/',
-      link: '/datasets/',
+      link: '/bioinformatics/datasets/',
       sidebar: 'auto',
     },
     {
       dir: 'bioinformatics/primer/',
-      link: '/primer/',
+      link: '/bioinformatics/primer/',
       sidebar: 'auto',
     },
     {
       dir: 'machine-learning/cml/',
-      link: '/cml/',
+      link: '/machine-learning/cml/',
       sidebar: 'auto',
     },
     {
       dir: 'machine-learning/dl/',
-      link: '/dl/',
+      link: '/machine-learning/dl/',
       sidebar: 'auto',
     },
-    {
-      dir: 'projects/',
-      link: '/projects/',
-      sidebar: 'auto',
-    },
+    // {
+    //   dir: 'projects/',
+    //   link: '/projects/',
+    //   sidebar: 'auto',
+    // },
   ],
 })
 
@@ -67,56 +67,56 @@ export const enNotes = definePlumeNotesConfig({
   dir: 'en/notes',
   link: '/',
   notes: [
-    // {
-    //   dir: 'lab-guide/doe/',
-    //   link: '/doe/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'lab-guide/instruments/',
-    //   link: '/instruments/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'en/chemometrics/pretreatment/',
-    //   link: '/pretreatment/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'chemometrics/multivariate-calibration/',
-    //   link: '/multivariate-calibration/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'chemometrics/multivariate-resolution/',
-    //   link: '/multivariate-resolution/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'chemometrics/pattern-recognition/',
-    //   link: '/pattern-recognition/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'bioinformatics/datasets/',
-    //   link: '/datasets/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'bioinformatics/primer/',
-    //   link: '/primer/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'machine-learning/cml/',
-    //   link: '/cml/',
-    //   sidebar: 'auto',
-    // },
-    // {
-    //   dir: 'machine-learning/dl/',
-    //   link: '/dl/',
-    //   sidebar: 'auto',
-    // },
+    {
+      dir: 'lab-guide/doe/',
+      link: '/en/lab-guide/doe/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'lab-guide/instruments/',
+      link: '/en/lab-guide/instruments/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'chemometrics/pretreatment/',
+      link: '/en/chemometrics/pretreatment/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'chemometrics/multivariate-calibration/',
+      link: '/en/chemometrics/multivariate-calibration/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'chemometrics/multivariate-resolution/',
+      link: '/en/chemometrics/multivariate-resolution/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'chemometrics/pattern-recognition/',
+      link: '/en/chemometrics/pattern-recognition/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'bioinformatics/datasets/',
+      link: '/en/bioinformatics/datasets/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'bioinformatics/primer/',
+      link: '/en/bioinformatics/primer/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'machine-learning/cml/',
+      link: '/en/machine-learning/cml/',
+      sidebar: 'auto',
+    },
+    {
+      dir: 'machine-learning/dl/',
+      link: '/en/machine-learning/dl/',
+      sidebar: 'auto',
+    },
     // {
     //   dir: 'projects/',
     //   link: '/projects/',

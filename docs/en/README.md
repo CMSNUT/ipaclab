@@ -9,12 +9,12 @@ config:
       dark: 0.3
     hero:
       name: IPAC Lab
-      tagline: Intelligence & Precision Analytical Chemistry
+      tagline: Intelligence & Precision Analytical Chemistry Lab
       text: Asking for Science
       actions:
         -
           text: IPAC Lab
-          link: /blog/
+          link: /en/blog/
           theme: brand
         -
           text: Github

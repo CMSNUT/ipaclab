@@ -4,7 +4,7 @@ import { enNavbar, zhNavbar } from './navbar.ts'
 
 export default defineThemeConfig({
   logo: '/logo.png',
-  docsRepo: 'https://github.com/cmsnut/ipaclab/',
+  docsRepo: 'https://github.com/cmsnut/ipaclab',
   contributors: false,
 
   social: [
@@ -28,6 +28,8 @@ export default defineThemeConfig({
         location: '中国陕西汉中',
         organization: '陕西理工大学',
       },
+      docsDir: 'docs',
+      docsBranch: 'main',
       editLinkText: '在 GitHub 上编辑此页',
       externalLinkIcon: false as any,
     },
@@ -44,6 +46,8 @@ export default defineThemeConfig({
         location: 'Hanzhong, Shaanxi, China',
         organization: 'Shaanxi University of Technology',
       },
+      docsDir: 'docs',
+      docsBranch: 'main',
       editLinkText: 'Edit this page on GitHub',
       externalLinkIcon: false as any,
     },
@@ -51,7 +55,12 @@ export default defineThemeConfig({
 
   encrypt: {
     rules: {
-      '^/projects/': 'ipac3426',
+      // zh
+      // '^/projects/': 'ipac3426',
+      '/lab-guide/instruments/list/': 'ipac3426',
+
+      // en
+      '/en/lab-guide/instruments/list/': 'ipac3426',
     },
   },
   autoFrontmatter: { exclude: ['**/*.snippet.*'] },

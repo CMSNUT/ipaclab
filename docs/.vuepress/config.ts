@@ -2,18 +2,23 @@ import { defineUserConfig } from 'vuepress'
 import { viteBundler } from '@vuepress/bundler-vite'
 import { plumeTheme } from 'vuepress-theme-plume'
 import * as path from 'node:path'
-import process from 'node:process'
 
 export default defineUserConfig({
   base: '/ipaclab/',
+  bundler: viteBundler(),
+  source: path.resolve(__dirname, '../'),
+  public: path.resolve(__dirname, 'public'),
+  head: [
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }],
+  ],
   lang: 'zh-CN',
   locales: {
     '/': { lang: 'zh-CN', title: '智能精准分析化学实验室' },
     '/en/': { lang: 'en-US', title: 'IPAC Lab' }
   },
-
   theme: plumeTheme({
-    hostname: process.env.SITE_HOST || 'https://cmsnut.github.io/ipaclab/',
+    hostname: 'https://cmsnut.github.io/ipaclab/',
     plugins: {
       shiki: {
         theme: { light: 'vitesse-light', dark: 'vitesse-dark' },
@@ -80,11 +85,4 @@ export default defineUserConfig({
       // },
     },
   }),
-  bundler: viteBundler(),
-  source: path.resolve(__dirname, '../'),
-  public: path.resolve(__dirname, 'public'),
-  head: [
-    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
-    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }],
-  ],
 }) as UserConfig
