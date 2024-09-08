@@ -142,8 +142,8 @@ packages:
     resolution: {integrity: sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/types@7.25.0':
-    resolution: {integrity: sha512-LcnxQSsd9aXOIgmmSpvZ/1yo46ra2ESYyqLcryaBZOghxy5qqOBjvCWP5JfkI8yl9rlxRgdLTTMCQQRcN2hdCg==}
+  '@babel/types@7.25.2':
+    resolution: {integrity: sha512-YTnYtra7W9e6/oAZEHj0bJehPRUlLH9/fbpT5LfB0NhQXyALCRkRs3zH9v07IYhkgpqX6Z78FnuccZr/l4Fs4Q==}
     engines: {node: '>=6.9.0'}
 
   '@braintree/sanitize-url@6.0.4':
@@ -1446,8 +1446,8 @@ packages:
     resolution: {integrity: sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==}
     engines: {node: '>= 0.4'}
 
-  caniuse-lite@1.0.30001643:
-    resolution: {integrity: sha512-ERgWGNleEilSrHM6iUz/zJNSQTP8Mr21wDWpdgvRwcTXGAq6jMtOUPP4dqFPTdKqZ2wKTdtB+uucZ3MRpAUSmg==}
+  caniuse-lite@1.0.30001644:
+    resolution: {integrity: sha512-YGvlOZB4QhZuiis+ETS0VXR+MExbFf4fZYYeMTEE0aTQd/RdIjkTyZjLrbYVKnHzppDvnOhritRVv+i7Go6mHw==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -1771,8 +1771,8 @@ packages:
   echarts@5.5.1:
     resolution: {integrity: sha512-Fce8upazaAXUVUVsjgV6mBnGuqgO+JNDlcgF79Dksy4+wgGpQB2lmYoO4TSweFg/mZITdpGHomw/cNBJZj1icA==}
 
-  electron-to-chromium@1.5.2:
-    resolution: {integrity: sha512-kc4r3U3V3WLaaZqThjYz/Y6z8tJe+7K0bbjUVo3i+LWIypVdMx5nXCkwRe6SWbY6ILqLdc1rKcKmr3HoH7wjSQ==}
+  electron-to-chromium@1.5.3:
+    resolution: {integrity: sha512-QNdYSS5i8D9axWp/6XIezRObRHqaav/ur9z1VzCDUCH1XIFOr9WQk5xmgunhsTpjjgDy3oLxO/WMOVZlpUQrlA==}
 
   elkjs@0.9.3:
     resolution: {integrity: sha512-f/ZeWvW/BCXbhGEf1Ujp29EASo/lk1FDnETgNKwJrsVvGZhUWCZyg3xLJjAsxfOmt8KjswHmI5EwCQcPMpOYhQ==}
@@ -2785,8 +2785,8 @@ packages:
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
-  tm-grammars@1.15.2:
-    resolution: {integrity: sha512-9q4jq/6r/Biy6za4j4JrzQI6TX4GA0EAbWFdN/onyJvY6FfoRocDYAgCBc8efZ0kix+uDSWu1nPLDZsTZr26Jw==}
+  tm-grammars@1.15.3:
+    resolution: {integrity: sha512-i74vIGey1y+8+OfWoulcdxZ53INOo+46HAvIa3NU0j22GIwby9fwJkXhm8gKlXroLCyDa46hXBpR95SHo0yOdg==}
 
   tm-themes@1.5.7:
     resolution: {integrity: sha512-po/2dZNyEDcPdlzHLWb8GZuCKierNUOyF5Nff6EUVqBknaoY6ksGc2xQ2/SnP4S22H/VuzN82ObABGu77RTa+w==}
@@ -3202,13 +3202,13 @@ snapshots:
 
   '@babel/parser@7.25.0':
     dependencies:
-      '@babel/types': 7.25.0
+      '@babel/types': 7.25.2
 
   '@babel/runtime@7.25.0':
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/types@7.25.0':
+  '@babel/types@7.25.2':
     dependencies:
       '@babel/helper-string-parser': 7.24.8
       '@babel/helper-validator-identifier': 7.24.7
@@ -4549,7 +4549,7 @@ snapshots:
   autoprefixer@10.4.19(postcss@8.4.40):
     dependencies:
       browserslist: 4.23.2
-      caniuse-lite: 1.0.30001643
+      caniuse-lite: 1.0.30001644
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
@@ -4583,8 +4583,8 @@ snapshots:
 
   browserslist@4.23.2:
     dependencies:
-      caniuse-lite: 1.0.30001643
-      electron-to-chromium: 1.5.2
+      caniuse-lite: 1.0.30001644
+      electron-to-chromium: 1.5.3
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.2)
 
@@ -4604,7 +4604,7 @@ snapshots:
       get-intrinsic: 1.2.4
       set-function-length: 1.2.2
 
-  caniuse-lite@1.0.30001643: {}
+  caniuse-lite@1.0.30001644: {}
 
   ccount@2.0.1: {}
 
@@ -4971,7 +4971,7 @@ snapshots:
       zrender: 5.6.0
     optional: true
 
-  electron-to-chromium@1.5.2: {}
+  electron-to-chromium@1.5.3: {}
 
   elkjs@0.9.3:
     optional: true
@@ -6291,7 +6291,7 @@ snapshots:
 
   tabbable@6.2.0: {}
 
-  tm-grammars@1.15.2: {}
+  tm-grammars@1.15.3: {}
 
   tm-themes@1.5.7: {}
 
@@ -6505,7 +6505,7 @@ snapshots:
       markdown-it-container: 4.0.0
       nanoid: 5.0.7
       shiki: 1.12.0
-      tm-grammars: 1.15.2
+      tm-grammars: 1.15.3
       tm-themes: 1.5.7
       vue: 3.4.34(typescript@5.5.4)
       vuepress: 2.0.0-rc.14(@vuepress/bundler-vite@2.0.0-rc.14(@types/node@22.0.0)(sass@1.77.8)(typescript@5.5.4))(typescript@5.5.4)(vue@3.4.34(typescript@5.5.4))
