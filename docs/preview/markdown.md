@@ -64,9 +64,9 @@ H~2~O
 >
 > 引用内容
 
-[链接](/)
+[](/)
 
-[外部链接](https://github.com/pengzhanbo)
+[外部](https://github.com/pengzhanbo)
 
 **Badge：**
 
@@ -299,9 +299,9 @@ span {
 
 **脚注：**
 
-脚注 1 链接[^first]。
+脚注 1 [^first]。
 
-脚注 2 链接[^second]。
+脚注 2 [^second]。
 
 行内的脚注^[行内脚注文本] 定义。
 
