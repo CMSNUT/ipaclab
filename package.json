@@ -18,7 +18,7 @@
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.18",
     "@vuepress/plugin-markdown-math": "^2.0.0-rc.57",
-    "chart.js": "^4.4.5",
+    "chart.js": "^4.4.6",
     "echarts": "^5.5.1",
     "flowchart.ts": "^3.0.1",
     "http-server": "^14.1.1",
