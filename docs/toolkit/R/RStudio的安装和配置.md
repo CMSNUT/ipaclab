@@ -51,10 +51,9 @@ chooseCRANmirror()
 options("repos" = c(CRAN="https://mirrors.tuna.tsinghua.edu.cn/CRAN/")) # 清华镜像
 
 # Bioconductor镜像设置 (安装Bioconductor前设置)
-options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor/") #清华镜像
+options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor") #清华镜像
 
 # 选择
-options()$BioC_mirror
 chooseBioCmirror(graphics = getOption("menu.graphics"), ind = NULL,local.only = FALSE)
 ```
 
