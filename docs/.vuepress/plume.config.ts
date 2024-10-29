@@ -24,8 +24,8 @@ export default defineThemeConfig({
         name: 'IPACLab',
         description: 'Web for IPACLab',
         // circle: true,
-        // location: '',
-        // organization: '',
+        location: '中国汉中市',
+        organization: '陕西理工大学',
       },
 
       navbar: zhNavbar,
@@ -37,8 +37,8 @@ export default defineThemeConfig({
         name: 'IPACLab',
         description: 'Web for IPACLab',
         // circle: true,
-        // location: '',
-        // organization: '',
+        location: 'Hanzhong, China',
+        organization: 'Shaanxi University of Technology',
       },
 
       navbar: enNavbar,

@@ -11,7 +11,7 @@ permalink: /article/21o14ut0/
 ## 创建虚拟环境,安装RDKit
 
 ```bash
-conda create -c rdkit -n cheminfo-env rdkit 
+conda create -c rdkit -n cheminfo-env rdkit
 conda activate cheminfo-env
 pip install ipykernel -i https://pypi.tuna.tsinghua.edu.cn/simple
 python -m ipykernel install --user --name cheminfo-env

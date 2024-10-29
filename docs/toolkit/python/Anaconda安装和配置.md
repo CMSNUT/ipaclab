@@ -14,7 +14,8 @@ permalink: /article/pdfr7qz3/
 ### Anaconda配置
 
 [参考](https://blog.csdn.net/xd_wjc/article/details/80587488)
-打开anaconda的prompt
+
+**管理员身份 启动 Anaconda Prompt**
 
 - **查看已有镜像**
 
