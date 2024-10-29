@@ -10,6 +10,8 @@ permalink: /article/21o14ut0/
 ---
 ## 创建虚拟环境,安装RDKit
 
+**管理员身份，启动 Anaconda Prompt**
+
 ```bash
 conda create -c rdkit -n cheminfo-env rdkit
 conda activate cheminfo-env
@@ -76,7 +78,5 @@ pip install openbabel-wheel -i https://pypi.tuna.tsinghua.edu.cn/simple
 obabel -h
 # 测试(jupyter)
 from openbabel import openbabel
-
-
 
 ```

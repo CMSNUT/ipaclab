@@ -72,3 +72,26 @@ jupyter notebook --generate-config
 - 将 **#c.ServerApp.notebook_dir  = ‘’**修改为：c.ServerApp.notebook_dir  = ‘指定目录（根据自己修改而定）’，比如：c.ServerApp.notebook_dir  = 'E:\\python'，保存退出
 - **Jupyter Notebook快捷方式，配置其属性（右击选择属性，删除 目标中的 "%USERPROFILE%/"这个后缀 以及起始位置的 "%USERPROFILE%/"）**
 - **非管理员打开，管理员打开有时会出错**
+
+### Anaconda 清除安装包和缓存
+[参考资料](https://blog.csdn.net/Ever_____/article/details/136749066)
+
+```bash
+# 清理所有环境的Anaconda包缓存 删除所有未使用的包以及缓存的索引和临时文件
+conda clean --all -y
+
+# 清理某一特定环境的Anaconda包缓存
+conda clean --all -n 环境名
+
+# 清除Anaconda下载的 tarballs（.tar.bz2 文件）
+conda clean -t #所有环境
+conda clean -t -n 环境名 #某一特定环境
+
+```
+
+- **清理anaconda缓存**
+```bash
+conda clean -p      # 删除没有用的包 --packages
+conda clean -t      # 删除tar打包 --tarballs
+conda clean -y -all # 删除所有的安装包及cache(索引缓存、锁定文件、未使用过的包和tar包)
+```
