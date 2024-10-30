@@ -62,3 +62,12 @@ chooseBioCmirror(graphics = getOption("menu.graphics"), ind = NULL,local.only = 
 ## 界面设置
 
 略
+
+## 专业书籍
+1. [R for Data Science （2e）](https://r4ds.hadley.nz/)
+2. [Efficient R programming](https://bookdown.org/csgillespie/efficientR/)
+3. [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)
+4. [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+## 数据科学必备R包
+[参考资料](https://blog.csdn.net/u013421629/article/details/72955040)
