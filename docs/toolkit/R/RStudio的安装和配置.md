@@ -23,7 +23,7 @@ op6=>operation: 6.配置RStudio
 op1(right)->op2->op3(right)->op4->op5(right)->op6
 ```
 
-- [x] 国内镜像(如[清华镜像](https://mirrors.tuna.tsinghua.edu.cn/CRAN/))下载**R**和对应的**RTools**，如[R-4.4.1](https://mirrors.tuna.tsinghua.edu.cn/CRAN/)，对应[RTools 4.4.0](https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/Rtools/rtools44/files/rtools44-6104-6039.exe), 并安装在非系统盘，安装路径必须是英文
+- [x] 国内镜像(如[清华镜像](https://mirrors.tuna.tsinghua.edu.cn/CRAN/))下载**R**和对应的**RTools**，如[R-4.4.1](https://mirrors.tuna.tsinghua.edu.cn/CRAN/)，对应[RTools 4.4.0](https://mirrors.tuna.tsinghua.edu.cn/CRAN/bin/windows/Rtools/rtools44/files/rtools44-6335-6327.exe), 并安装在非系统盘，安装路径必须是英文
 - [x] [RStudio官网](https://posit.co/download/rstudio-desktop/)下载最新版，如[win10/11版](https://download1.rstudio.org/electron/windows/RStudio-2024.09.0-375.exe)，并安装在非系统盘，安装路径必须是英文
 
 ## 关联 RTools和RStudio
@@ -64,10 +64,14 @@ chooseBioCmirror(graphics = getOption("menu.graphics"), ind = NULL,local.only = 
 略
 
 ## 专业书籍
+
 1. [R for Data Science （2e）](https://r4ds.hadley.nz/)
 2. [Efficient R programming](https://bookdown.org/csgillespie/efficientR/)
 3. [bookdown: Authoring Books and Technical Documents with R Markdown](https://bookdown.org/yihui/bookdown/)
 4. [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
 
 ## 数据科学必备R包
+
 [参考资料](https://blog.csdn.net/u013421629/article/details/72955040)
+
+
