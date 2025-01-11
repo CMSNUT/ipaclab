@@ -2,6 +2,7 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
 
+
 export default defineUserConfig({
   base: '/ipaclab/',
   lang: 'zh-CN',

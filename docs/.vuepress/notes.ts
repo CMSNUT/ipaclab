@@ -2,16 +2,36 @@ import { defineNoteConfig, defineNotesConfig } from 'vuepress-theme-plume'
 
 /* =================== locale: zh-CN ======================= */
 
-const zhDemoNote = defineNoteConfig({
+/**
+ * 配置 单个 note
+ */
+
+const zhDemo = defineNoteConfig({
   dir: 'demo',
   link: '/demo',
-  sidebar: ['', 'foo', 'bar'],
+  sidebar: "auto"
 })
+
+const zhCS = defineNoteConfig({
+  dir: '测试',
+  link: '/cs',
+  sidebar: "auto"
+})
+
+
+
+/**
+ * 配置 notes
+ */
 
 export const zhNotes = defineNotesConfig({
   dir: 'notes',
   link: '/',
-  notes: [zhDemoNote],
+  notes: [
+    zhDemo,
+    zhCS,
+    // zhChemometricsTools,
+  ]
 })
 
 /* =================== locale: en-US ======================= */

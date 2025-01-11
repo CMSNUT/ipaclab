@@ -50,3 +50,34 @@ npm list -global
 ```bash
 npm install npm -g
 ```
+
+- npm : 无法加载文件
+
+
+npm : 无法加载文件 d:\nodejs\npm.ps1,因为在此系统上禁止运行脚本。有关详细信
+报错解释：
+
+这个错误表明你的系统策略设置不允许执行未签名的PowerShell脚本。从Windows PowerShell 3.0开始，默认的执行策略被设置为“Restricted”，这意味着默认情况下不允许任何脚本运行。
+
+解决方法：
+
+以管理员身份打开PowerShell。
+
+执行以下命令来查看当前的执行策略：
+```bash
+Get-ExecutionPolicy
+```
+
+如果返回结果是Restricted，你可以设置一个更宽松的执行策略，如RemoteSigned（运行本地脚本和已签名的远程脚本）：
+```bash
+Set-ExecutionPolicy RemoteSigned
+```
+
+或者，如果你确信脚本是安全的，可以暂时设置为Unrestricted（允许所有脚本运行）：
+```bash
+Set-ExecutionPolicy Unrestricted
+```
+
+当系统提示确认时，输入Y并回车以确认更改。
+
+完成这些步骤后，你应该能够运行npm命令了。请注意，更改执行策略可能会带来安全风险，确保只从可信来源运行脚本。

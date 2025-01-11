@@ -1,7 +1,6 @@
 ---
 title: foo
-createTime: 2024/10/26 15:55:55
-permalink: /demo/m1semb0p/
+createTime: 2025/01/11 19:13:57
+permalink: /demo/b51zu7zh/
 ---
-
-[bar](./bar.md)
+foo
