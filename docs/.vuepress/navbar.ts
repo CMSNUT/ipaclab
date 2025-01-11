@@ -6,112 +6,59 @@ export const zhNavbar = defineNavbarConfig([
   // { text: '标签', link: '/blog/tags/' },
   // { text: '归档', link: '/blog/archives/' },
 
+  // { 
+  //   text: '笔记',
+  //   items: 
+  //   [
+  //     { text: '示例', link: '/notes/demo/bar.md' },
+  //     { text: '测试', link: '/notes/测试/1.测试1/1.测试003.md' },
+  //   ]
+  // },
+
+
+  /**
+   * 研究课题
+   */
   { 
-    text: '化学计量学',
+    text: '研究课题',
     items: 
     [
-      { text: '示例', link: '/notes/demo/bar.md' },
-      { text: '测试', link: '/notes/多元校正/1.测试1/1.测试003.md' },
+      { text: '化学计量学', link: '/notes/研究课题/化学计量学/1.算法程序/1.算法001.md' },
+      { text: '生物信息学', link: '/notes/研究课题/生物信息学/转录组学/转录001.md' },
+      
     ]
-  }
+  },
 
-  // { text: '化学计量学', 
-  //   icon: 'icon-park-solid:bookshelf',
-  //   items: [
-  //     {
-  //       text: '研究进展',
-  //       link: '/chemometrics-progresses/',
-  //       activeMatch: '^/chemometrics-progresses/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究工具',
-  //       link: '/tools/',
-  //       activeMatch: '^/tools/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究课题',
-  //       link: '/chemometrics/tasks/',
-  //       activeMatch: '^/chemometrics/tasks/',
-  //       icon: 'emojione:memo',
-  //     },
-  //   ]
-  // },
+  /**
+   * 软件教程
+   */
 
-  // { text: '生物信息学', 
-  //   icon: 'icon-park-solid:bookshelf',
-  //   items: [
-  //     {
-  //       text: '研究进展',
-  //       link: '/bioinfomatics/progresses/',
-  //       activeMatch: '^/bioinfomatics/progresses/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究工具',
-  //       link: '/bioinfomatics/tools/',
-  //       activeMatch: '^/bioinfomatics/tools/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究课题',
-  //       link: '/bioinfomatics/tasks/',
-  //       activeMatch: '^/bioinfomatics/tasks/',
-  //       icon: 'emojione:memo',
-  //     },
-  //   ]
-  // },
+  { 
+    text: '软件教程',
+    items: 
+    [
+      { text: '化学计量学', link: '/notes/软件教程/化学计量学/数据处理/处理001.md' },
+      { text: '生物信息学', link: '/notes/软件教程/生物信息学/生信分析/生信001.md' },
+      
+    ]
+  },
 
-  // { text: '计算机辅助药物设计', 
-  //   icon: 'icon-park-solid:bookshelf',
-  //   items: [
-  //     {
-  //       text: '研究进展',
-  //       link: '/cadd/progresses/',
-  //       activeMatch: '^/cadd/progresses/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究工具',
-  //       link: '/cadd/tools/',
-  //       activeMatch: '^/cadd/tools/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究课题',
-  //       link: '/cadd/tasks/',
-  //       activeMatch: '^/cadd/tasks/',
-  //       icon: 'emojione:memo',
-  //     },
-  //   ]
-  // },
 
-  // { text: '其他工作', 
-  //   icon: 'icon-park-solid:bookshelf',
-  //   items: [
-  //     {
-  //       text: '研究进展',
-  //       link: '/other/progresses/',
-  //       activeMatch: '^/other/progresses/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究工具',
-  //       link: '/other/tools/',
-  //       activeMatch: '^/other/tools/',
-  //       icon: 'emojione:memo',
-  //     },
-  //     {
-  //       text: '研究课题',
-  //       link: '/other/tasks/',
-  //       activeMatch: '^/other/tasks/',
-  //       icon: 'emojione:memo',
-  //     },
-  //   ]
-  // },
+  /**
+   * 实验技术
+   */
 
-  
+  { 
+    text: '实验技术',
+    items: 
+    [
+      { text: '实验安全', link: '/notes/实验技术/实验安全/试剂/危险化学品.md' },
+      { text: '分析仪器', link: '/notes/实验技术/分析仪器/红外光谱/Nicolet.md' },
+      
+    ]
+  },
+
+   
 ])
 
 export const enNavbar = defineNavbarConfig([
