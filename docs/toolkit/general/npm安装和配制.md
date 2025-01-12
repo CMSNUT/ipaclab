@@ -1,5 +1,15 @@
 ---
 title: npm安装和配制
+cover: 
+# copyright: CC-BY-4.0
+
+copyright:
+  creation: reprint
+  license: CC-BY-4.0
+  source: https://example.com/origin
+  author:
+    name: 转载者
+    url: https://example.com/author
 tags:
   - npm
   - nvm

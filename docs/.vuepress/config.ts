@@ -25,7 +25,86 @@ export default defineUserConfig({
     // 添加您的部署域名
     // hostname: 'https://your_site_url',
 
+    /**
+     * bulletin： 公告板
+     * @see https://theme-plume.vuejs.press/guide/features/bulletin/
+     */
+
+    bulletin: {
+      layout: 'top-right',
+      title: '公告板标题',
+      content: '公告板内容',
+    },
+
+    /**
+     * changelog: 文章变更历史
+     * 
+     * 默认 不启用，仅当 plugins.git 为 true 时生效
+     * 此配置在 plume.config.ts 中无效
+     * @see https://theme-plume.vuejs.press/guide/features/changelog/
+     */
+    changelog: true,
+
+    /**
+     * contributors: 文章贡献者
+     * @see https://theme-plume.vuejs.press/guide/features/contributors/
+     */
+    contributors: true,
+
+    /**
+     * copyright: 文章版权
+     * @see https://theme-plume.vuejs.press/guide/features/copyright/
+     */
+    copyright: 'CC-BY-4.0',
+
+    /**
+     * 文章封面图
+     */
+    blog: {
+      // 配置 封面图 布局位置
+      // postCover: 'left', // 'left' | 'right' | 'odd-left' | 'odd-right' | 'top'
+      postCover: {
+        layout: 'left',
+        ratio: '16:9',
+        width: 300,
+        compact: true
+      }
+    },
+
+    /**
+     * 文章加密
+     * @see https://theme-plume.vuejs.press/guide/features/encryption/
+     */
+
+    encrypt: {
+      rules: {
+        // 可以是 md 文件的相对路径，对该文件加密
+        // '前端/基础.md': '123456',
+
+        // 可以是 文件夹的路径，对该目录下所有文章加密
+        // '/notes/': '123456',  //好像失败了
+
+        // 可以是 访问地址的请求路径，对该访问路径下所有文章加密
+        '/tasks/': 'snut3426',
+
+        // 可以是 具体的某个页面的请求路径，对该页面加密
+        // '/article/f8dnci3/': '123456',
+
+        // 如果是 `^` 开头，则匹配该正则表达式的页面也会加密
+        // '^/(a|b)/': '123456',
+      }
+    },
+
     plugins: {
+
+      /**
+       * 文章变更历史 、 文章贡献者
+       * @see https://theme-plume.vuejs.press/guide/features/changelog/
+       */
+      // git: process.env.NODE_ENV === 'production',
+      git: true,
+
+
       /**
        * Shiki 代码高亮
        * @see https://theme-plume.vuejs.press/config/plugins/code-highlight/
@@ -40,18 +119,17 @@ export default defineUserConfig({
        * @see https://theme-plume.vuejs.press/config/plugins/markdown-enhance/
        */
       markdownEnhance: {
-        demo: true, // 代码案例
-        mermaid: true,
-        include: true, // Markdown 导入支持
-        chart: true, // 图表支持
+        chartjs: true, // 图表支持
         echarts: true, // ECharts 图表支持
         flowchart: true, // 流程图支持
-        markmap: true, // Markmap 图表支持
+        // markmap: true, // Markmap 图表支持
+        mermaid: true, // mermaid 图标支持
         // stylize: true, // 对行内语法进行样式化以创建代码片段
         // playground: true, // 交互演示
         // kotlinPlayground: true, // Kotlin 交互演示
         // vuePlayground: true, // Vue 交互演示
         // sandpack: true, // sandpack 交互演示
+        // demo: true, // 代码案例
       },
 
       /**
@@ -80,6 +158,8 @@ export default defineUserConfig({
         imageSize: true, // 在构建阶段为 图片添加 width/height 属性
       },
 
+      
+
       /**
        *  markdown math
        * @see https://theme-plume.vuejs.press/config/plugins/markdown-math/
@@ -88,6 +168,10 @@ export default defineUserConfig({
         type: 'katex',
       },
 
+      /**
+       * markdownImage 为 Markdown 图像添加附加功能
+       * @see https://theme-plume.vuejs.press/config/plugins/markdown-image/
+       */
       markdownImage: {
         // 启用 figure
         figure: true,
