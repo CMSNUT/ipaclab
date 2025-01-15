@@ -18,6 +18,7 @@
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.19",
     "@vuepress/plugin-container": "^2.0.0-rc.0",
+    "@vuepress/plugin-markdown-image": "^2.0.0-rc.70",
     "@vuepress/plugin-markdown-math": "2.0.0-rc.69",
     "chart.js": "^4.4.7",
     "echarts": "^5.6.0",
@@ -35,6 +36,7 @@
     "vuepress-theme-plume": "1.0.0-rc.128"
   },
   "dependencies": {
+    "markmap": "^0.6.1",
     "swiper": "^11.2.1"
   }
 }

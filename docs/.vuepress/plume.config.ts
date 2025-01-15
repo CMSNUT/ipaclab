@@ -22,7 +22,8 @@ export default defineThemeConfig({
       profile: {
         avatar: 'https://theme-plume.vuejs.press/plume.png',
         name: 'IPACLab',
-        description: 'Web for IPACLab',
+        // description: 'Web for IPACLab',
+        description: '智能精准分析化学实验室',
         // circle: true,
         location: '中国汉中市',
         organization: '陕西理工大学',

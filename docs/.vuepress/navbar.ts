@@ -23,10 +23,10 @@ export const zhNavbar = defineNavbarConfig([
     text: '研究课题',
     items: 
     [
-      { text: '化学计量学', link: '/notes/研究课题/化学计量学/1.算法程序/1.算法001.md' },
-      { text: '生物信息学', link: '/notes/研究课题/生物信息学/1.临床医学/1.膀胱癌lncRNAs.md' },
-      { text: '计算机辅助药物设计', link: '/notes/研究课题/计算机辅助药物设计/1.先导化合物优化/1.优化001.md' },
-      { text: '其他', link: '/notes/研究课题/其他/1.氢氧催化粘接/1.粘接溶液配方优化.md' },
+      { text: '化学计量学', link: '/notes/研究课题/化学计量学/README.md' },
+      { text: '生物信息学', link: '/notes/研究课题/生物信息学/README.md' },
+      { text: '计算机辅助药物设计', link: '/notes/研究课题/计算机辅助药物设计/README.md' },
+      { text: '其他', link: '/notes/研究课题/其他/README.md' },
     ]
   },
 
@@ -37,10 +37,10 @@ export const zhNavbar = defineNavbarConfig([
     text: '重要文献',
     items: 
     [
-      { text: '化学计量学', link: '/notes/重要文献/化学计量学/1.算法程序/README.md' },
-      { text: '生物信息学', link: '/notes/重要文献/生物信息学/1.网络药理学/README.md' },
-      { text: '计算机辅助药物设计', link: '/notes/重要文献/计算机辅助药物设计/1.先导化合物优化/README.md' },
-      { text: '其他', link: '/notes/重要文献/其他/1.氢氧催化粘接/README.md' },
+      { text: '化学计量学', link: '/notes/重要文献/化学计量学/README.md' },
+      { text: '生物信息学', link: '/notes/重要文献/生物信息学/README.md' },
+      { text: '计算机辅助药物设计', link: '/notes/重要文献/计算机辅助药物设计/README.md' },
+      { text: '其他', link: '/notes/重要文献/其他/README.md' },
     ]
   },
 
@@ -52,10 +52,10 @@ export const zhNavbar = defineNavbarConfig([
     text: '实验技术',
     items: 
     [
-      { text: '实验安全', link: '/notes/实验技术/实验安全/试剂/危险化学品.md' },
-      { text: '分析仪器', link: '/notes/实验技术/分析仪器/红外光谱/Nicolet.md' },
-      { text: '常规操作', link: '/notes/实验技术/常规操作/分离纯化/过滤.md' },
-      { text: '材料制备', link: '/notes/实验技术/材料制备/SERS基底/Ag纳米.md' },
+      { text: '实验安全', link: '/notes/实验技术/实验安全/README.md' },
+      { text: '分析仪器', link: '/notes/实验技术/分析仪器/README.md' },
+      { text: '常规操作', link: '/notes/实验技术/常规操作/README.md' },
+      { text: '材料制备', link: '/notes/实验技术/材料制备/README.md' },
       
     ]
   },
@@ -68,10 +68,10 @@ export const zhNavbar = defineNavbarConfig([
     text: '软件教程',
     items: 
     [
-      { text: '化学计量学', link: '/notes/软件教程/化学计量学/1.数据处理/1.数据读写.md' },
-      { text: '生物信息学', link: '/notes/软件教程/生物信息学/1.生存分析/1.KM生存曲线.md' },
-      { text: '计算机辅助药物设计', link: '/notes/软件教程/计算机辅助药物设计/1.分子设计/1.分子结构绘制与转换.md' },
-      { text: '其他', link: '/notes/软件教程/其他/1.R软件/1.R基础.md' },
+      { text: '化学计量学', link: '/notes/软件教程/化学计量学/README.md' },
+      { text: '生物信息学', link: '/notes/软件教程/生物信息学/README.md' },
+      { text: '计算机辅助药物设计', link: '/notes/软件教程/计算机辅助药物设计/README.md' },
+      { text: '其他', link: '/notes/软件教程/其他/README.md' },
       
     ]
   },
