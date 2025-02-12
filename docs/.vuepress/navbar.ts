@@ -6,16 +6,6 @@ export const zhNavbar = defineNavbarConfig([
   // { text: '标签', link: '/blog/tags/' },
   // { text: '归档', link: '/blog/archives/' },
 
-  // { 
-  //   text: '笔记',
-  //   items: 
-  //   [
-  //     { text: '示例', link: '/notes/demo/bar.md' },
-  //     { text: '测试', link: '/notes/测试/1.测试1/1.测试003.md' },
-  //   ]
-  // },
-
-
   /**
    * 研究课题
    */
@@ -25,22 +15,9 @@ export const zhNavbar = defineNavbarConfig([
     [
       { text: '化学计量学', link: '/notes/研究课题/化学计量学/README.md' },
       { text: '生物信息学', link: '/notes/研究课题/生物信息学/README.md' },
+      { text: '网络药理学', link: '/notes/研究课题/网络药理学/README.md' },
       { text: '计算机辅助药物设计', link: '/notes/研究课题/计算机辅助药物设计/README.md' },
       { text: '其他', link: '/notes/研究课题/其他/README.md' },
-    ]
-  },
-
-  /**
-   * 重要文献
-   */
-  { 
-    text: '重要文献',
-    items: 
-    [
-      { text: '化学计量学', link: '/notes/重要文献/化学计量学/README.md' },
-      { text: '生物信息学', link: '/notes/重要文献/生物信息学/README.md' },
-      { text: '计算机辅助药物设计', link: '/notes/重要文献/计算机辅助药物设计/README.md' },
-      { text: '其他', link: '/notes/重要文献/其他/README.md' },
     ]
   },
 
@@ -61,17 +38,18 @@ export const zhNavbar = defineNavbarConfig([
   },
 
   /**
-   * 软件教程
+   * 学习资料
    */
 
   { 
-    text: '软件教程',
+    text: '学习资料',
     items: 
     [
-      { text: '化学计量学', link: '/notes/软件教程/化学计量学/README.md' },
-      { text: '生物信息学', link: '/notes/软件教程/生物信息学/README.md' },
-      { text: '计算机辅助药物设计', link: '/notes/软件教程/计算机辅助药物设计/README.md' },
-      { text: '其他', link: '/notes/软件教程/其他/README.md' },
+      { text: '化学计量学', link: '/notes/学习资料/化学计量学/README.md' },
+      { text: '生物信息学', link: '/notes/学习资料/生物信息学/README.md' },
+      { text: '网络药理学', link: '/notes/学习资料/网络药理学/README.md' },
+      { text: '计算机辅助药物设计', link: '/notes/学习资料/计算机辅助药物设计/README.md' },
+      { text: '其他', link: '/notes/学习资料/其他/README.md' },
       
     ]
   },

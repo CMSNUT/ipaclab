@@ -34,6 +34,12 @@ const zhTasksBioinfomatics = defineNoteConfig({
   sidebar: "auto"
 })
 
+const zhTasksNetPharm= defineNoteConfig({
+  dir: '研究课题/网络药理学',
+  link: '/tasks/netpharm',
+  sidebar: "auto"
+})
+
 const zhTasksCADD = defineNoteConfig({
   dir: '研究课题/计算机辅助药物设计',
   link: '/tasks/cadd',
@@ -46,6 +52,39 @@ const zhTasksOther = defineNoteConfig({
   sidebar: "auto"
 })
 
+
+/**
+ * 学习资料
+ */
+const zhLearningChemometrics = defineNoteConfig({
+  dir: '学习资料/化学计量学',
+  link: '/learning/chemometrics',
+  sidebar: "auto"
+})
+
+const zhLearningBioinfomatics = defineNoteConfig({
+  dir: '学习资料/生物信息学',
+  link: '/learning/bioinfomatics',
+  sidebar: "auto"
+})
+
+const zhLearningNetPharm= defineNoteConfig({
+  dir: '学习资料/网络药理学',
+  link: '/learning/netpharm',
+  sidebar: "auto"
+})
+
+const zhLearningCADD = defineNoteConfig({
+  dir: '学习资料/计算机辅助药物设计',
+  link: '/learning/cadd',
+  sidebar: "auto"
+})
+
+const zhLearningOther = defineNoteConfig({
+  dir: '学习资料/其他',
+  link: '/learning/other',
+  sidebar: "auto"
+})
 
 /**
  * 实验技术
@@ -77,92 +116,6 @@ const zhPreparations = defineNoteConfig({
 
 
 /**
- * 重要文献
- */
-
-const zhRefsChemometrics = defineNoteConfig({
-  dir: '重要文献/化学计量学',
-  link: '/references/chemometrics',
-  sidebar: "auto"
-})
-
-const zhRefsBioinfomatics = defineNoteConfig({
-  dir: '重要文献/生物信息学',
-  link: '/references/bioinfomatics',
-  sidebar: "auto"
-})
-
-const zhRefsCADD = defineNoteConfig({
-  dir: '重要文献/计算机辅助药物设计',
-  link: '/references/cadd',
-  sidebar: "auto"
-})
-
-const zhRefsOther = defineNoteConfig({
-  dir: '重要文献/其他',
-  link: '/references/other',
-  sidebar: "auto"
-})
-
-
-/**
- * 软件教程
- */
-
-const zhTutorialsChemometrics = defineNoteConfig({
-  dir: '软件教程/化学计量学',
-  link: '/tutorials/chemometrics',
-  sidebar: "auto"
-})
-
-const zhTutorialsBioinfomatics = defineNoteConfig({
-  dir: '软件教程/生物信息学',
-  link: '/tutorials/bioinfomatics',
-  sidebar: "auto"
-})
-
-const zhTutorialsCADD = defineNoteConfig({
-  dir: '软件教程/计算机辅助药物设计',
-  link: '/tutorials/cadd',
-  sidebar: "auto"
-})
-
-const zhTutorialsOther = defineNoteConfig({
-  dir: '软件教程/其他',
-  link: '/tutorials/other',
-  sidebar: "auto"
-})
-
-/**
- * 开源数据
- */
-
-const zhDatasetsChemometrics = defineNoteConfig({
-  dir: '开源数据/化学计量学',
-  link: '/datasets/chemometrics',
-  sidebar: "auto"
-})
-
-const zhDatasetsBioinfomatics = defineNoteConfig({
-  dir: '开源数据/生物信息学',
-  link: '/datasets/bioinfomatics',
-  sidebar: "auto"
-})
-
-const zhDatasetsCADD = defineNoteConfig({
-  dir: '开源数据/计算机辅助药物设计',
-  link: '/datasets/cadd',
-  sidebar: "auto"
-})
-
-const zhDatasetsOther = defineNoteConfig({
-  dir: '开源数据/其他',
-  link: '/datasets/other',
-  sidebar: "auto"
-})
-
-
-/**
  * 配置 notes
  */
 
@@ -178,6 +131,7 @@ export const zhNotes = defineNotesConfig({
      */
     zhTasksChemometrics,
     zhTasksBioinfomatics,
+    zhTasksNetPharm,
     zhTasksCADD,
     zhTasksOther,
 
@@ -189,30 +143,16 @@ export const zhNotes = defineNotesConfig({
     zhOperations,
     zhPreparations,
 
-    /**
-     * 重要文献
-     */
 
-    zhRefsChemometrics,
-    zhRefsBioinfomatics,
-    zhRefsCADD,
-    zhRefsOther,
-
-     /**
-     * 软件教程
-     */
-     zhTutorialsChemometrics,
-     zhTutorialsBioinfomatics,
-     zhTutorialsCADD,
-     zhTutorialsOther,
  
     /**
-     * 开源数据
+     * 学习资料
      */
-    zhDatasetsChemometrics,
-    zhDatasetsBioinfomatics,
-    zhDatasetsCADD,
-    zhDatasetsOther,
+    zhLearningChemometrics,
+    zhLearningBioinfomatics,
+    zhLearningNetPharm,
+    zhLearningCADD,
+    zhLearningOther,
   ]
 })
 
