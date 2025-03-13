@@ -30,11 +30,18 @@ export default defineUserConfig({
      * @see https://theme-plume.vuejs.press/guide/features/bulletin/
      */
 
-    bulletin: {
-      layout: 'top-right',
-      title: '公告板标题',
-      content: '公告板内容',
-    },
+    // bulletin: {
+    //   layout: 'top-right',
+    //   title: '公告板标题',
+    //   content: '公告板内容',
+    // },
+
+    /**
+     * outline： 显示的标题级别
+     * @see https://theme-plume.vuejs.press/config/frontmatter/basic/#outline
+     */
+
+    outline: [2,6],
 
     /**
      * changelog: 文章变更历史

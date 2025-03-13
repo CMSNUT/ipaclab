@@ -13,11 +13,11 @@ export const zhNavbar = defineNavbarConfig([
     text: '研究课题',
     items: 
     [
-      { text: '化学计量学', link: '/notes/研究课题/化学计量学/README.md' },
-      { text: '生物信息学', link: '/notes/研究课题/生物信息学/README.md' },
-      { text: '网络药理学', link: '/notes/研究课题/网络药理学/README.md' },
-      { text: '计算机辅助药物设计', link: '/notes/研究课题/计算机辅助药物设计/README.md' },
-      { text: '其他', link: '/notes/研究课题/其他/README.md' },
+      { text: '临床医学', link: '/notes/研究课题/临床医学/README.md' },
+      { text: '中药智鉴', link: '/notes/研究课题/中药智鉴/README.md' },
+      { text: '药物设计', link: '/notes/研究课题/药物设计/README.md' },
+      { text: '工具研发', link: '/notes/研究课题/工具研发/README.md' },
+      { text: '其他课题', link: '/notes/研究课题/其他课题/README.md' },
     ]
   },
 

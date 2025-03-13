@@ -22,32 +22,32 @@ import { defineNoteConfig, defineNotesConfig } from 'vuepress-theme-plume'
 /**
  * 研究课题
  */
-const zhTasksChemometrics = defineNoteConfig({
-  dir: '研究课题/化学计量学',
-  link: '/tasks/chemometrics',
+const zhTasksTCM = defineNoteConfig({
+  dir: '研究课题/中药智鉴',
+  link: '/tasks/tcmie',
   sidebar: "auto"
 })
 
-const zhTasksBioinfomatics = defineNoteConfig({
-  dir: '研究课题/生物信息学',
-  link: '/tasks/bioinfomatics',
+const zhTasksCM = defineNoteConfig({
+  dir: '研究课题/临床医学',
+  link: '/tasks/clinical',
   sidebar: "auto"
 })
 
-const zhTasksNetPharm= defineNoteConfig({
-  dir: '研究课题/网络药理学',
-  link: '/tasks/netpharm',
+const zhTasksTD= defineNoteConfig({
+  dir: '研究课题/工具研发',
+  link: '/tasks/tools',
   sidebar: "auto"
 })
 
 const zhTasksCADD = defineNoteConfig({
-  dir: '研究课题/计算机辅助药物设计',
+  dir: '研究课题/药物设计',
   link: '/tasks/cadd',
   sidebar: "auto"
 })
 
 const zhTasksOther = defineNoteConfig({
-  dir: '研究课题/其他',
+  dir: '研究课题/其他课题',
   link: '/tasks/other',
   sidebar: "auto"
 })
@@ -129,9 +129,9 @@ export const zhNotes = defineNotesConfig({
     /**
      * 研究课题
      */
-    zhTasksChemometrics,
-    zhTasksBioinfomatics,
-    zhTasksNetPharm,
+    zhTasksTCM,
+    zhTasksCM,
+    zhTasksTD,
     zhTasksCADD,
     zhTasksOther,
 
