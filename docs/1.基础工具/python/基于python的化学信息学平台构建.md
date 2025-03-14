@@ -339,3 +339,36 @@ conda deactivate
 - **rdkit** + **Open Babel**（分子处理）
 - **Gnina**（深度学习增强）
 
+## 导出 Anaconda 虚拟环境中安装的包
+
+### **激活虚拟环境**：
+   ```bash
+   conda activate myenv
+   ```
+
+###  **导出 conda 包列表**：
+   ```bash
+   conda list --export > conda_requirements.txt
+   ```
+
+### **导出 pip 包列表**：
+   ```bash
+   pip freeze > pip_requirements.txt
+   ```
+
+### **在其他环境中恢复**：
+
+   - 对于 `conda` 安装的包：
+
+     ```bash
+     conda install --file conda_requirements.txt
+     ```
+
+   - 对于 `pip` 安装的包：
+
+     ```bash
+     pip install -r pip_requirements.txt
+     ```
+
+
+
