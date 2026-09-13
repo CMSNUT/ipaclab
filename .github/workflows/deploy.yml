@@ -9,12 +9,17 @@ on:
   # Manually trigger deployment
   workflow_dispatch:
 
+# 新添加的
+permissions:
+  contents: write
+
 jobs:
   docs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
           # "Last updated time" and other git log-related information require fetching all commit records.
@@ -44,7 +49,8 @@ jobs:
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v4
+        # uses: crazy-max/ghaction-github-pages@v4
+        uses: crazy-max/ghaction-github-pages@v5
         with:
           # 部署到 gh-pages 分支
           target_branch: gh-pages
