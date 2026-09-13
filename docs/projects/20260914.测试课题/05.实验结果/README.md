@@ -1,7 +1,7 @@
 ---
 title: 05.实验结果
 createTime: 2026/09/14 01:04:06
-permalink: /ipaclab/projects/vpqhhzzo/
+permalink: /ipaclab/projects/kol6zoxd/
 ---
 
 # 05.实验结果

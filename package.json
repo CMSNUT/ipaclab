@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "description": "a web of IPAC Lab",
-  "author": "Aikemi <dhxia@snut.edu.cn>",
+  "author": "CMSNUT <dhxia@snut.edu.cn>",
   "license": "MIT",
   "scripts": {
     "gen:readme": "node ./docs/.vuepress/scripts/genReadme.cjs",

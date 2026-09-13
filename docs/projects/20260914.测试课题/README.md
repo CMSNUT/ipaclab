@@ -1,7 +1,7 @@
 ---
 title: 20260914.测试课题
 createTime: 2026/09/14 00:15:53
-permalink: /ipaclab/projects/4kusggip/
+permalink: /ipaclab/projects/ifdqor7y/
 ---
 
 # 20260914.测试课题

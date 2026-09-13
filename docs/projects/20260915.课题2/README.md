@@ -1,7 +1,7 @@
 ---
 title: 20260915.课题2
 createTime: 2026/09/14 00:54:32
-permalink: /ipaclab/projects/3pfhcpr6/
+permalink: /ipaclab/projects/bef56qkp/
 ---
 
 # 20260915.课题2
