@@ -1,24 +1,24 @@
-# ipac-lab
+# ipac
 
 The Site is generated using [vuepress](https://vuepress.vuejs.org/) and [vuepress-theme-plume](https://github.com/pengzhanbo/vuepress-theme-plume)
 
 ## Install
 
 ```sh
-pnpm install
+npm install
 ```
 
 ## Usage
 
 ```sh
 # start dev server
-pnpm docs:dev
+npm run docs:dev
 # build for production
-pnpm docs:build
+npm run docs:build
 # preview production build in local
-pnpm docs:preview
+npm run docs:preview
 # update vuepress and theme
-pnpm vp-update
+npm run vp-update
 ```
 
 ## Deploy to GitHub Pages

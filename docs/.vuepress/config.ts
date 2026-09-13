@@ -16,8 +16,8 @@ import { plumeTheme } from 'vuepress-theme-plume'
 export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
-  title: 'IPAC Lab',
-  description: 'A web of IPAC Lab',
+  title: 'IPAC',
+  description: 'a web of IPAC Lab',
 
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: 'https://theme-plume.vuejs.press/favicon-32x32.png' }],

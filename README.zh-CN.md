@@ -1,24 +1,24 @@
-# ipac-lab
+# ipac
 
 网站使用 [vuepress](https://vuepress.vuejs.org/) 和 [vuepress-theme-plume](https://github.com/pengzhanbo/vuepress-theme-plume) 构建生成。
 
 ## Install
 
 ```sh
-pnpm install
+npm install
 ```
 
 ## Usage
 
 ```sh
 # 启动开发服务
-pnpm docs:dev
+npm run docs:dev
 # 构建生产包
-pnpm docs:build
+npm run docs:build
 # 本地预览生产服务
-pnpm docs:preview
+npm run docs:preview
 # 更新 vuepress 和主题
-pnpm vp-update
+npm run vp-update
 ```
 
 ## 部署到 GitHub Pages

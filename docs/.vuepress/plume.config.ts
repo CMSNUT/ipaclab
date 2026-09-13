@@ -29,8 +29,8 @@ export default defineThemeConfig({
    */
   profile: {
     avatar: 'https://theme-plume.vuejs.press/plume.png',
-    name: 'IPAC Lab',
-    description: 'A web of IPAC Lab',
+    name: 'IPAC',
+    description: 'a web of IPAC Lab',
   },
 
   navbar,
