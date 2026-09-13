@@ -1,10 +1,10 @@
 ---
-title: 05.实验结果
+title: 实验结果
 createTime: 2026/09/14 01:04:06
-permalink: /ipaclab/projects/kol6zoxd/
+permalink: /ipaclab/projects/4cv3cowu/
 ---
 
-# 05.实验结果
+# 实验结果
 
 > 本目录下共 2 个条目
 

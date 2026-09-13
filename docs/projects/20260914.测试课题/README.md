@@ -1,10 +1,10 @@
 ---
-title: 20260914.测试课题
+title: 测试课题
 createTime: 2026/09/14 00:15:53
-permalink: /ipaclab/projects/ifdqor7y/
+permalink: /ipaclab/projects/5mg8ifgo/
 ---
 
-# 20260914.测试课题
+# 测试课题
 
 > 本目录下共 5 个条目
 

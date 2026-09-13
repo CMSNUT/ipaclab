@@ -5,7 +5,10 @@
  * 规则：
  * - 优先读取 frontmatter 的 title，其次一级标题 #，最后用文件名
  * - 排除 README.md 自身，避免循环
- * - 目录优先、文件次之，各自按名称排序（支持 01-、02- 数字前缀）
+ * - 目录优先、文件次之
+ * - 按数字前缀的大小正序排列（如 01-、02-、20260915.）
+ * - 无数字前缀的排在有前缀的之后
+ * - 目录名/文件名前的数字前缀在显示时自动去除
  * - 若目录下无内容，则跳过，不生成空 README
  */
 
@@ -22,6 +25,21 @@ const TARGET_DIRS = [
 
 // docs 根目录（脚本位于 docs/.vuepress/scripts/）
 const DOCS_ROOT = path.resolve(__dirname, '../..')
+
+/**
+ * 去掉名称前的数字前缀（如 01-、02_、20260915. 等）
+ */
+function stripPrefix(name) {
+  return name.replace(/^\d+[-_.]\s*/, '')
+}
+
+/**
+ * 提取名称开头的数字前缀，无前缀返回 Infinity（排到最后）
+ */
+function extractPrefix(name) {
+  const match = name.match(/^(\d+)[-_.]/)
+  return match ? parseInt(match[1], 10) : Infinity
+}
 
 /**
  * 从 Markdown 文件中提取标题
@@ -43,18 +61,24 @@ function getTitle(filePath) {
   if (h1Match) return h1Match[1].trim()
 
   // 3. 文件名（去掉扩展名和数字前缀）
-  return path
-    .basename(filePath, '.md')
-    .replace(/^\d+[-_.]\s*/, '')
+  return stripPrefix(path.basename(filePath, '.md'))
 }
 
 /**
- * 按名称排序：目录优先，文件次之，各自按名称排序
+ * 按数字前缀正序排序：目录优先，再按前缀数字升序，无前缀的排最后
  */
 function sortEntries(entries) {
   return entries.sort((a, b) => {
+    // 目录优先
     if (a.isDirectory() && !b.isDirectory()) return -1
     if (!a.isDirectory() && b.isDirectory()) return 1
+
+    // 按数字前缀大小排序
+    const pa = extractPrefix(a.name)
+    const pb = extractPrefix(b.name)
+    if (pa !== pb) return pa - pb
+
+    // 前缀相同（或无前缀）时按名称排序
     return a.name.localeCompare(b.name, 'zh-CN', { numeric: true })
   })
 }
@@ -71,13 +95,11 @@ function generateReadme(dir) {
     const fullPath = path.join(dir, entry.name)
 
     if (entry.isDirectory()) {
-      // 递归处理子目录
       const subItems = generateReadme(fullPath)
-      // 子目录有内容才加入索引
       if (subItems.length > 0) {
         items.push({
-          name: entry.name.replace(/^\d+[-_.]\s*/, ''),
-          link: `${entry.name}/README.md`,
+          name: stripPrefix(entry.name),        // 显示：去掉前缀
+          link: `${entry.name}/README.md`,      // 链接：保留原始目录名
         })
       }
     } else if (entry.name.endsWith('.md') && entry.name !== 'README.md') {
@@ -88,13 +110,12 @@ function generateReadme(dir) {
     }
   }
 
-  // 无内容则不生成 README
   if (items.length === 0) return []
 
-  // 生成 Markdown 内容
   const dirName = path.basename(dir)
-  let content = `---\ntitle: ${dirName}\n---\n\n`
-  content += `# ${dirName}\n\n`
+  const displayName = stripPrefix(dirName)      // 标题：去掉前缀
+  let content = `---\ntitle: ${displayName}\n---\n\n`
+  content += `# ${displayName}\n\n`
   content += `> 本目录下共 ${items.length} 个条目\n\n`
   for (const item of items) {
     content += `- [${item.name}](${encodeURI(item.link)})\n`

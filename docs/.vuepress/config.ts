@@ -217,6 +217,12 @@ export default defineUserConfig({
     contributors: { 
       avatar: true,
       mode: "block",
+      info: [
+        {
+          username: 'CMSNUT', // github username
+          alias: ['Aikemi'], // 别名，本地 git 配置中的用户名
+        }
+      ]
     },
 
     plugins: {
