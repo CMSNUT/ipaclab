@@ -22,5 +22,14 @@
   },
   "engines": {
     "node": "^20.19.0 || >=22.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "echarts": "^6.1.0",
+    "flowchart.ts": "^3.0.1",
+    "markmap-lib": "^0.18.12",
+    "markmap-toolbar": "^0.18.12",
+    "markmap-view": "^0.18.12",
+    "mermaid": "^11.17.2"
   }
 }

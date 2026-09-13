@@ -38,9 +38,9 @@ const demoDoc = defineCollection({
   dir: 'demo',
   linkPrefix: '/demo',
   title: 'Demo',
-  sidebar: ['', 'foo', 'bar'],
+  // sidebar: ['', 'foo', 'bar'],
   // 根据文件结构自动生成侧边栏
-  // sidebar: 'auto',
+  sidebar: 'auto',
 })
 
 export default defineCollections([

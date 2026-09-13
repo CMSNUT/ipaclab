@@ -18,19 +18,29 @@ import navbar from './navbar'
  * @see https://theme-plume.vuejs.press/config/theme/
  */
 export default defineThemeConfig({
-  logo: 'https://theme-plume.vuejs.press/plume.png',
+  logo: 'avatar.jpg',
 
   social: [
-    { icon: 'github', link: '/' },
+    { icon: 'github', link: 'https://github.com/cmsnut/ipaclab' },
   ],
 
   /**
    * @see https://theme-plume.vuejs.press/config/theme/#profile
    */
   profile: {
-    avatar: 'https://theme-plume.vuejs.press/plume.png',
-    name: 'IPAC',
-    description: 'a web of IPAC Lab',
+    avatar: 'avatar.jpg',
+    name: 'IPAC Lab',
+    description: '智能精准分析化学实验室',
+    circle: true,
+    organization: '陕西理工大学',
+    location: '中国陕西省汉中市',
+  },
+
+  /**
+   * @see https://theme-plume.vuejs.press/config/theme/#footer
+   */
+  footer: {
+    message: '© 2026 IPAC Lab · 智能精准分析化学实验室',
   },
 
   navbar,
