@@ -159,11 +159,12 @@ export default defineUserConfig({
     comment: {
       provider: 'Giscus', // "Artalk“ | "Giscus" | "Twikoo" | "Waline"
       comment: true,
-      repo: 'CMSNUT/ipcalab',        // 必填：GitHub 仓库
-      repoId: 'R_kgDONGHXUQ',
-      category: 'General',
-      categoryId: 'DIC_kwDONGHXUc4Cjxoc',
+      repo: 'cmsnut/ipaclab',        // 格式：用户名/仓库名
+      repoId: 'R_kgDONGHXUQ',         // 从 giscus.app 复制，确保一致
+      category: 'General',            // 你选择的分类名称
+      categoryId: 'DIC_kwDONGHXUc4Cjxoc', // 从 giscus.app 复制，确保一致
       mapping: 'pathname',
+      strict: false,
       reactionsEnabled: true,
       inputPosition: 'top',
     },
@@ -172,21 +173,21 @@ export default defineUserConfig({
     /**
      * @see https://theme-plume.vuejs.press/config/theme/#watermark
      */
-    watermark: {
-      // enabled: false,  // boolean 类型控制是否全局启用
-      enabled: page => true, // function 类型 过滤哪些页面启用水印
+    // watermark: {
+    //   // enabled: false,  // boolean 类型控制是否全局启用
+    //   enabled: page => true, // function 类型 过滤哪些页面启用水印
 
-      /**
-       * 是否全屏水印，默认为 `true`，
-       * 设置为 `false` 时，水印仅在 内容区域中显示。
-       */
-      fullPage: true,
+    //   /**
+    //    * 是否全屏水印，默认为 `true`，
+    //    * 设置为 `false` 时，水印仅在 内容区域中显示。
+    //    */
+    //   fullPage: true,
 
-      /** @see https://zhensherlock.github.io/watermark-js-plus/zh/config/ */
-      watermarkOptions: {
-        content: 'ipca@aikemi',   
-      }
-    },
+    //   /** @see https://zhensherlock.github.io/watermark-js-plus/zh/config/ */
+    //   watermarkOptions: {
+    //     content: 'ipca@aikemi',   
+    //   }
+    // },
 
     /** 
      * @see https://theme-plume.vuejs.press/config/theme/#readingtime

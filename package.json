@@ -6,9 +6,10 @@
   "author": "Aikemi <dhxia@snut.edu.cn>",
   "license": "MIT",
   "scripts": {
-    "docs:build": "vuepress build docs --clean-cache --clean-temp",
-    "docs:dev": "vuepress dev docs",
-    "docs:dev-clean": "vuepress dev docs --clean-cache --clean-temp",
+    "gen:readme": "node ./docs/.vuepress/scripts/genReadme.cjs",
+    "docs:build": "npm run gen:readme && vuepress build docs --clean-cache --clean-temp",
+    "docs:dev": "npm run gen:readme && vuepress dev docs",
+    "docs:dev-clean": "npm run gen:readme && vuepress dev docs --clean-cache --clean-temp",
     "docs:preview": "http-server docs/.vuepress/dist",
     "vp-update": "npx vp-update"
   },
@@ -16,7 +17,7 @@
     "@vuepress/bundler-vite": "2.0.0-rc.31",
     "http-server": "^14.1.1",
     "typescript": "^6.0.3",
-    "vue": "^3.5.34",
+    "vue": "^3.5.42",
     "vuepress": "2.0.0-rc.31",
     "vuepress-theme-plume": "1.0.0-rc.210"
   },

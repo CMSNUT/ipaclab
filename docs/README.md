@@ -4,19 +4,19 @@ config:
   -
     type: hero
     full: true
-    forceDark: true
+    forceDark: false
     effect: lightning
     hero:
-      name: Theme Plume
-      tagline: VuePress Next Theme
-      text: 一个简约的，功能丰富的 vuepress 文档&博客 主题
+      name: IPAC Lab
+      tagline: 智能精准分析化学实验室
+      text: Intelligent and precise analytical chemistry laboratory
       actions:
         -
           theme: brand
-          text: 博客
-          link: /blog/
+          text: IPAC
+          link: /projects/
         -
           theme: alt
           text: Github →
-          link: https://github.com/pengzhanbo/vuepress-theme-plume
+          link: https://github.com/cmsnut/ipaclab
 ---

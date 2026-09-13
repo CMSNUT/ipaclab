@@ -26,24 +26,86 @@
  */
 import { defineCollection, defineCollections } from 'vuepress-theme-plume'
 
-const blog = defineCollection({
-  type: 'post',
-  dir: 'blog',
-  title: 'Blog',
-  link: '/blog/',
+// const blog = defineCollection({
+//   type: 'post',
+//   dir: 'blog',
+//   title: 'Blog',
+//   link: '/blog/',
+// })
+
+// const demoDoc = defineCollection({
+//   type: 'doc',
+//   dir: 'demo',
+//   linkPrefix: '/demo',
+//   title: 'Demo',
+//   // sidebar: ['', 'foo', 'bar'],
+//   // 根据文件结构自动生成侧边栏
+//   sidebar: 'auto',
+// })
+
+const projects = defineCollection({
+  type: 'doc',
+  dir: 'projects',
+  title: '研究课题',
+  linkPrefix: '/ipaclab/projects/',
+  sidebar: 'auto',
+  sidebarCollapsed: true, 
 })
 
-const demoDoc = defineCollection({
+const pictures = defineCollection({
   type: 'doc',
-  dir: 'demo',
-  linkPrefix: '/demo',
-  title: 'Demo',
-  // sidebar: ['', 'foo', 'bar'],
-  // 根据文件结构自动生成侧边栏
+  dir: 'pictures',
+  title: '学术图库',
+  linkPrefix: '/ipaclab/pictures/',
   sidebar: 'auto',
+  sidebarCollapsed: true, 
+})
+
+const exp = defineCollection({
+  type: 'doc',
+  dir: 'exp',
+  title: '实验技术',
+  linkPrefix: '/ipaclab/exp/',
+  sidebar: 'auto',
+  sidebarCollapsed: true, 
+})
+
+const tools = defineCollection({
+  type: 'doc',
+  dir: 'tools',
+  title: '研究工具',
+  linkPrefix: '/ipaclab/tools/',
+  sidebar: 'auto',
+  sidebarCollapsed: true, 
+})
+
+const paper = defineCollection({
+  type: 'post',
+  dir: 'paper',
+  title: '文献研读',
+  link: '/ipaclab/paper/',
+  tags: true,
+  categories: true,
+  archives: true,
+})
+
+const notes = defineCollection({
+  type: 'post',
+  dir: 'notes',
+  title: '研究笔记',
+  link: '/ipaclab/notes/',
+  tags: true,
+  categories: true,
+  archives: true,
 })
 
 export default defineCollections([
-  blog,
-  demoDoc,
+  // blog,
+  // demoDoc,
+  projects,
+  notes,
+  pictures,
+  exp,
+  tools,
+  paper,
 ])
