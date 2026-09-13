@@ -17,10 +17,10 @@ const path = require('path')
 
 // ===== 配置要生成索引的目录（相对于 docs/）=====
 const TARGET_DIRS = [
-  'projects',
-  'exp',
-  'tools',
-  'pictures',
+  '研究课题',
+  '实验技术',
+  '研究工具',
+  '学术图库',
 ]
 
 // docs 根目录（脚本位于 docs/.vuepress/scripts/）

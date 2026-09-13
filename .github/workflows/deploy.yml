@@ -13,6 +13,7 @@ on:
 permissions:
   contents: write
   deployments: write   # ← 清理部署记录需要此权限
+  actions: write        # ← 删除 workflow runs 需要此权限
 
 jobs:
   docs:
@@ -68,3 +69,24 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: github-pages
           onlyRemoveDeployments: true
+
+      # ↓↓↓ 清理旧的 workflow runs，保留最新 1 条 ↓↓↓
+      - name: 清理旧运行记录
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: context.workflow,
+              per_page: 100,
+            })
+            // 跳过最新一条，删除其余
+            for (const run of runs.data.workflow_runs.slice(1)) {
+              await github.rest.actions.deleteWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: run.id,
+              })
+              console.log(`已删除 run #${run.run_number}`)
+            }

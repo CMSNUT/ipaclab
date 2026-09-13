@@ -1,10 +1,8 @@
 ---
-title: projects
-createTime: 2026/09/13 23:50:16
-permalink: /ipaclab/projects/
+title: 研究课题
 ---
 
-# projects
+# 研究课题
 
 > 本目录下共 2 个条目
 

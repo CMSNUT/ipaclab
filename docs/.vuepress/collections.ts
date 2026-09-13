@@ -45,7 +45,7 @@ import { defineCollection, defineCollections } from 'vuepress-theme-plume'
 
 const projects = defineCollection({
   type: 'doc',
-  dir: 'projects',
+  dir: '研究课题',
   title: '研究课题',
   linkPrefix: '/ipaclab/projects/',
   sidebar: 'auto',
@@ -54,7 +54,7 @@ const projects = defineCollection({
 
 const pictures = defineCollection({
   type: 'doc',
-  dir: 'pictures',
+  dir: '学术图库',
   title: '学术图库',
   linkPrefix: '/ipaclab/pictures/',
   sidebar: 'auto',
@@ -63,16 +63,16 @@ const pictures = defineCollection({
 
 const exp = defineCollection({
   type: 'doc',
-  dir: 'exp',
+  dir: '实验技术',
   title: '实验技术',
-  linkPrefix: '/ipaclab/exp/',
+  linkPrefix: '/ipaclab/lab-skills/',
   sidebar: 'auto',
   sidebarCollapsed: true, 
 })
 
 const tools = defineCollection({
   type: 'doc',
-  dir: 'tools',
+  dir: '研究工具',
   title: '研究工具',
   linkPrefix: '/ipaclab/tools/',
   sidebar: 'auto',
@@ -81,12 +81,18 @@ const tools = defineCollection({
 
 const paper = defineCollection({
   type: 'post',
-  dir: 'paper',
+  dir: '文献研读',
   title: '文献研读',
   link: '/ipaclab/paper/',
   tags: true,
   categories: true,
-  archives: true,
+  archives: true, 
+  postCover: {
+    layout: 'left',       // 封面图在上方
+    ratio: '16/9',       // 宽高比
+    width: 300,          // 宽度（仅 left/right 生效）
+    compact: false,      // 紧凑模式
+  },
 })
 
 const notes = defineCollection({

@@ -1,7 +1,5 @@
 ---
 title: 实验结果
-createTime: 2026/09/14 01:04:06
-permalink: /ipaclab/projects/4cv3cowu/
 ---
 
 # 实验结果

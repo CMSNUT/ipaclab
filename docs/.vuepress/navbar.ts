@@ -17,8 +17,8 @@ export default defineNavbarConfig([
   // },
   { text: '研究课题', link: '/ipaclab/projects/' },
   { text: '研究笔记', link: '/ipaclab/notes/' },
-  { text: '学术图库', link: '/ipaclab/pictures/' },
-  { text: '实验技术', link: '/ipaclab/exp/' },
+  { text: '实验技术', link: '/ipaclab/lab-skills/' },
   { text: '研究工具', link: '/ipaclab/tools/' },
   { text: '文献研读', link: '/ipaclab/paper/' },
+  { text: '学术图库', link: '/ipaclab/pictures/' },
 ])

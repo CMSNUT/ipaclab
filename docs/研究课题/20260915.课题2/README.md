@@ -1,7 +1,5 @@
 ---
 title: 课题2
-createTime: 2026/09/14 00:54:32
-permalink: /ipaclab/projects/hiae0ua9/
 ---
 
 # 课题2

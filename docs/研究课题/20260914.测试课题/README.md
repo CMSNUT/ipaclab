@@ -1,7 +1,5 @@
 ---
 title: 测试课题
-createTime: 2026/09/14 00:15:53
-permalink: /ipaclab/projects/5mg8ifgo/
 ---
 
 # 测试课题
