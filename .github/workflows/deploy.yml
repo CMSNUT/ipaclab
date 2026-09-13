@@ -12,6 +12,7 @@ on:
 # 新添加的
 permissions:
   contents: write
+  deployments: write   # ← 清理部署记录需要此权限
 
 jobs:
   docs:
@@ -59,3 +60,11 @@ jobs:
         env:
           # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ↓↓↓ 清理旧部署记录，加在部署步骤之后 ↓↓↓
+      - name: 清理旧部署记录
+        uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: github-pages
+          onlyRemoveDeployments: true
