@@ -26,23 +26,6 @@
  */
 import { defineCollection, defineCollections } from 'vuepress-theme-plume'
 
-// const blog = defineCollection({
-//   type: 'post',
-//   dir: 'blog',
-//   title: 'Blog',
-//   link: '/blog/',
-// })
-
-// const demoDoc = defineCollection({
-//   type: 'doc',
-//   dir: 'demo',
-//   linkPrefix: '/demo',
-//   title: 'Demo',
-//   // sidebar: ['', 'foo', 'bar'],
-//   // 根据文件结构自动生成侧边栏
-//   sidebar: 'auto',
-// })
-
 const projects = defineCollection({
   type: 'doc',
   dir: '研究课题',
@@ -61,7 +44,7 @@ const pictures = defineCollection({
   sidebarCollapsed: true, 
 })
 
-const exp = defineCollection({
+const labSkills = defineCollection({
   type: 'doc',
   dir: '实验技术',
   title: '实验技术',
@@ -75,6 +58,15 @@ const tools = defineCollection({
   dir: '研究工具',
   title: '研究工具',
   linkPrefix: '/ipaclab/tools/',
+  sidebar: 'auto',
+  sidebarCollapsed: true, 
+})
+
+const techCollect = defineCollection({
+  type: 'doc',
+  dir: '技术文集',
+  title: '技术文集',
+  linkPrefix: '/ipaclab/tech-collection/',
   sidebar: 'auto',
   sidebarCollapsed: true, 
 })
@@ -97,7 +89,7 @@ const paper = defineCollection({
 
 const notes = defineCollection({
   type: 'post',
-  dir: 'notes',
+  dir: '研究笔记',
   title: '研究笔记',
   link: '/ipaclab/notes/',
   tags: true,
@@ -106,12 +98,11 @@ const notes = defineCollection({
 })
 
 export default defineCollections([
-  // blog,
-  // demoDoc,
   projects,
   notes,
   pictures,
-  exp,
+  labSkills,
   tools,
   paper,
+  techCollect,
 ])

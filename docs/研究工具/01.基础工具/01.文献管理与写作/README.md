@@ -1,7 +1,7 @@
 ---
 title: 文献管理与写作
-createTime: 2026/09/14 16:07:37
-permalink: /ipaclab/tools/ddo8vvnk/
+createTime: 2026/09/14 20:18:39
+permalink: /ipaclab/tools/mzykrbmr/
 ---
 
 # 文献管理与写作

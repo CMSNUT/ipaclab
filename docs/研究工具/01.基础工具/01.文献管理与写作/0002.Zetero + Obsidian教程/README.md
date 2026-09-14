@@ -1,7 +1,7 @@
 ---
 title: Zetero + Obsidian教程
-createTime: 2026/09/14 16:07:37
-permalink: /ipaclab/tools/8gjzfygi/
+createTime: 2026/09/14 20:18:39
+permalink: /ipaclab/tools/lz2ljcip/
 ---
 
 # Zetero + Obsidian教程

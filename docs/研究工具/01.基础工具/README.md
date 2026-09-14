@@ -1,7 +1,7 @@
 ---
 title: 基础工具
-createTime: 2026/09/14 10:40:40
-permalink: /ipaclab/tools/l40iv77r/
+createTime: 2026/09/14 20:18:39
+permalink: /ipaclab/tools/tg5jamzz/
 ---
 
 # 基础工具

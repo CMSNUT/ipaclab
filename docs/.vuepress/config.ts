@@ -20,13 +20,22 @@ export default defineUserConfig({
   description: 'A web of IPAC Lab',
 
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: 'https://theme-plume.vuejs.press/favicon-32x32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', href: '/favicon_32x32.png' }],
   ],
 
   bundler: viteBundler(),
   shouldPrefetch: false,
 
   theme: plumeTheme({
+
+    /**
+     * 自动为每个 Markdown 文件生成 frontmatter
+     */
+    autoFrontmatter: {
+      title: true, // 自动生成标题
+      createTime: true, // 自动生成创建时间
+      permalink: true, // 自动生成永久链接
+    },
 
     /**
      * @see https://theme-plume.vuejs.press/config/theme/#markdown

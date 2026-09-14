@@ -31,6 +31,7 @@
     "markmap-lib": "^0.18.12",
     "markmap-toolbar": "^0.18.12",
     "markmap-view": "^0.18.12",
-    "mermaid": "^11.17.2"
+    "mermaid": "^11.17.2",
+    "ogl": "^1.0.11"
   }
 }

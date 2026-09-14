@@ -5,7 +5,7 @@ config:
     type: hero
     full: true
     forceDark: false
-    effect: lightning
+    effect: prism
     hero:
       name: IPAC Lab
       tagline: 智能精准分析化学实验室
