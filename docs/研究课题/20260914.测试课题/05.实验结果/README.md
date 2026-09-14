@@ -1,5 +1,7 @@
 ---
 title: 实验结果
+createTime: 2026/09/14 10:29:52
+permalink: /ipaclab/projects/qw5kg1di/
 ---
 
 # 实验结果

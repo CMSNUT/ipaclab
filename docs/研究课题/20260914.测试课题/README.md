@@ -1,5 +1,7 @@
 ---
 title: 测试课题
+createTime: 2026/09/14 10:29:52
+permalink: /ipaclab/projects/bfhithrm/
 ---
 
 # 测试课题

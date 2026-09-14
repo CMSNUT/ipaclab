@@ -1,5 +1,7 @@
 ---
 title: 课题2
+createTime: 2026/09/14 10:29:52
+permalink: /ipaclab/projects/pi9ytnrw/
 ---
 
 # 课题2

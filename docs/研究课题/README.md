@@ -1,5 +1,7 @@
 ---
 title: 研究课题
+createTime: 2026/09/14 10:29:52
+permalink: /ipaclab/projects/
 ---
 
 # 研究课题
