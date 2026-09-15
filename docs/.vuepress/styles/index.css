@@ -91,9 +91,9 @@
 /* ===== 实验室简介卡片 ===== */
 .lab-intro-card {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  padding: 28px 32px;
+  gap: 24px;  
+  align-items: stretch;
+  padding: 0;
   margin: 24px 0;
   border: 1px solid var(--vp-c-divider);
   border-radius: 16px;
@@ -102,6 +102,7 @@
     var(--vp-c-brand-soft) 0%,
     var(--vp-c-bg-soft) 100%
   );
+  overflow: hidden;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
@@ -110,47 +111,59 @@
   border-color: var(--vp-c-brand-1);
 }
 
-.lab-intro-icon {
+/* 图片区：缩小到 120px */
+.lab-intro-image {
   flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-brand-1);
-  font-size: 36px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 260px;
+  overflow: hidden;
+  background: var(--vp-c-bg-alt);
 }
 
+.lab-intro-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 文字区 */
 .lab-intro-body {
   flex: 1;
   min-width: 0;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 标题与副标题同一行 */
+.lab-intro-header {
+  /* display: flex; */
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .lab-intro-title {
-  font-size: 1.3em;
+  font-size: 1.25em;
   font-weight: 800;
   color: var(--vp-c-text-1);
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
 }
 
 .lab-intro-subtitle {
-  display: block;
-  font-size: 0.68em;
+  display: block;  
+  font-size: 0.75em;
   font-weight: 500;
   color: var(--vp-c-text-2);
-  letter-spacing: 0;
-  margin-top: 4px;
 }
 
 .lab-intro-text {
-  font-size: 0.95em;
+  font-size: 0.92em;
   color: var(--vp-c-text-1);
-  line-height: 1.8;
-  margin: 12px 0 0;
+  line-height: 1.7;
+  margin: 0;
   text-align: justify;
 }
 
@@ -158,22 +171,29 @@
   color: var(--vp-c-brand-1);
 }
 
-/* 小屏：图标和文字改为上下排列 */
+/* 小屏：图片在上，标题和副标题自动换行 */
 @media (max-width: 640px) {
   .lab-intro-card {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 24px 20px;
   }
 
-  .lab-intro-text {
-    text-align: left;
+  .lab-intro-image {
+    width: 100%;
+    height: 140px;
+  }
+
+  .lab-intro-body {
+    padding: 16px 20px;
+  }
+
+  .lab-intro-header {
+    gap: 6px;
   }
 }
 
 /* ===== 研究方向卡片网格 ===== */
-/* ===== 研究方向：每行一个，带示意图 ===== */
+/* ===== 研究方向：每行一个，图左图右交替 ===== */
+/* ===== 研究方向：每行一个，图左图右交替，大屏对半 ===== */
 .research-list {
   display: flex;
   flex-direction: column;
@@ -183,9 +203,10 @@
 
 .research-item {
   display: flex;
-  gap: 24px;
+  gap: 0;
   align-items: stretch;
   padding: 0;
+  min-height: 300px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   background: var(--vp-c-bg-soft);
@@ -198,10 +219,20 @@
   border-color: var(--vp-c-brand-1);
 }
 
-/* 示意图：左侧固定宽度 */
+/* 奇数卡片：图在右，文字在左 */
+.research-item:nth-child(odd) {
+  flex-direction: row-reverse;
+}
+
+/* 偶数卡片：图在左，文字在右 */
+.research-item:nth-child(even) {
+  flex-direction: row;
+}
+
+/* 图片区：占 60% 宽度，撑满卡片高度 */
 .research-image {
   flex-shrink: 0;
-  width: 260px;
+  width: 55%;
   overflow: hidden;
   background: var(--vp-c-bg-alt);
 }
@@ -213,43 +244,361 @@
   display: block;
 }
 
-/* 文字区 */
+/* 文字区基础样式：占剩余 40% */
 .research-body {
   flex: 1;
   min-width: 0;
-  padding: 24px 28px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+/* 奇数卡片（图在右）：文字左侧留 20px */
+.research-item:nth-child(odd) .research-body {
+  padding: 20px;
+}
+
+/* 偶数卡片（图在左）：文字双侧留 20px */
+.research-item:nth-child(even) .research-body {
+  padding: 20px;
+}
+
 .research-title {
-  font-size: 1.15em;
+  font-size: 1.2em;
   font-weight: 700;
   color: var(--vp-c-text-1);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .research-desc {
-  font-size: 0.92em;
+  font-size: 0.94em;
   color: var(--vp-c-text-2);
   line-height: 1.8;
   margin: 0;
   text-align: justify;
 }
 
-/* 小屏：图片在上，文字在下 */
+/* ===== 小屏：图片在上，文字在下 ===== */
 @media (max-width: 768px) {
-  .research-item {
+  .research-item,
+  .research-item:nth-child(odd),
+  .research-item:nth-child(even) {
     flex-direction: column;
+    min-height: auto;
   }
 
   .research-image {
     width: 100%;
-    height: 180px;
+    height: 200px;
   }
 
-  .research-body {
+  .research-item:nth-child(odd) .research-body,
+  .research-item:nth-child(even) .research-body {
     padding: 20px;
   }
+
+  .research-title {
+    font-size: 1.1em;
+  }
+}
+
+
+/* ============================================================
+   仪器分类卡片网格
+   特性：
+   - 透明卡片，跟随主题
+   - 图片缩小，按屏宽自适应列数
+   - 文字默认隐藏，hover / focus / 触摸设备显示
+   - 文字强制白色，带渐变遮罩保证可读
+   ============================================================ */
+
+
+/* ============================================================
+   一、网格
+   ============================================================ */
+
+.ins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+  margin: .8rem 0 1.6rem;
+}
+
+/* 清掉 markdown 渲染给 p 加的默认间距 */
+.ins-grid p {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ============================================================
+   二、卡片
+   ============================================================ */
+
+.ins-card {
+  position: relative;              /* 文字浮层的定位基准 */
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(127, 149, 181, .25);
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.ins-card:hover,
+.ins-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: #38bdf8;
+  box-shadow: 0 6px 18px -8px rgba(56, 189, 248, .55);
+}
+
+
+/* ============================================================
+   三、图片区
+   ============================================================ */
+
+.ins-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;             /* 想更方改 1/1，想更扁改 16/9 */
+  overflow: hidden;
+  background: rgba(127, 149, 181, .08);
+}
+
+.ins-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease;
+}
+
+.ins-card:hover .ins-card__media img,
+.ins-card:focus-visible .ins-card__media img {
+  transform: scale(1.06);
+}
+
+
+/* ============================================================
+   四、底部渐变遮罩
+   默认透明，hover / focus 时淡入，保证白字可读
+   ============================================================ */
+
+.ins-card__media::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60%;
+  background: linear-gradient(to top,
+              rgba(0, 0, 0, .78) 0%,
+              rgba(0, 0, 0, .5) 45%,
+              rgba(0, 0, 0, 0) 100%);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ins-card:hover .ins-card__media::after,
+.ins-card:focus-visible .ins-card__media::after {
+  opacity: 1;
+}
+
+
+/* ============================================================
+   五、文字浮层
+   绝对定位贴底，默认隐藏，hover / focus 滑入
+   ============================================================ */
+
+.ins-card__body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 8px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.ins-card:hover .ins-card__body,
+.ins-card:focus-visible .ins-card__body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   六、文字样式
+   高特异性 + !important，强制盖过主题的 p 颜色
+   ============================================================ */
+
+/* 清掉默认边距 / 背景 / 边框 */
+.ins-grid .ins-card__body p,
+.ins-grid .ins-card__body .ins-card__name,
+.ins-grid .ins-card__body .ins-card__model {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  text-decoration: none !important;
+}
+
+/* 仪器名称：强制白色 */
+.ins-grid .ins-card__body .ins-card__name,
+.ins-grid .ins-card__body p.ins-card__name {
+  color: #ffffff !important;
+  font-size: .82rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .1px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .65);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 型号：强制浅白 */
+.ins-grid .ins-card__body .ins-card__model,
+.ins-grid .ins-card__body p.ins-card__model {
+  color: rgba(255, 255, 255, .82) !important;
+  font-size: .7rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: .1px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   七、分类标题
+   ============================================================ */
+
+.ins-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 1.6rem 0 .8rem;
+  padding-bottom: .4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  border-bottom: 1px solid rgba(127, 149, 181, .2);
+}
+
+.ins-section-title::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  height: 1em;
+  border-radius: 3px;
+  background: #38bdf8;
+}
+
+
+/* ============================================================
+   八、触摸设备
+   没有 hover，文字常显，避免永远看不到
+   ============================================================ */
+
+@media (hover: none) {
+  .ins-card__media::after {
+    opacity: 1;
+  }
+  .ins-card__body {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ============================================================
+   九、自适应断点
+   ============================================================ */
+
+/* 超大屏（≥ 1440px）：一行约 8~10 张 */
+@media (min-width: 1440px) {
+  .ins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* 平板（768 ~ 1023px）：一行约 5~6 张 */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .ins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+  }
+}
+
+/* 大手机（480 ~ 767px）：一行约 3~4 张 */
+@media (min-width: 480px) and (max-width: 767px) {
+  .ins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+  .ins-grid .ins-card__body .ins-card__name {
+    font-size: .78rem;
+  }
+  .ins-grid .ins-card__body .ins-card__model {
+    font-size: .66rem;
+  }
+}
+
+/* 小手机（< 480px）：一行约 2~3 张 */
+@media (max-width: 479px) {
+  .ins-grid {
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    gap: 8px;
+    margin: .5rem 0 1rem;
+  }
+  .ins-card {
+    border-radius: 6px;
+  }
+  .ins-card__body {
+    padding: 6px 7px 7px;
+  }
+  .ins-grid .ins-card__body .ins-card__name {
+    font-size: .72rem;
+  }
+  .ins-grid .ins-card__body .ins-card__model {
+    font-size: .6rem;
+  }
+  .ins-section-title {
+    font-size: .95rem;
+    margin: 1.2rem 0 .6rem;
+  }
+}
+
+/* 存放地点标签 */
+.ins-grid .ins-card__body .ins-card__location,
+.ins-grid .ins-card__body p.ins-card__location {
+  margin: 4px 0 0 !important;
+  padding: 2px 6px !important;
+  font-size: .66rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #ffffff !important;
+  background: rgba(56, 189, 248, .35) !important;
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-self: flex-start;
+  letter-spacing: .2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }

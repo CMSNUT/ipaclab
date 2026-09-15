@@ -2,54 +2,118 @@
  * 自动为指定目录生成 README.md 索引
  * 用法：npm run gen:readme
  *
- * 规则：
- * - 优先读取 frontmatter 的 title，其次一级标题 #，最后用文件名
- * - 排除 README.md 自身，避免循环
- * - 目录优先、文件次之
- * - 按数字前缀的大小正序排列（如 01-、02-、20260915.）
- * - 无数字前缀的排在有前缀的之后
- * - 目录名/文件名前的数字前缀在显示时自动去除
- * - 若目录下无内容，则跳过，不生成空 README
+ * permalink 规则：
+ * - 段 `课题` → `projects`
+ * - 段 `YYYYMMDD.xxx` → md5 前 8 位（同名同 hash，稳定不变）
+ * - 其它段 → 剥掉"第一个 . 及之前"的部分
+ *   例：docs/课题/20260916.芪附汤抗慢性心衰网药分析/01.研究计划
+ *       → /projects/a1b2c3d4/研究计划/
+ * - createTime 存在即保留
+ * - permalink 与脚本重新计算的值一致（或以其为前缀）时保留，否则重建
  */
 
 const fs = require('fs')
 const path = require('path')
+const crypto = require('crypto')
 
 // ===== 配置要生成索引的目录（相对于 docs/）=====
 const TARGET_DIRS = [
-  // `团队`,
   '教程',
   '设备',
   '工具',
-  '课题', 
+  '课题',
   '更多'
 ]
+
+// 顶层目录名映射（路径段 → URL 段）
+const SEGMENT_MAP = {
+  '课题': 'projects',
+  // 需要时可加：
+  '教程': 'courses',
+  '设备': 'instruments',
+  '工具': 'tools',
+  '更多': 'more',
+}
+
+// 遇到这些目录名跳过：不生成 README、不递归进入
+const SKIP_DIRNAMES = new Set([
+  '02.研究进度',
+  '09.里程碑',
+  '_template',
+  'scripts',
+  'node_modules',
+])
 
 // docs 根目录（脚本位于 docs/.vuepress/scripts/）
 const DOCS_ROOT = path.resolve(__dirname, '../..')
 
-/**
- * 去掉名称前的数字前缀（如 01-、02_、20260915. 等）
- */
+// ---------- 工具 ----------
+
+/** 去掉名称前的数字前缀（显示用）：01.、02_、20260915. 等 */
 function stripPrefix(name) {
   return name.replace(/^\d+[-_.]\s*/, '')
 }
 
-/**
- * 提取名称开头的数字前缀，无前缀返回 Infinity（排到最后）
- */
+/** 提取名称开头的数字前缀，无前缀返回 Infinity */
 function extractPrefix(name) {
   const match = name.match(/^(\d+)[-_.]/)
   return match ? parseInt(match[1], 10) : Infinity
 }
 
+/** 剥掉"第一个 . 及之前"的所有内容 */
+function stripFirstDotPrefix(seg) {
+  const idx = seg.indexOf('.')
+  return idx === -1 ? seg : seg.slice(idx + 1)
+}
+
+/** 8 位 hash（md5 前 8 位） */
+function hash8(input) {
+  return crypto.createHash('md5').update(input).digest('hex').slice(0, 8)
+}
+
+/** 判断是否是 YYYYMMDD.xxx 形式的目录段 */
+function isDatedSegment(seg) {
+  return /^\d{8}\./.test(seg)
+}
+
+// ---------- 路径 → URL 段 ----------
+
 /**
- * 从 Markdown 文件中提取标题
+ * 目录相对 docs 的路径（统一 / 分隔），逐段映射：
+ *   课题                    → projects
+ *   20260916.xxx           → 8 位 hash
+ *   01.研究计划             → 研究计划
+ *   教程                    → 教程
  */
+function relFromDocs(dir) {
+  return path.relative(DOCS_ROOT, dir)
+    .split(path.sep)
+    .map(seg => {
+      if (SEGMENT_MAP[seg]) return SEGMENT_MAP[seg]
+      if (isDatedSegment(seg)) return hash8(seg)
+      return stripFirstDotPrefix(seg)
+    })
+    .join('/')
+}
+
+/** 生成 permalink：以 / 开头、以 / 结尾 */
+function buildPermalink(dir) {
+  return '/' + relFromDocs(dir) + '/'
+}
+
+/** 判断旧 permalink 与脚本计算值是否一致或前缀一致 */
+function isPermalinkPrefixValid(value, dir) {
+  const expected = ('/' + relFromDocs(dir)).replace(/\/+$/, '')
+  const v = value.replace(/\/+$/, '') || '/'
+  return v === expected || v.startsWith(expected + '/')
+}
+
+// ---------- 标题 / frontmatter ----------
+
+/** 从 Markdown 文件中提取标题 */
 function getTitle(filePath) {
   const content = fs.readFileSync(filePath, 'utf-8')
 
-  // 1. frontmatter title
   const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (fmMatch) {
     const titleMatch = fmMatch[1].match(/^title:\s*(.+)$/m)
@@ -58,37 +122,83 @@ function getTitle(filePath) {
     }
   }
 
-  // 2. 一级标题 # Title
   const h1Match = content.match(/^#\s+(.+)$/m)
   if (h1Match) return h1Match[1].trim()
 
-  // 3. 文件名（去掉扩展名和数字前缀）
   return stripPrefix(path.basename(filePath, '.md'))
 }
 
-/**
- * 按数字前缀正序排序：目录优先，再按前缀数字升序，无前缀的排最后
- */
+/** 从已有 README 中提取需要保留的字段 */
+function extractPreservedMeta(readmePath, dir) {
+  const preserved = {}
+  if (!fs.existsSync(readmePath)) return preserved
+
+  const text = fs.readFileSync(readmePath, 'utf-8')
+  if (!text.startsWith('---')) return preserved
+
+  const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  if (!m) return preserved
+  const fm = m[1]
+
+  const ctMatch = fm.match(/^createTime:\s*(.+)$/m)
+  if (ctMatch && ctMatch[1].trim()) {
+    preserved.createTime = ctMatch[1].trim().replace(/^["']|["']$/g, '')
+  }
+
+  const plMatch = fm.match(/^permalink:\s*(.+)$/m)
+  if (plMatch && plMatch[1].trim()) {
+    const value = plMatch[1].trim().replace(/^["']|["']$/g, '')
+    if (isPermalinkPrefixValid(value, dir)) {
+      preserved.permalink = value
+    } else {
+      preserved.permalink = buildPermalink(dir)
+      preserved.permalinkRebuilt = true
+      preserved.permalinkOld = value
+    }
+  }
+
+  return preserved
+}
+
+// ---------- 排序 / 内容探测 ----------
+
 function sortEntries(entries) {
   return entries.sort((a, b) => {
-    // 目录优先
     if (a.isDirectory() && !b.isDirectory()) return -1
     if (!a.isDirectory() && b.isDirectory()) return 1
 
-    // 按数字前缀大小排序
     const pa = extractPrefix(a.name)
     const pb = extractPrefix(b.name)
     if (pa !== pb) return pa - pb
 
-    // 前缀相同（或无前缀）时按名称排序
     return a.name.localeCompare(b.name, 'zh-CN', { numeric: true })
   })
 }
 
-/**
- * 为单个目录递归生成 README.md
- */
-function generateReadme(dir) {
+function hasContent(dir) {
+  let entries
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true })
+  } catch {
+    return false
+  }
+  for (const entry of entries) {
+    if (entry.name === 'README.md') continue
+    if (SKIP_DIRNAMES.has(entry.name)) continue
+    const full = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      if (hasContent(full)) return true
+    } else if (entry.name.endsWith('.md')) {
+      return true
+    }
+  }
+  return false
+}
+
+// ---------- 生成单个 README ----------
+
+function generateReadme(dir, options = {}) {
+  const { shallow = false } = options
   const entries = fs.readdirSync(dir, { withFileTypes: true })
   const sorted = sortEntries(entries)
   const items = []
@@ -97,11 +207,27 @@ function generateReadme(dir) {
     const fullPath = path.join(dir, entry.name)
 
     if (entry.isDirectory()) {
-      const subItems = generateReadme(fullPath)
-      if (subItems.length > 0) {
+      if (SKIP_DIRNAMES.has(entry.name)) {
+        if (hasContent(fullPath)) {
+          items.push({
+            name: stripPrefix(entry.name),
+            link: `${entry.name}/README.md`,
+          })
+        }
+        continue
+      }
+
+      let ok
+      if (shallow) {
+        ok = hasContent(fullPath)
+      } else {
+        const subItems = generateReadme(fullPath)
+        ok = subItems.length > 0
+      }
+      if (ok) {
         items.push({
-          name: stripPrefix(entry.name),        // 显示：去掉前缀
-          link: `${entry.name}/README.md`,      // 链接：保留原始目录名
+          name: stripPrefix(entry.name),
+          link: `${entry.name}/README.md`,
         })
       }
     } else if (entry.name.endsWith('.md') && entry.name !== 'README.md') {
@@ -114,17 +240,34 @@ function generateReadme(dir) {
 
   if (items.length === 0) return []
 
+  const readmePath = path.join(dir, 'README.md')
+  const preserved = extractPreservedMeta(readmePath, dir)
+
   const dirName = path.basename(dir)
-  const displayName = stripPrefix(dirName)      // 标题：去掉前缀
-  let content = `---\ntitle: ${displayName}\n---\n\n`
+  const displayName = stripPrefix(dirName)
+
+  let content = '---\n'
+  content += `title: ${displayName}\n`
+  if (preserved.createTime) content += `createTime: ${preserved.createTime}\n`
+  if (preserved.permalink) content += `permalink: ${preserved.permalink}\n`
+  content += '---\n\n'
+
   content += `# ${displayName}\n\n`
   content += `> 本目录下共 ${items.length} 个条目\n\n`
   for (const item of items) {
     content += `- [${item.name}](${encodeURI(item.link)})\n`
   }
 
-  fs.writeFileSync(path.join(dir, 'README.md'), content, 'utf-8')
-  console.log(`✅ 已更新: ${path.relative(DOCS_ROOT, path.join(dir, 'README.md'))}`)
+  fs.writeFileSync(readmePath, content, 'utf-8')
+
+  const notes = []
+  if (preserved.createTime) notes.push('保留 createTime')
+  if (preserved.permalink && !preserved.permalinkRebuilt) notes.push('保留 permalink')
+  if (preserved.permalinkRebuilt) {
+    notes.push(`重建 permalink（原 ${preserved.permalinkOld} → ${preserved.permalink}）`)
+  }
+  const noteStr = notes.length ? `（${notes.join('；')}）` : ''
+  console.log(`✅ 已更新: ${path.relative(DOCS_ROOT, readmePath)} ${noteStr}`)
 
   return items
 }
@@ -132,14 +275,17 @@ function generateReadme(dir) {
 // ===== 执行 =====
 console.log('🚀 开始生成 README 索引...\n')
 
-for (const rel of TARGET_DIRS) {
+for (const target of TARGET_DIRS) {
+  const rel = typeof target === 'string' ? target : target.path
+  const shallow = typeof target === 'object' && target.shallow === true
+
   const targetDir = path.join(DOCS_ROOT, rel)
   if (!fs.existsSync(targetDir)) {
     console.log(`⚠️  跳过（目录不存在）: docs/${rel}`)
     continue
   }
-  console.log(`📂 处理目录: docs/${rel}`)
-  generateReadme(targetDir)
+  console.log(`📂 已更新: docs/${rel}${shallow ? ' (shallow)' : ''}`)
+  generateReadme(targetDir, { shallow })
   console.log('')
 }
 

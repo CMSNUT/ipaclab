@@ -7,11 +7,14 @@
   "license": "MIT",
   "scripts": {
     "gen:readme": "node ./docs/.vuepress/scripts/genReadme.cjs",
-    "docs:build": "npm run gen:readme && vuepress build docs --clean-cache --clean-temp",
-    "docs:dev": "npm run gen:readme && vuepress dev docs",
-    "docs:dev-clean": "npm run gen:readme && vuepress dev docs --clean-cache --clean-temp",
+    "gen:instruments": "node ./docs/.vuepress/scripts/genInstruments.cjs",
+    "docs:build": "npm run gen:instruments && npm run gen:readme && vuepress build docs --clean-cache --clean-temp",
+    "docs:dev": "npm run gen:instruments && npm run gen:readme && vuepress dev docs",
+    "docs:dev-clean": "npm run gen:instruments && npm run gen:readme && vuepress dev docs --clean-cache --clean-temp",
     "docs:preview": "http-server docs/.vuepress/dist",
-    "vp-update": "npx vp-update"
+    "vp-update": "npx vp-update",
+    "new": "node ./docs/.vuepress/scripts/createProject.cjs",
+    "init:templates": "node ./docs/.vuepress/scripts/initTemplates.cjs"
   },
   "devDependencies": {
     "@vuepress/bundler-vite": "2.0.0-rc.31",

@@ -1,7 +1,7 @@
 ---
 title: 其他基础工具
 createTime: 2026/09/15 21:44:45
-permalink: /tools/2zhe3nqi/
+permalink: /tools/基础工具/其他基础工具/
 ---
 
 # 其他基础工具

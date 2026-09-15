@@ -27,6 +27,19 @@ export default defineUserConfig({
   bundler: viteBundler(),
   shouldPrefetch: false,
 
+  markdown: {
+    html: true
+  },
+
+  // ...其它配置
+  pagePatterns: [
+    '**/*.md',
+    '!.vuepress',
+    '!node_modules',
+    '!templates/**',      // ← 排除模板目录
+    '!**/templates/**',
+  ],
+
   theme: plumeTheme({
 
     /**

@@ -1,7 +1,7 @@
 ---
 title: 课题2
 createTime: 2026/09/15 21:44:45
-permalink: /projects/cjde3tl2/
+permalink: /projects/2a7335df/
 ---
 
 # 课题2

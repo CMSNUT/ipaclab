@@ -1,7 +1,7 @@
 ---
 title: 文献管理与写作
 createTime: 2026/09/15 21:44:45
-permalink: /tools/jsr29hw3/
+permalink: /tools/基础工具/文献管理与写作/
 ---
 
 # 文献管理与写作

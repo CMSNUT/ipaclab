@@ -1,7 +1,7 @@
 ---
 title: 编程工具
 createTime: 2026/09/15 21:44:45
-permalink: /tools/evjmpqwb/
+permalink: /tools/编程工具/
 ---
 
 # 编程工具

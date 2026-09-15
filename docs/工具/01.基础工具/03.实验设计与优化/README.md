@@ -1,7 +1,7 @@
 ---
 title: 实验设计与优化
 createTime: 2026/09/15 21:44:45
-permalink: /tools/25hb5su6/
+permalink: /tools/基础工具/实验设计与优化/
 ---
 
 # 实验设计与优化

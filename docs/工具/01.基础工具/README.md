@@ -1,7 +1,7 @@
 ---
 title: 基础工具
 createTime: 2026/09/15 21:44:45
-permalink: /tools/d6uysrr1/
+permalink: /tools/基础工具/
 ---
 
 # 基础工具

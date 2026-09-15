@@ -1,7 +1,7 @@
 ---
 title: Zetero + Obsidian教程
 createTime: 2026/09/15 21:44:45
-permalink: /tools/4rbefexy/
+permalink: /tools/基础工具/文献管理与写作/Zetero + Obsidian教程/
 ---
 
 # Zetero + Obsidian教程

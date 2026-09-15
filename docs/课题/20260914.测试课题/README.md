@@ -1,7 +1,7 @@
 ---
 title: 测试课题
 createTime: 2026/09/15 21:44:45
-permalink: /projects/sdepogvr/
+permalink: /projects/24db3e66/
 ---
 
 # 测试课题

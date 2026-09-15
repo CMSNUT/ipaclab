@@ -1,7 +1,7 @@
 ---
 title: 数据处理与绘图
 createTime: 2026/09/15 21:44:45
-permalink: /tools/52a72kul/
+permalink: /tools/基础工具/数据处理与绘图/
 ---
 
 # 数据处理与绘图

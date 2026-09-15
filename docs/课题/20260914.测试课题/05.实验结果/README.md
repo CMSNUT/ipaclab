@@ -1,7 +1,7 @@
 ---
 title: 实验结果
 createTime: 2026/09/15 21:44:45
-permalink: /projects/8jvl25en/
+permalink: /projects/24db3e66/实验结果/
 ---
 
 # 实验结果

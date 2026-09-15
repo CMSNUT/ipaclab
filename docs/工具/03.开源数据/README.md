@@ -1,7 +1,7 @@
 ---
 title: 开源数据
 createTime: 2026/09/15 21:44:45
-permalink: /tools/b4suwz77/
+permalink: /tools/开源数据/
 ---
 
 # 开源数据
