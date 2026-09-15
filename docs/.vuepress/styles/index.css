@@ -1,0 +1,249 @@
+.vp-footer {
+  padding: 10px 0 !important;   /* 上下都是 10px，对称 */
+  margin: 0 !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+.vp-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2px 6px;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.vp-footer .container .message,
+.vp-footer .container .copyright {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+  font-size: 13px !important;
+}
+
+@media (max-width: 640px) {
+  .vp-footer .container {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+/* ===== 团队页面标题美化 ===== */
+.team-page h2 {
+  display: inline-block;          /* ← 关键：让元素宽度 = 文字宽度 */
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 48px 0 24px;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.team-page h2::after {
+  content: '';
+  position: absolute;
+  left: 0;                        /* 从文字左边缘开始 */
+  bottom: 0;
+  width: 100%;                    /* 与文字等宽 */
+  height: 3px;
+  border-radius: 2px;
+  background: var(--vp-c-brand-1);
+}
+
+/* 小屏适配 */
+@media (max-width: 640px) {
+  .team-page h2 {
+    font-size: 1.25em;
+    padding-left: 12px;
+  }
+}
+
+/* ===== 导师网格：1~4 列自适应 ===== */
+.mentor-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+/* 当容器宽度不足以容纳 2 列时，强制 1 列 */
+@media (max-width: 900px) {
+  .mentor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 学生网格：1~6 列自适应 ===== */
+.student-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+/* ===== 实验室简介卡片 ===== */
+.lab-intro-card {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 28px 32px;
+  margin: 24px 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    var(--vp-c-brand-soft) 0%,
+    var(--vp-c-bg-soft) 100%
+  );
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.lab-intro-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border-color: var(--vp-c-brand-1);
+}
+
+.lab-intro-icon {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-brand-1);
+  font-size: 36px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.lab-intro-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.lab-intro-title {
+  font-size: 1.3em;
+  font-weight: 800;
+  color: var(--vp-c-text-1);
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.lab-intro-subtitle {
+  display: block;
+  font-size: 0.68em;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  letter-spacing: 0;
+  margin-top: 4px;
+}
+
+.lab-intro-text {
+  font-size: 0.95em;
+  color: var(--vp-c-text-1);
+  line-height: 1.8;
+  margin: 12px 0 0;
+  text-align: justify;
+}
+
+.lab-intro-text strong {
+  color: var(--vp-c-brand-1);
+}
+
+/* 小屏：图标和文字改为上下排列 */
+@media (max-width: 640px) {
+  .lab-intro-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 24px 20px;
+  }
+
+  .lab-intro-text {
+    text-align: left;
+  }
+}
+
+/* ===== 研究方向卡片网格 ===== */
+/* ===== 研究方向：每行一个，带示意图 ===== */
+.research-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.research-item {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+  padding: 0;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.research-item:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--vp-c-brand-1);
+}
+
+/* 示意图：左侧固定宽度 */
+.research-image {
+  flex-shrink: 0;
+  width: 260px;
+  overflow: hidden;
+  background: var(--vp-c-bg-alt);
+}
+
+.research-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 文字区 */
+.research-body {
+  flex: 1;
+  min-width: 0;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.research-title {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin-bottom: 10px;
+}
+
+.research-desc {
+  font-size: 0.92em;
+  color: var(--vp-c-text-2);
+  line-height: 1.8;
+  margin: 0;
+  text-align: justify;
+}
+
+/* 小屏：图片在上，文字在下 */
+@media (max-width: 768px) {
+  .research-item {
+    flex-direction: column;
+  }
+
+  .research-image {
+    width: 100%;
+    height: 180px;
+  }
+
+  .research-body {
+    padding: 20px;
+  }
+}

@@ -4,19 +4,19 @@ config:
   -
     type: hero
     full: true
-    forceDark: false
+    forceDark: true
     effect: prism
     hero:
       name: IPAC Lab
-      tagline: 智能精准分析化学实验室
-      text: Intelligent and precise analytical chemistry laboratory
+      tagline: 智能精准分析化学课题组
+      text: Intelligent and Precise Analytical Chemistry Laboratory
       actions:
         -
           theme: brand
-          text: IPAC
-          link: /projects/
+          text: 教程
+          link: /courses/
         -
-          theme: alt
-          text: Github →
-          link: https://github.com/cmsnut/ipaclab
+          theme: brand
+          text: 工具
+          link: /tools/
 ---

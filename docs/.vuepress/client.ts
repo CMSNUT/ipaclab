@@ -1,9 +1,9 @@
 import { defineClientConfig } from 'vuepress/client'
 
-// import Layout from './layouts/Layout.vue'
-// import SafetyAlert from './components/SafetyAlert.vue'
+import TeamMentor from './components/TeamMentor.vue'
+import TeamStudent from './components/TeamStudent.vue'
 
-
+import './styles/index.css'
 
 export default defineClientConfig({
   // 1. 覆盖布局，使用主题插槽
@@ -18,8 +18,9 @@ export default defineClientConfig({
     // siteData: 站点数据
 
     // 注册全局组件
-    // app.component('MyComponent', MyComponent)
-
+    app.component('TeamMentor', TeamMentor)
+    app.component('TeamStudent', TeamStudent)
+    
     // 注册全局组件
     // app.component('SafetyAlert', SafetyAlert)
 

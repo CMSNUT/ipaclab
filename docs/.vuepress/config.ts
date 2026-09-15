@@ -14,12 +14,13 @@ import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
 
 export default defineUserConfig({
-  base: '/ipaclab/',
+  base: '/',
   lang: 'zh-CN',
   title: 'IPAC',
   description: 'A web of IPAC Lab',
 
   head: [
+    ['link', { rel: 'icon', href: '/favicon_32x32.ico' }],
     ['link', { rel: 'icon', type: 'image/png', href: '/favicon_32x32.png' }],
   ],
 
@@ -237,6 +238,12 @@ export default defineUserConfig({
     plugins: {
       git: process.env.NODE_ENV === 'production', // 生产环境启用
     },
+
+    encrypt: {
+      rules: {
+        '/projects/': 'snut3420',
+      }
+    }
 
   }),
 })

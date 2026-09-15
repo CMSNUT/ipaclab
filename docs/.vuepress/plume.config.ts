@@ -14,21 +14,25 @@ import { defineThemeConfig } from 'vuepress-theme-plume'
 import collections from './collections'
 import navbar from './navbar'
 
+const startYear = 2024
+const currentYear = new Date().getFullYear()
+const yearRange = startYear === currentYear ? `${startYear}` : `${startYear}–${currentYear}`
+
 /**
  * @see https://theme-plume.vuejs.press/config/theme/
  */
 export default defineThemeConfig({
-  logo: 'avatar.jpg',
+  logo: '/avatar.jpg',
 
   social: [
-    { icon: 'github', link: 'https://github.com/cmsnut/ipaclab' },
+    { icon: 'github', link: 'https://github.com/cmsnut' },
   ],
 
   /**
    * @see https://theme-plume.vuejs.press/config/theme/#profile
    */
   profile: {
-    avatar: 'avatar.jpg',
+    avatar: '/avatar.jpg',
     name: 'IPAC Lab',
     description: '智能精准分析化学实验室',
     circle: true,
@@ -40,7 +44,8 @@ export default defineThemeConfig({
    * @see https://theme-plume.vuejs.press/config/theme/#footer
    */
   footer: {
-    message: '© 2026 IPAC Lab · 智能精准分析化学实验室',
+    message: '陕西理工大学智能精准分析化学课题组 版权所有  Email: <a href="mailto:dhxia@snut.edu.cn">dhxia@snut.edu.cn</a>',
+    copyright: '© ' + yearRange + `&nbsp;` + ' IPAC Lab ',
   },
 
   navbar,

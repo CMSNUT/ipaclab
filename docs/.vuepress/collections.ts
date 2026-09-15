@@ -26,83 +26,66 @@
  */
 import { defineCollection, defineCollections } from 'vuepress-theme-plume'
 
+const team = defineCollection({
+  type: 'doc',
+  dir: '团队',
+  title: '团队',
+  linkPrefix: '/team/',
+  sidebar: 'auto',
+  sidebarCollapsed: true, 
+})
+
 const projects = defineCollection({
   type: 'doc',
-  dir: '研究课题',
-  title: '研究课题',
-  linkPrefix: '/ipaclab/projects/',
+  dir: '课题',
+  title: '课题',
+  linkPrefix: '/projects/',
   sidebar: 'auto',
   sidebarCollapsed: true, 
 })
 
-const pictures = defineCollection({
+const instruments = defineCollection({
   type: 'doc',
-  dir: '学术图库',
-  title: '学术图库',
-  linkPrefix: '/ipaclab/pictures/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
-})
-
-const labSkills = defineCollection({
-  type: 'doc',
-  dir: '实验技术',
-  title: '实验技术',
-  linkPrefix: '/ipaclab/lab-skills/',
+  dir: '设备',
+  title: '设备',
+  linkPrefix: '/instruments/',
   sidebar: 'auto',
   sidebarCollapsed: true, 
 })
 
 const tools = defineCollection({
   type: 'doc',
-  dir: '研究工具',
-  title: '研究工具',
-  linkPrefix: '/ipaclab/tools/',
+  dir: '工具',
+  title: '工具',
+  linkPrefix: '/tools/',
   sidebar: 'auto',
   sidebarCollapsed: true, 
 })
 
-const techCollect = defineCollection({
+const courses = defineCollection({
   type: 'doc',
-  dir: '技术文集',
-  title: '技术文集',
-  linkPrefix: '/ipaclab/tech-collection/',
+  dir: '教程',
+  title: '教程',
+  linkPrefix: '/courses/',
   sidebar: 'auto',
   sidebarCollapsed: true, 
 })
 
-const paper = defineCollection({
-  type: 'post',
-  dir: '文献研读',
-  title: '文献研读',
-  link: '/ipaclab/paper/',
-  tags: true,
-  categories: true,
-  archives: true, 
-  postCover: {
-    layout: 'left',       // 封面图在上方
-    ratio: '16/9',       // 宽高比
-    width: 300,          // 宽度（仅 left/right 生效）
-    compact: false,      // 紧凑模式
-  },
+const more = defineCollection({
+  type: 'doc',
+  dir: '更多',
+  title: '更多',
+  linkPrefix: '/more/',
+  sidebar: 'auto',
+  sidebarCollapsed: true, 
 })
 
-const notes = defineCollection({
-  type: 'post',
-  dir: '研究笔记',
-  title: '研究笔记',
-  link: '/ipaclab/notes/',
-  tags: true,
-  categories: true,
-  archives: true,
-})
 
 export default defineCollections([
-  projects,
-  notes,
-  pictures,
-  labSkills,
+  team,
+  instruments,
   tools,
-  paper,
-  techCollect,
+  courses,
+  projects,
+  more,  
 ])
