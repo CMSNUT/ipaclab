@@ -1,5 +1,9 @@
+/* 页脚 */
 .vp-footer {
-  padding: 10px 0 !important;   /* 上下都是 10px，对称 */
+  display: flex;                 /* 让 footer 本身成为弹性容器 */
+  justify-content: center;       /* 水平居中 .container */
+  align-items: center;           /* 垂直居中 .container */
+  padding: 10px 0 !important;
   margin: 0 !important;
   min-height: auto !important;
   height: auto !important;
@@ -8,11 +12,12 @@
 .vp-footer .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: center;       /* 水平居中子元素 */
+  align-items: center;           /* 垂直居中子元素 */
   gap: 2px 6px;
   padding: 0 !important;
   margin: 0 !important;
+  width: 100%;                   /* 占满 footer 宽度 */
 }
 
 .vp-footer .container .message,
@@ -21,6 +26,7 @@
   padding: 0 !important;
   line-height: 1.2 !important;
   font-size: 13px !important;
+  text-align: center;            /* 文本水平居中 */
 }
 
 @media (max-width: 640px) {

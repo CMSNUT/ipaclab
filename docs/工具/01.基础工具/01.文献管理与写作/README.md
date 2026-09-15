@@ -1,7 +1,7 @@
 ---
 title: 文献管理与写作
-createTime: 2026/09/14 16:07:37
-permalink: /tools/d1dfxlnu/
+createTime: 2026/09/15 21:44:45
+permalink: /tools/jsr29hw3/
 ---
 
 # 文献管理与写作
