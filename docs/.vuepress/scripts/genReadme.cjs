@@ -14,6 +14,8 @@
  * - comment 一律写 false（已存在的 README 也会被强制修正）
  * - permalink 与脚本重新计算的值一致（或以其为前缀）时保留，否则重建
  * - 生成后自动比对每条链接：目标文件/目录不存在即清除
+ * - 排序：所有文件与目录混合，按名称中的数字前缀升序；无前缀者排最后
+ * - 顺序修正：全仓库扫描时，README 条目顺序与期望不一致也会被重写
  */
 
 const fs = require('fs')
@@ -23,7 +25,6 @@ const crypto = require('crypto')
 // ===== 配置要生成索引的目录（相对于 docs/)=====
 const TARGET_DIRS = [
   '教程',
-  '设备',
   '工具',
   '课题',
   '更多'
@@ -33,7 +34,6 @@ const TARGET_DIRS = [
 const SEGMENT_MAP = {
   '课题': 'projects',
   '教程': 'courses',
-  '设备': 'instruments',
   '工具': 'tools',
   '更多': 'more',
 }
@@ -178,13 +178,6 @@ function extractPreservedMeta(readmePath, dir) {
 
 // ---------- comment: false 强制修正 ----------
 
-/**
- * 保证 README frontmatter 中 comment 字段恒为 false：
- *   - 有 comment 行 → 覆盖为 `comment: false`
- *   - 无 comment 行 → 在 frontmatter 末尾追加
- *   - 没有 frontmatter → 不动（避免误伤非本脚本生成的文件）
- * 返回 true 表示发生了修改
- */
 function ensureCommentFalse(readmePath) {
   if (!fs.existsSync(readmePath)) return false
   const text = fs.readFileSync(readmePath, 'utf-8')
@@ -280,13 +273,9 @@ function cleanInvalidLinks(readmePath) {
 
 function sortEntries(entries) {
   return entries.sort((a, b) => {
-    if (a.isDirectory() && !b.isDirectory()) return -1
-    if (!a.isDirectory() && b.isDirectory()) return 1
-
     const pa = extractPrefix(a.name)
     const pb = extractPrefix(b.name)
     if (pa !== pb) return pa - pb
-
     return a.name.localeCompare(b.name, 'zh-CN', { numeric: true })
   })
 }
@@ -309,6 +298,95 @@ function hasContent(dir) {
     }
   }
   return false
+}
+
+// ---------- 顺序修正 ----------
+
+function computeDirItems(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true })
+  const sorted = sortEntries(entries)
+  const items = []
+  for (const entry of sorted) {
+    if (entry.name === 'README.md') continue
+    if (entry.isDirectory()) {
+      const fullPath = path.join(dir, entry.name)
+      if (!hasContent(fullPath)) continue
+      items.push({
+        name: stripPrefix(entry.name),
+        link: `${entry.name}/README.md`,
+      })
+    } else if (entry.name.endsWith('.md')) {
+      items.push({
+        name: getTitle(path.join(dir, entry.name)),
+        link: entry.name,
+      })
+    }
+  }
+  return items
+}
+
+function readReadmeItems(readmePath) {
+  if (!fs.existsSync(readmePath)) return []
+  const text = fs.readFileSync(readmePath, 'utf-8')
+  const fmMatch = text.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/)
+  const body = fmMatch ? text.slice(fmMatch[0].length) : text
+  const items = []
+  for (const line of body.split(/\r?\n/)) {
+    const m = line.match(/^\s*[-*]\s+\[([^\]]+)\]\(([^)]+)\)\s*$/)
+    if (m) items.push({ name: m[1], link: m[2] })
+  }
+  return items
+}
+
+function normalizeLink(link) {
+  let out = link
+  try { out = decodeURI(out) } catch { /* 保持原样 */ }
+  return out
+}
+
+function fixReadmeOrder(dir) {
+  const readmePath = path.join(dir, 'README.md')
+  if (!fs.existsSync(readmePath)) return false
+
+  const expected = computeDirItems(dir)
+  const current = readReadmeItems(readmePath)
+
+  if (current.length === expected.length && current.length > 0) {
+    let same = true
+    for (let i = 0; i < current.length; i++) {
+      if (
+        normalizeLink(current[i].link) !== normalizeLink(expected[i].link) ||
+        current[i].name !== expected[i].name
+      ) {
+        same = false
+        break
+      }
+    }
+    if (same) return false
+  } else if (current.length === 0 && expected.length === 0) {
+    return false
+  }
+
+  const text = fs.readFileSync(readmePath, 'utf-8')
+  const fmMatch = text.match(/^(---\r?\n[\s\S]*?\r?\n---\r?\n?)/)
+  const fm = fmMatch ? fmMatch[0] : ''
+  const displayName = stripPrefix(path.basename(dir))
+
+  let newContent = fm
+  if (!fm) {
+    newContent += '---\n'
+    newContent += `title: ${displayName}\n`
+    newContent += 'comment: false\n'
+    newContent += '---\n\n'
+  }
+  newContent += `# ${displayName}\n\n`
+  newContent += `::: info 本目录下共 ${expected.length} 个条目\n:::\n\n`
+  for (const item of expected) {
+    newContent += `- [${item.name}](${encodeURI(item.link)})\n`
+  }
+
+  fs.writeFileSync(readmePath, newContent, 'utf-8')
+  return true
 }
 
 // ---------- 生成单个 README ----------
@@ -356,7 +434,6 @@ function generateReadme(dir, options = {}) {
     }
   }
 
-  // ===== 无条目：清理无效链接 + 强制 comment: false =====
   if (items.length === 0) {
     const removed = cleanInvalidLinks(readmePath)
     const fixedComment = ensureCommentFalse(readmePath)
@@ -394,7 +471,6 @@ function generateReadme(dir, options = {}) {
 
   fs.writeFileSync(readmePath, content, 'utf-8')
 
-  // 写入后兜底清理（跳过目录无 README、被手动加进来的死链等）
   const removedLinks = cleanInvalidLinks(readmePath)
   if (removedLinks.length) {
     console.log(`   🧹 清除 ${removedLinks.length} 条无效链接:`)
@@ -403,10 +479,8 @@ function generateReadme(dir, options = {}) {
     }
   }
 
-  // 二次确认 comment: false（其实上面写入时已是 false，这里只是保险）
   ensureCommentFalse(readmePath)
 
-  // 返回值过滤掉被清理的项
   const removedKeys = new Set()
   for (const r of removedLinks) {
     removedKeys.add(r.link)
@@ -455,10 +529,12 @@ for (const target of TARGET_DIRS) {
   console.log('')
 }
 
-// ===== 全仓库兜底扫描：把 docs 下所有 README.md 的 comment 都修正 =====
-console.log('🔎 全仓库扫描 README.md，确保 comment: false ...')
+// ===== 全仓库兜底扫描：comment 与条目顺序一并修正 =====
+console.log('🔎 全仓库扫描 README.md，确保 comment: false 与条目顺序正确 ...')
 let scanned = 0
-let fixed = 0
+let fixedComment = 0
+let fixedOrder = 0
+let fixedBoth = 0
 
 function walkDocs(dir) {
   let entries
@@ -474,15 +550,27 @@ function walkDocs(dir) {
       walkDocs(full)
     } else if (entry.name === 'README.md') {
       scanned++
-      if (ensureCommentFalse(full)) {
-        fixed++
-        console.log(`🔧 修正: ${path.relative(DOCS_ROOT, full)}`)
+      const cFixed = ensureCommentFalse(full)
+      const oFixed = fixReadmeOrder(dir)
+      if (cFixed && oFixed) {
+        fixedBoth++
+        console.log(`🔧 修正 comment + 顺序: ${path.relative(DOCS_ROOT, full)}`)
+      } else if (cFixed) {
+        fixedComment++
+        console.log(`🔧 修正 comment: ${path.relative(DOCS_ROOT, full)}`)
+      } else if (oFixed) {
+        fixedOrder++
+        console.log(`🔄 修正顺序: ${path.relative(DOCS_ROOT, full)}`)
       }
     }
   }
 }
 
 walkDocs(DOCS_ROOT)
-console.log(`   扫描 ${scanned} 个 README.md，修正 ${fixed} 个\n`)
+console.log(
+  `   扫描 ${scanned} 个 README.md，` +
+  `comment 修正 ${fixedComment + fixedBoth} 个，` +
+  `顺序修正 ${fixedOrder + fixedBoth} 个\n`
+)
 
 console.log('✨ 全部完成！')

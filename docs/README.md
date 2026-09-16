@@ -21,3 +21,12 @@ config:
           link: /tools/
 comment: false
 ---
+# docs
+
+::: info 本目录下共 4 个条目
+:::
+
+- [更多](%E6%9B%B4%E5%A4%9A/README.md)
+- [工具](%E5%B7%A5%E5%85%B7/README.md)
+- [教程](%E6%95%99%E7%A8%8B/README.md)
+- [课题](%E8%AF%BE%E9%A2%98/README.md)

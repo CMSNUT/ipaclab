@@ -602,3 +602,72 @@
   letter-spacing: .2px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
 }
+
+/* 让 Vancouver 格式的参考文献数字与文字显示在同一行 */
+.csl-entry {
+  display: flex;
+  align-items: flex-start;
+}
+
+.csl-left-margin {
+  flex-shrink: 0;
+  margin-right: 0.5em;
+}
+
+.csl-right-inline {
+  flex: 1;
+}
+
+/* .vuepress/styles/index.css */
+
+/* 通用表格样式 */
+.markdown-body table {
+  border-collapse: collapse;      /* 合并边框，关键 */
+  width: 100%;
+  margin: 1.5em 0;
+  border: none;                   /* 清除默认边框 */
+}
+
+/* 顶线（粗） */
+.markdown-body table thead tr:first-child th {
+  border-top: 2px solid #000;
+  border-bottom: 1px solid #000;  /* 表头下线（细） */
+  padding: 8px 12px;
+  font-weight: bold;
+  background: transparent;        /* 去掉默认背景色 */
+  text-align: left;               /* 学术表格通常左对齐 */
+}
+
+/* 底线（粗） */
+.markdown-body table tbody tr:last-child td {
+  border-bottom: 2px solid #000;
+}
+
+/* 移除所有其他边框（包括竖线） */
+.markdown-body table th,
+.markdown-body table td {
+  border-left: none;
+  border-right: none;
+}
+
+/* 表格正文单元格 */
+.markdown-body table tbody td {
+  padding: 8px 12px;
+  border-top: none;
+  border-bottom: none;
+}
+
+[data-theme="dark"] .markdown-body table thead tr:first-child th,
+[data-theme="dark"] .markdown-body table tbody tr:last-child td {
+  border-color: #e0e0e0;  /* 暗色模式下用浅色线条 */
+}
+
+/* 更通用的写法：定位表格容器内、表格之后出现的标题元素 */
+[class*="table-container"] {
+  display: flex;
+  flex-direction: column;
+}
+
+[class*="table-container"] > *:last-child {
+  order: -1;  /* 把最后一个子元素（标题）提到最前 */
+}

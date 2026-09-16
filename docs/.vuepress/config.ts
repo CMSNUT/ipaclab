@@ -15,6 +15,8 @@ import { plumeTheme } from 'vuepress-theme-plume'
 
 const base = '/ipaclab/'
 
+const citationPlugin = require('./plugins/citation-plugin.cjs')
+
 export default defineUserConfig({
   base: base,
   lang: 'zh-CN',
@@ -42,7 +44,7 @@ export default defineUserConfig({
     '!**/templates/**',
   ],
 
-  theme: plumeTheme({
+   theme: plumeTheme({
 
     /**
      * 自动为每个 Markdown 文件生成 frontmatter
@@ -120,7 +122,11 @@ export default defineUserConfig({
       field: true,
 
       // 表格增强：带标题、复制功能的表格，适合数据展示
-      table: true,
+      table: {
+        maxContent: true,   // 默认收窄为内容宽度
+        fullWidth: false,   // 默认不占满整行
+        align: 'center',
+      },
 
       // 时间线：展示研究进度、实验里程碑，适合研究项目模块
       timeline: true,
@@ -261,4 +267,19 @@ export default defineUserConfig({
     }
 
   }),
+
+  extendsMarkdown: (md) => {
+    md.use(citationPlugin, {
+      // 所有 .bib 文件都放在这个目录下
+      bibDir: 'docs/.vuepress/data/bib',
+      // 以下全部是默认值，可被 frontmatter 覆盖
+      // 可用样式: [ 'apa', 'vancouver', 'harvard1' ]
+      defaultTemplate: 'vancouver',
+      defaultTitle: '参考文献',
+      defaultHeadingLevel: 2,
+      defaultHeadingId: '参考文献',
+      defaultWrapClass: 'csl-bib-body',
+      defaultAppendHeading: true,
+    })
+  },
 })
