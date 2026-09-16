@@ -13,15 +13,17 @@ import { viteBundler } from '@vuepress/bundler-vite'
 import { defineUserConfig } from 'vuepress'
 import { plumeTheme } from 'vuepress-theme-plume'
 
+const base = '/ipaclab/'
+
 export default defineUserConfig({
-  base: '/ipaclab/',
+  base: base,
   lang: 'zh-CN',
   title: 'IPAC',
   description: 'A web of IPAC Lab',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon_32x32.ico' }],
-    ['link', { rel: 'icon', type: 'image/png', href: '/favicon_32x32.png' }],
+    // ['link', { rel: 'icon', href: '/favicon_32x32.ico' }],
+    ['link', { rel: 'icon', type: 'image/png', href: `${base}favicon_32x32.png` }],
   ],
 
   bundler: viteBundler(),

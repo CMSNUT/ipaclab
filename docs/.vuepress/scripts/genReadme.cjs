@@ -11,8 +11,9 @@
  * - createTime 存在即保留
  * - tags 存在即保留
  * - pageClass 存在即保留
- * - comment 一律写 false
+ * - comment 一律写 false（已存在的 README 也会被强制修正）
  * - permalink 与脚本重新计算的值一致（或以其为前缀）时保留，否则重建
+ * - 生成后自动比对每条链接：目标文件/目录不存在即清除
  */
 
 const fs = require('fs')
@@ -31,7 +32,6 @@ const TARGET_DIRS = [
 // 顶层目录名映射（路径段 → URL 段）
 const SEGMENT_MAP = {
   '课题': 'projects',
-  // 需要时可加：
   '教程': 'courses',
   '设备': 'instruments',
   '工具': 'tools',
@@ -52,43 +52,28 @@ const DOCS_ROOT = path.resolve(__dirname, '../..')
 
 // ---------- 工具 ----------
 
-/** 去掉名称前的数字前缀（显示用）：01.、02_、20260915. 等 */
 function stripPrefix(name) {
   return name.replace(/^\d+[-_.]\s*/, '')
 }
 
-/** 提取名称开头的数字前缀，无前缀返回 Infinity */
 function extractPrefix(name) {
   const match = name.match(/^(\d+)[-_.]/)
   return match ? parseInt(match[1], 10) : Infinity
 }
 
-/** 剥掉"第一个 . 及之前"的所有内容 */
 function stripFirstDotPrefix(seg) {
   const idx = seg.indexOf('.')
   return idx === -1 ? seg : seg.slice(idx + 1)
 }
 
-/** 8 位 hash（md5 前 8 位） */
 function hash8(input) {
   return crypto.createHash('md5').update(input).digest('hex').slice(0, 8)
 }
 
-/** 判断是否是 YYYYMMDD.xxx 形式的目录段 */
 function isDatedSegment(seg) {
   return /^\d{8}\./.test(seg)
 }
 
-/**
- * 从 frontmatter 中提取某个 key 的完整 YAML 块
- * 支持：
- *   key: value
- *   key: [a, b]
- *   key:
- *     - a
- *     - b
- * 找不到返回 null
- */
 function extractKeyBlock(fm, key) {
   const lines = fm.split(/\r?\n/)
   const result = []
@@ -101,7 +86,6 @@ function extractKeyBlock(fm, key) {
       continue
     }
     if (collecting) {
-      // 继续吃缩进行（多行列表）
       if (/^\s+\S/.test(line)) {
         result.push(line)
       } else {
@@ -115,13 +99,6 @@ function extractKeyBlock(fm, key) {
 
 // ---------- 路径 → URL 段 ----------
 
-/**
- * 目录相对 docs 的路径（统一 / 分隔），逐段映射：
- *   课题                    → projects
- *   20260916.xxx           → 8 位 hash
- *   01.研究计划             → 研究计划
- *   教程                    → 教程
- */
 function relFromDocs(dir) {
   return path.relative(DOCS_ROOT, dir)
     .split(path.sep)
@@ -133,12 +110,10 @@ function relFromDocs(dir) {
     .join('/')
 }
 
-/** 生成 permalink：以 / 开头、以 / 结尾 */
 function buildPermalink(dir) {
   return '/' + relFromDocs(dir) + '/'
 }
 
-/** 判断旧 permalink 与脚本计算值是否一致或前缀一致 */
 function isPermalinkPrefixValid(value, dir) {
   const expected = ('/' + relFromDocs(dir)).replace(/\/+$/, '')
   const v = value.replace(/\/+$/, '') || '/'
@@ -147,7 +122,6 @@ function isPermalinkPrefixValid(value, dir) {
 
 // ---------- 标题 / frontmatter ----------
 
-/** 从 Markdown 文件中提取标题 */
 function getTitle(filePath) {
   const content = fs.readFileSync(filePath, 'utf-8')
 
@@ -165,7 +139,6 @@ function getTitle(filePath) {
   return stripPrefix(path.basename(filePath, '.md'))
 }
 
-/** 从已有 README 中提取需要保留的字段 */
 function extractPreservedMeta(readmePath, dir) {
   const preserved = {}
   if (!fs.existsSync(readmePath)) return preserved
@@ -194,15 +167,113 @@ function extractPreservedMeta(readmePath, dir) {
     }
   }
 
-  // 保留 tags（支持行内数组、单行、多行列表）
   const tagsBlock = extractKeyBlock(fm, 'tags')
   if (tagsBlock) preserved.tags = tagsBlock
 
-  // 保留 pageClass（字符串或数组都按块保留）
   const pageClassBlock = extractKeyBlock(fm, 'pageClass')
   if (pageClassBlock) preserved.pageClass = pageClassBlock
 
   return preserved
+}
+
+// ---------- comment: false 强制修正 ----------
+
+/**
+ * 保证 README frontmatter 中 comment 字段恒为 false：
+ *   - 有 comment 行 → 覆盖为 `comment: false`
+ *   - 无 comment 行 → 在 frontmatter 末尾追加
+ *   - 没有 frontmatter → 不动（避免误伤非本脚本生成的文件）
+ * 返回 true 表示发生了修改
+ */
+function ensureCommentFalse(readmePath) {
+  if (!fs.existsSync(readmePath)) return false
+  const text = fs.readFileSync(readmePath, 'utf-8')
+  if (!text.startsWith('---')) return false
+
+  const m = text.match(/^(---\r?\n)([\s\S]*?)(\r?\n---)/)
+  if (!m) return false
+
+  const [, fmStart, fm, fmEnd] = m
+  let newFm
+  if (/^comment\s*:/m.test(fm)) {
+    newFm = fm.replace(/^comment\s*:.*$/m, 'comment: false')
+  } else {
+    newFm = fm + '\ncomment: false'
+  }
+  if (newFm === fm) return false
+
+  const updated = text.replace(m[0], fmStart + newFm + fmEnd)
+  fs.writeFileSync(readmePath, updated, 'utf-8')
+  return true
+}
+
+// ---------- 无效链接清理 ----------
+
+function isExternalLink(link) {
+  return (
+    /^(https?:)?\/\//i.test(link) ||
+    /^mailto:/i.test(link) ||
+    link.startsWith('#')
+  )
+}
+
+function linkTargetExists(baseDir, rawLink) {
+  if (isExternalLink(rawLink)) return true
+
+  const cleanLink = rawLink.split('#')[0].split('?')[0]
+  if (!cleanLink) return true
+
+  let decoded = cleanLink
+  try {
+    decoded = decodeURI(cleanLink)
+  } catch {
+    /* 保持原样 */
+  }
+
+  const target = decoded.startsWith('/')
+    ? path.join(DOCS_ROOT, decoded)
+    : path.resolve(baseDir, decoded)
+
+  return fs.existsSync(target)
+}
+
+function cleanInvalidLinks(readmePath) {
+  if (!fs.existsSync(readmePath)) return []
+
+  const baseDir = path.dirname(readmePath)
+  const original = fs.readFileSync(readmePath, 'utf-8')
+  const lines = original.split(/\r?\n/)
+  const kept = []
+  const removed = []
+
+  for (const line of lines) {
+    const m = line.match(/^(\s*[-*]\s+)\[([^\]]+)\]\(([^)]+)\)\s*$/)
+    if (!m) {
+      kept.push(line)
+      continue
+    }
+
+    const name = m[2]
+    const link = m[3]
+
+    if (linkTargetExists(baseDir, link)) {
+      kept.push(line)
+    } else {
+      removed.push({ name, link })
+    }
+  }
+
+  if (!removed.length) return []
+
+  let text = kept.join('\n')
+  const count = kept.filter(l => /^\s*[-*]\s+\[/.test(l)).length
+  text = text.replace(
+    /(本目录下共\s+)\d+(\s+个条目)/,
+    (_, a, b) => `${a}${count}${b}`
+  )
+
+  fs.writeFileSync(readmePath, text, 'utf-8')
+  return removed
 }
 
 // ---------- 排序 / 内容探测 ----------
@@ -248,6 +319,8 @@ function generateReadme(dir, options = {}) {
   const sorted = sortEntries(entries)
   const items = []
 
+  const readmePath = path.join(dir, 'README.md')
+
   for (const entry of sorted) {
     const fullPath = path.join(dir, entry.name)
 
@@ -283,11 +356,24 @@ function generateReadme(dir, options = {}) {
     }
   }
 
-  if (items.length === 0) return []
+  // ===== 无条目：清理无效链接 + 强制 comment: false =====
+  if (items.length === 0) {
+    const removed = cleanInvalidLinks(readmePath)
+    const fixedComment = ensureCommentFalse(readmePath)
 
-  const readmePath = path.join(dir, 'README.md')
+    if (removed.length) {
+      console.log(`🧹 ${path.relative(DOCS_ROOT, readmePath)} 清除 ${removed.length} 条无效链接:`)
+      for (const { name, link } of removed) {
+        console.log(`   - [${name}](${link})`)
+      }
+    }
+    if (fixedComment) {
+      console.log(`🔧 ${path.relative(DOCS_ROOT, readmePath)} 修正 comment → false`)
+    }
+    return []
+  }
+
   const preserved = extractPreservedMeta(readmePath, dir)
-
   const dirName = path.basename(dir)
   const displayName = stripPrefix(dirName)
 
@@ -308,6 +394,34 @@ function generateReadme(dir, options = {}) {
 
   fs.writeFileSync(readmePath, content, 'utf-8')
 
+  // 写入后兜底清理（跳过目录无 README、被手动加进来的死链等）
+  const removedLinks = cleanInvalidLinks(readmePath)
+  if (removedLinks.length) {
+    console.log(`   🧹 清除 ${removedLinks.length} 条无效链接:`)
+    for (const { name, link } of removedLinks) {
+      console.log(`      - [${name}](${link})`)
+    }
+  }
+
+  // 二次确认 comment: false（其实上面写入时已是 false，这里只是保险）
+  ensureCommentFalse(readmePath)
+
+  // 返回值过滤掉被清理的项
+  const removedKeys = new Set()
+  for (const r of removedLinks) {
+    removedKeys.add(r.link)
+    removedKeys.add(encodeURI(r.link))
+    try { removedKeys.add(decodeURI(r.link)) } catch {}
+  }
+  const validItems = removedKeys.size
+    ? items.filter(it => {
+        const enc = encodeURI(it.link)
+        let dec = it.link
+        try { dec = decodeURI(enc) } catch {}
+        return !removedKeys.has(it.link) && !removedKeys.has(enc) && !removedKeys.has(dec)
+      })
+    : items
+
   const notes = []
   if (preserved.createTime) notes.push('保留 createTime')
   if (preserved.permalink && !preserved.permalinkRebuilt) notes.push('保留 permalink')
@@ -317,10 +431,11 @@ function generateReadme(dir, options = {}) {
   if (preserved.tags) notes.push('保留 tags')
   if (preserved.pageClass) notes.push('保留 pageClass')
   notes.push('comment=false')
+  if (removedLinks.length) notes.push(`清除无效链接 x${removedLinks.length}`)
   const noteStr = notes.length ? `(${notes.join('; ')})` : ''
   console.log(`✅ 已更新: ${path.relative(DOCS_ROOT, readmePath)} ${noteStr}`)
 
-  return items
+  return validItems
 }
 
 // ===== 执行 =====
@@ -339,5 +454,35 @@ for (const target of TARGET_DIRS) {
   generateReadme(targetDir, { shallow })
   console.log('')
 }
+
+// ===== 全仓库兜底扫描：把 docs 下所有 README.md 的 comment 都修正 =====
+console.log('🔎 全仓库扫描 README.md，确保 comment: false ...')
+let scanned = 0
+let fixed = 0
+
+function walkDocs(dir) {
+  let entries
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true })
+  } catch {
+    return
+  }
+  for (const entry of entries) {
+    const full = path.join(dir, entry.name)
+    if (entry.isDirectory()) {
+      if (entry.name === 'node_modules' || entry.name === '.git') continue
+      walkDocs(full)
+    } else if (entry.name === 'README.md') {
+      scanned++
+      if (ensureCommentFalse(full)) {
+        fixed++
+        console.log(`🔧 修正: ${path.relative(DOCS_ROOT, full)}`)
+      }
+    }
+  }
+}
+
+walkDocs(DOCS_ROOT)
+console.log(`   扫描 ${scanned} 个 README.md，修正 ${fixed} 个\n`)
 
 console.log('✨ 全部完成！')

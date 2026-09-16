@@ -245,8 +245,6 @@ function build() {
     return [frontMatter, '', '## ' + TITLE, '', '暂无仪器图片。', ''].join('\n');
   }
 
-  var intro = '实验室仪器设备按**分析原理与技术**可分为光谱、色谱、质谱、电化学、热分析、表面形貌、物性测试、生命科学等大类。下面按类别展示各类仪器图片卡片，鼠标划过或键盘聚焦可查看名称、型号与存放地点。';
-
   // 每个分类：## 标题 + v-pre 网格
   var body = order.map(function (cat) {
     return sectionMarkdown(cat, groups[cat]);
@@ -267,10 +265,9 @@ function build() {
     '| 物理性能力学 | 物理量 / 力学量直接测量 | 万能试验机、硬度计、粘度计、粒度仪 |\n' +
     '| 生命科学生物 | 生物分子识别与扩增 | PCR、流式、酶标仪、测序仪 |\n' +
     '| 样品前处理 | 消解 / 萃取 / 浓缩 / 研磨 | 微波消解、固相萃取、旋转蒸发、冻干机 |\n' +
-    '| 实验室通用辅助 | 实验室基础保障 | 天平、烘箱、马弗炉、纯水机、安全柜 |\n\n' +
-    '> 本页由 `docs/.vuepress/scripts/genInstruments.cjs` 自动生成，请勿手改。';
+    '| 实验室通用辅助 | 实验室基础保障 | 天平、烘箱、马弗炉、纯水机、安全柜 |\n';
 
-  return [frontMatter, '', intro, '', body, '', tail, ''].join('\n');
+  return [frontMatter, '', body, '', tail, ''].join('\n');
 }
 
 fs.mkdirSync(path.dirname(MD_OUT), { recursive: true });

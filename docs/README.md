@@ -19,4 +19,5 @@ config:
           theme: brand
           text: 工具
           link: /tools/
+comment: false
 ---

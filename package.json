@@ -8,6 +8,7 @@
   "scripts": {
     "gen:readme": "node ./docs/.vuepress/scripts/genReadme.cjs",
     "gen:instruments": "node ./docs/.vuepress/scripts/genInstruments.cjs",
+    "gen:template": "node docs/.vuepress/scripts/genTemplate.cjs",
     "docs:build": "npm run gen:instruments && npm run gen:readme && vuepress build docs --clean-cache --clean-temp",
     "docs:dev": "npm run gen:instruments && npm run gen:readme && vuepress dev docs",
     "docs:dev-clean": "npm run gen:instruments && npm run gen:readme && vuepress dev docs --clean-cache --clean-temp",
