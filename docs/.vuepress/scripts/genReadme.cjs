@@ -9,6 +9,9 @@
  *   例：docs/课题/20260916.芪附汤抗慢性心衰网药分析/01.研究计划
  *       → /projects/a1b2c3d4/研究计划/
  * - createTime 存在即保留
+ * - tags 存在即保留
+ * - pageClass 存在即保留
+ * - comment 一律写 false
  * - permalink 与脚本重新计算的值一致（或以其为前缀）时保留，否则重建
  */
 
@@ -16,7 +19,7 @@ const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 
-// ===== 配置要生成索引的目录（相对于 docs/）=====
+// ===== 配置要生成索引的目录（相对于 docs/)=====
 const TARGET_DIRS = [
   '教程',
   '设备',
@@ -44,7 +47,7 @@ const SKIP_DIRNAMES = new Set([
   'node_modules',
 ])
 
-// docs 根目录（脚本位于 docs/.vuepress/scripts/）
+// docs 根目录（脚本位于 docs/.vuepress/scripts/)
 const DOCS_ROOT = path.resolve(__dirname, '../..')
 
 // ---------- 工具 ----------
@@ -74,6 +77,40 @@ function hash8(input) {
 /** 判断是否是 YYYYMMDD.xxx 形式的目录段 */
 function isDatedSegment(seg) {
   return /^\d{8}\./.test(seg)
+}
+
+/**
+ * 从 frontmatter 中提取某个 key 的完整 YAML 块
+ * 支持：
+ *   key: value
+ *   key: [a, b]
+ *   key:
+ *     - a
+ *     - b
+ * 找不到返回 null
+ */
+function extractKeyBlock(fm, key) {
+  const lines = fm.split(/\r?\n/)
+  const result = []
+  let collecting = false
+
+  for (const line of lines) {
+    if (new RegExp(`^${key}\\s*:`).test(line)) {
+      collecting = true
+      result.push(line)
+      continue
+    }
+    if (collecting) {
+      // 继续吃缩进行（多行列表）
+      if (/^\s+\S/.test(line)) {
+        result.push(line)
+      } else {
+        break
+      }
+    }
+  }
+
+  return result.length ? result.join('\n') : null
 }
 
 // ---------- 路径 → URL 段 ----------
@@ -156,6 +193,14 @@ function extractPreservedMeta(readmePath, dir) {
       preserved.permalinkOld = value
     }
   }
+
+  // 保留 tags（支持行内数组、单行、多行列表）
+  const tagsBlock = extractKeyBlock(fm, 'tags')
+  if (tagsBlock) preserved.tags = tagsBlock
+
+  // 保留 pageClass（字符串或数组都按块保留）
+  const pageClassBlock = extractKeyBlock(fm, 'pageClass')
+  if (pageClassBlock) preserved.pageClass = pageClassBlock
 
   return preserved
 }
@@ -250,10 +295,13 @@ function generateReadme(dir, options = {}) {
   content += `title: ${displayName}\n`
   if (preserved.createTime) content += `createTime: ${preserved.createTime}\n`
   if (preserved.permalink) content += `permalink: ${preserved.permalink}\n`
+  if (preserved.tags) content += `${preserved.tags}\n`
+  if (preserved.pageClass) content += `${preserved.pageClass}\n`
+  content += 'comment: false\n'
   content += '---\n\n'
 
   content += `# ${displayName}\n\n`
-  content += `> 本目录下共 ${items.length} 个条目\n\n`
+  content += `::: info 本目录下共 ${items.length} 个条目\n:::\n\n`
   for (const item of items) {
     content += `- [${item.name}](${encodeURI(item.link)})\n`
   }
@@ -264,9 +312,12 @@ function generateReadme(dir, options = {}) {
   if (preserved.createTime) notes.push('保留 createTime')
   if (preserved.permalink && !preserved.permalinkRebuilt) notes.push('保留 permalink')
   if (preserved.permalinkRebuilt) {
-    notes.push(`重建 permalink（原 ${preserved.permalinkOld} → ${preserved.permalink}）`)
+    notes.push(`重建 permalink(原 ${preserved.permalinkOld} → ${preserved.permalink})`)
   }
-  const noteStr = notes.length ? `（${notes.join('；')}）` : ''
+  if (preserved.tags) notes.push('保留 tags')
+  if (preserved.pageClass) notes.push('保留 pageClass')
+  notes.push('comment=false')
+  const noteStr = notes.length ? `(${notes.join('; ')})` : ''
   console.log(`✅ 已更新: ${path.relative(DOCS_ROOT, readmePath)} ${noteStr}`)
 
   return items

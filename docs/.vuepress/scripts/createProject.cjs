@@ -3,7 +3,7 @@
 
 /**
  * 在 docs/课题/ 下创建新课题，自动生成目录结构和文件。
- * 课题目录命名：`YYYYMMDD.课题名`（如 20260916.芪附汤抗慢性心衰网药分析）
+ * 课题目录命名：`YYYYMMDD.课题名`(如 20260916.芪附汤抗慢性心衰网药分析)
  *
  * 用法：
  *   npm run new -- <课题名称> [--force]
@@ -55,7 +55,7 @@ function nowDateCompact(d = new Date()) {
 }
 
 /**
- * 去掉用户输入里可能已有的日期前缀（YYYYMMDD. 或 YYYY-MM-DD.）
+ * 去掉用户输入里可能已有的日期前缀(YYYYMMDD. 或 YYYY-MM-DD.)
  * 避免出现 20260916.20260916.xxx
  */
 function stripDatePrefix(name) {

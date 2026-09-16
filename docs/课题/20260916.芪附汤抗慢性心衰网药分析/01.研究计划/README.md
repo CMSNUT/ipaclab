@@ -2,11 +2,13 @@
 title: 研究计划
 createTime: 2026/09/16 03:08:49
 permalink: /projects/c2538985/研究计划/
+comment: false
 ---
 
 # 研究计划
 
-> 本目录下共 3 个条目
+::: info 本目录下共 3 个条目
+:::
 
 - [里程碑](%E9%87%8C%E7%A8%8B%E7%A2%91.md)
 - [任务分解](%E4%BB%BB%E5%8A%A1%E5%88%86%E8%A7%A3.md)

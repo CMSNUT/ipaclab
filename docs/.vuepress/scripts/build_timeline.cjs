@@ -11,8 +11,8 @@
  *
  * 产物：
  *   <课题>/02_研究进度/timeline.md      纯 Plume 时间线
- *   <课题>/02_研究进度/README.md        概览 + 时间线（自动区域）
- *   <课题>/09_里程碑/README.md          里程碑总览表（自动区域）
+ *   <课题>/02_研究进度/README.md        概览 + 时间线(自动区域)
+ *   <课题>/09_里程碑/README.md          里程碑总览表(自动区域)
  *   <课题>/09_里程碑/milestones/*.md    每个里程碑内的进度聚合块
  *
  * 保留策略：
@@ -130,7 +130,7 @@ function nowCreateTime(d = new Date()) {
 }
 
 /**
- * 合并元数据：旧文件已有的键全部保留；
+ * 合并元数据：旧文件已有的键全部保留; 
  * title / createTime / permalink 缺失时补全。
  */
 function mergeMeta(oldMeta, defaults) {
@@ -164,8 +164,8 @@ function extractSection(body, name) {
 function normalizeConclusion(raw) {
   if (!raw) return '';
   let c = raw.replace(/^\s*[-*]\s*/gm, '');
-  c = c.replace(/\n+/g, '；').replace(/；{2,}/g, '；');
-  return c.replace(/^；|；$/g, '').trim();
+  c = c.replace(/\n+/g, '; ').replace(/; {2,}/g, '; ');
+  return c.replace(/^; |; $/g, '').trim();
 }
 
 // ---------- 进度条目 ----------
@@ -229,7 +229,7 @@ function buildPlumeTimeline(items) {
     lines.push(
       item.conclusion
         ? `  **结论**：${item.conclusion}`
-        : '  *（暂无结论记录）*'
+        : '  *(暂无结论记录)*'
     );
     if (item.milestones.length) {
       lines.push(`  **里程碑**：${item.milestones.join(' / ')}`);
@@ -389,7 +389,7 @@ function writeWithPreservedMeta(filePath, defaults, newBody) {
   if (oldMeta.permalink) kept.push('permalink');
   console.log(
     `[OK] 已写入 ${filePath}` +
-    (kept.length ? `（已保留 ${kept.join('、')}）` : '')
+    (kept.length ? `(已保留 ${kept.join('、')})` : '')
   );
 }
 

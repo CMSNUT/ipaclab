@@ -77,7 +77,7 @@ export default defineUserConfig({
 
       // 包含：在文档中插入其他 Markdown 文件的内容
       include: {
-        // 是否启用深度包含（即被包含的文件里还可以再包含其他文件）
+        // 是否启用深度包含(即被包含的文件里还可以再包含其他文件)
         deep: true, 
         
         // 是否解析被包含文件中的相对图片和链接路径
@@ -164,7 +164,7 @@ export default defineUserConfig({
       notationHighlight: true,        // 高亮标记 !!
       notationWordHighlight: true,    // 单词高亮标记 !!
       highlightLines: true,           // 行高亮
-      collapsedLines: false,          // 代码折叠（默认关闭，可设为数字）
+      collapsedLines: false,          // 代码折叠(默认关闭，可设为数字)
       whitespace: false,              // 空白字符可视化
 
     },

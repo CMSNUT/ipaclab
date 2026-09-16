@@ -2,11 +2,13 @@
 title: 测试课题
 createTime: 2026/09/15 21:44:45
 permalink: /projects/24db3e66/
+comment: false
 ---
 
 # 测试课题
 
-> 本目录下共 5 个条目
+::: info 本目录下共 5 个条目
+:::
 
 - [实验结果](05.%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C/README.md)
 - [测试1](01.%E6%B5%8B%E8%AF%951.md)

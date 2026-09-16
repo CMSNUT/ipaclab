@@ -2,11 +2,13 @@
 title: 芪附汤抗慢性心衰网药分析
 createTime: 2026-09-16 02:59:00
 permalink: /projects/c2538985/
+comment: false
 ---
 
 # 芪附汤抗慢性心衰网药分析
 
-> 本目录下共 4 个条目
+::: info 本目录下共 4 个条目
+:::
 
 - [研究计划](01.%E7%A0%94%E7%A9%B6%E8%AE%A1%E5%88%92/README.md)
 - [研究进度](02_%E7%A0%94%E7%A9%B6%E8%BF%9B%E5%BA%A6/README.md)

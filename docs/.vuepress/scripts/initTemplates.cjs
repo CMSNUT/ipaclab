@@ -22,7 +22,7 @@ const DEST_BUILD_TIMELINE = path.join(TEMPLATE_DIR, 'scripts', 'build_timeline.c
 
 const FORCE = process.argv.includes('--force');
 
-// ---------- 模板内容（含空文件，统一由 writeFile 处理） ----------
+// ---------- 模板内容(含空文件，统一由 writeFile 处理) ----------
 const FILES = {
   'README.md': `---
 title: {{PROJECT_NAME}}
@@ -34,7 +34,7 @@ permalink: /projects/{{PROJECT_NAME}}/
 
 ## 课题简介
 
-（填写课题背景、研究目标、预期成果）
+(填写课题背景、研究目标、预期成果)
 
 ## 目录
 
@@ -171,7 +171,7 @@ permalink: /projects/{{PROJECT_NAME}}/experiments/
 两类实验组织方式一致：
 - 每个实验一个文件夹：\`YYYY-MM-DD_实验名/\`
 - 实验总览：\`README.md\`
-- 实验步骤：\`NN.步骤名.md\`（或 \`NN.步骤名/README.md\`）
+- 实验步骤：\`NN.步骤名.md\`(或 \`NN.步骤名/README.md\`)
 - 附件：\`附件/\`
 
 ## 实验索引
@@ -293,7 +293,7 @@ status: 完成
 
 1. 复制 \`_template/experiment.md\` 为新文件夹的 \`README.md\`
 2. 按步骤复制 \`_template/step.md\` 为 \`01.xxx.md\`、\`02.xxx.md\` ...
-3. 配置、日志、图表放入 \`附件/\`；大文件放 \`05.数据/\`
+3. 配置、日志、图表放入 \`附件/\`; 大文件放 \`05.数据/\`
 `,
 
   '04.实验记录/计算实验/_template/experiment.md': `---
@@ -586,7 +586,7 @@ function copyBuildTimeline() {
   }
 
   fs.copyFileSync(SRC_BUILD_TIMELINE, DEST_BUILD_TIMELINE);
-  console.log('[OK]   scripts/build_timeline.cjs （从 docs/.vuepress/scripts/ 复制）');
+  console.log('[OK]   scripts/build_timeline.cjs (从 docs/.vuepress/scripts/ 复制)');
 }
 
 function main() {

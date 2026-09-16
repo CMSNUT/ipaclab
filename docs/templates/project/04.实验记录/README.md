@@ -14,7 +14,7 @@ permalink: /projects/{{PROJECT_NAME}}/experiments/
 两类实验组织方式一致：
 - 每个实验一个文件夹：`YYYY-MM-DD_实验名/`
 - 实验总览：`README.md`
-- 实验步骤：`NN.步骤名.md`（或 `NN.步骤名/README.md`）
+- 实验步骤：`NN.步骤名.md`(或 `NN.步骤名/README.md`)
 - 附件：`附件/`
 
 ## 实验索引

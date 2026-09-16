@@ -2,11 +2,13 @@
 title: 基础工具
 createTime: 2026/09/15 21:44:45
 permalink: /tools/基础工具/
+comment: false
 ---
 
 # 基础工具
 
-> 本目录下共 4 个条目
+::: info 本目录下共 4 个条目
+:::
 
 - [文献管理与写作](01.%E6%96%87%E7%8C%AE%E7%AE%A1%E7%90%86%E4%B8%8E%E5%86%99%E4%BD%9C/README.md)
 - [数据处理与绘图](02.%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8E%E7%BB%98%E5%9B%BE/README.md)

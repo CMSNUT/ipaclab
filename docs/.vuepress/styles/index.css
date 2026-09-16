@@ -253,12 +253,12 @@
   justify-content: center;
 }
 
-/* 奇数卡片（图在右）：文字左侧留 20px */
+/* 奇数卡片(图在右)：文字左侧留 20px */
 .research-item:nth-child(odd) .research-body {
   padding: 20px;
 }
 
-/* 偶数卡片（图在左）：文字双侧留 20px */
+/* 偶数卡片(图在左)：文字双侧留 20px */
 .research-item:nth-child(even) .research-body {
   padding: 20px;
 }
@@ -529,7 +529,7 @@
    九、自适应断点
    ============================================================ */
 
-/* 超大屏（≥ 1440px）：一行约 8~10 张 */
+/* 超大屏(≥ 1440px)：一行约 8~10 张 */
 @media (min-width: 1440px) {
   .ins-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -537,7 +537,7 @@
   }
 }
 
-/* 平板（768 ~ 1023px）：一行约 5~6 张 */
+/* 平板(768 ~ 1023px)：一行约 5~6 张 */
 @media (min-width: 768px) and (max-width: 1023px) {
   .ins-grid {
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -545,7 +545,7 @@
   }
 }
 
-/* 大手机（480 ~ 767px）：一行约 3~4 张 */
+/* 大手机(480 ~ 767px)：一行约 3~4 张 */
 @media (min-width: 480px) and (max-width: 767px) {
   .ins-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -559,7 +559,7 @@
   }
 }
 
-/* 小手机（< 480px）：一行约 2~3 张 */
+/* 小手机(< 480px)：一行约 2~3 张 */
 @media (max-width: 479px) {
   .ins-grid {
     grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));

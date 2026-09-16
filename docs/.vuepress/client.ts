@@ -24,7 +24,7 @@ export default defineClientConfig({
     // 注册全局组件
     // app.component('SafetyAlert', SafetyAlert)
 
-    // // 路由守卫（可选）
+    // // 路由守卫(可选)
     // router.beforeEach((to, from, next) => {
     //   next()
     // })

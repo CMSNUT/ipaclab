@@ -4,8 +4,8 @@
  * 输出：markdown 标题 + HTML 卡片
  *
  * 关键：
- *   分类标题用 markdown 的 ## 语法（外层，不被 v-pre 包裹）
- *   卡片网格用 <div class="ins-grid" v-pre> 包住（v-pre 阻止 VuePress 解析 <img src>）
+ *   分类标题用 markdown 的 ## 语法(外层，不被 v-pre 包裹)
+ *   卡片网格用 <div class="ins-grid" v-pre> 包住(v-pre 阻止 VuePress 解析 <img src>)
  *
  * 用法：
  *   node docs/.vuepress/scripts/genInstruments.cjs
