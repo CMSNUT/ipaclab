@@ -276,10 +276,10 @@ export default defineUserConfig({
       // 可用样式: [ 'apa', 'vancouver', 'harvard1' ]
       defaultTemplate: 'vancouver',
       defaultTitle: '参考文献',
-      defaultHeadingLevel: 2,
+      defaultHeadingLevel: 2, // 全局默认标题级别
       defaultHeadingId: '参考文献',
       defaultWrapClass: 'csl-bib-body',
-      defaultAppendHeading: true,
+      defaultAppendHeading: true, // 全局默认自动追加标题
     })
   },
 })

@@ -618,8 +618,6 @@
   flex: 1;
 }
 
-/* .vuepress/styles/index.css */
-
 /* 通用表格样式 */
 .markdown-body table {
   border-collapse: collapse;      /* 合并边框，关键 */
