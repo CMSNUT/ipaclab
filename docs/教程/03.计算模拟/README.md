@@ -1,11 +1,11 @@
 ---
-title: 其他基础工具
-createTime: 2026/09/15 21:44:45
-permalink: /tools/基础工具/其他基础工具/
+title: 计算模拟
+createTime: 2026/09/17 16:08:38
+permalink: /courses/edb2fa77/
 comment: false
 ---
 
-# 其他基础工具
+# 计算模拟
 
 ::: info 本目录下共 1 个条目
 :::

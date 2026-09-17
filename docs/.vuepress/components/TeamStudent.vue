@@ -20,8 +20,9 @@ defineProps<{
     <div v-if="grade" class="student-grade">{{ grade }}</div>
     <p v-if="research" class="student-research">{{ research }}</p>
     <a v-if="email" :href="`mailto:${email}`" class="student-email">
-      <Icon icon="mdi:email-outline" /> {{ email }}
+      <Icon icon="mdi:email-outline" /> {{ email }} 
     </a>
+    
   </div>
 </template>
 

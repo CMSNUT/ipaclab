@@ -24,24 +24,77 @@
  *
  * 通过 `defineCollection` 定义的 collection 配置，应该填入 `defineCollections` 中
  */
+
+
+// import { defineCollection, defineCollections } from 'vuepress-theme-plume'
+
+// const team = defineCollection({
+//   type: 'doc',
+//   dir: '团队',
+//   title: '团队',
+//   linkPrefix: '/team/',
+//   sidebar: 'auto',
+//   sidebarCollapsed: true, 
+// })
+
+// const projects = defineCollection({
+//   type: 'doc',
+//   dir: '课题',
+//   title: '课题',
+//   linkPrefix: '/projects/',
+//   sidebar: 'auto',
+//   sidebarCollapsed: true, 
+// })
+
+// const instruments = defineCollection({
+//   type: 'doc',
+//   dir: '设备',
+//   title: '设备',
+//   linkPrefix: '/instruments/',
+//   sidebar: 'auto',
+//   sidebarCollapsed: true, 
+// })
+
+// const courses = defineCollection({
+//   type: 'doc',
+//   dir: '教程',
+//   title: '教程',
+//   linkPrefix: '/courses/',
+//   sidebar: 'auto',
+//   sidebarCollapsed: true, 
+// })
+
+// const more = defineCollection({
+//   type: 'doc',
+//   dir: '更多',
+//   title: '更多',
+//   linkPrefix: '/more/',
+//   sidebar: 'auto',
+//   sidebarCollapsed: true, 
+// })
+
+// export default defineCollections([
+//   team,
+//   instruments,
+//   courses,
+//   projects,
+//   more,  
+// ])
+
+
+import path from 'node:path'
 import { defineCollection, defineCollections } from 'vuepress-theme-plume'
+import { scanSidebar } from './sidebar.js'
+
+const DOCS_ROOT = path.resolve(process.cwd(), 'docs')
 
 const team = defineCollection({
   type: 'doc',
   dir: '团队',
   title: '团队',
   linkPrefix: '/team/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
-})
-
-const projects = defineCollection({
-  type: 'doc',
-  dir: '课题',
-  title: '课题',
-  linkPrefix: '/projects/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
+  sidebar: scanSidebar(path.join(DOCS_ROOT, '团队')),
+  sidebarCollapsed: true,
 })
 
 const instruments = defineCollection({
@@ -49,17 +102,8 @@ const instruments = defineCollection({
   dir: '设备',
   title: '设备',
   linkPrefix: '/instruments/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
-})
-
-const tools = defineCollection({
-  type: 'doc',
-  dir: '工具',
-  title: '工具',
-  linkPrefix: '/tools/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
+  sidebar: scanSidebar(path.join(DOCS_ROOT, '设备')),
+  sidebarCollapsed: true,
 })
 
 const courses = defineCollection({
@@ -67,8 +111,26 @@ const courses = defineCollection({
   dir: '教程',
   title: '教程',
   linkPrefix: '/courses/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
+  sidebar: scanSidebar(path.join(DOCS_ROOT, '教程')),
+  sidebarCollapsed: true,
+})
+
+const tools = defineCollection({
+  type: 'doc',
+  dir: '工具',
+  title: '工具',
+  linkPrefix: '/tools/',
+  sidebar: scanSidebar(path.join(DOCS_ROOT, '工具')),
+  sidebarCollapsed: true,
+})
+
+const projects = defineCollection({
+  type: 'doc',
+  dir: '课题',
+  title: '课题',
+  linkPrefix: '/projects/',
+  sidebar: scanSidebar(path.join(DOCS_ROOT, '课题')),
+  sidebarCollapsed: true,
 })
 
 const more = defineCollection({
@@ -76,16 +138,15 @@ const more = defineCollection({
   dir: '更多',
   title: '更多',
   linkPrefix: '/more/',
-  sidebar: 'auto',
-  sidebarCollapsed: true, 
+  sidebar: scanSidebar(path.join(DOCS_ROOT, '更多')),
+  sidebarCollapsed: true,
 })
-
 
 export default defineCollections([
   team,
   instruments,
-  tools,
   courses,
+  tools,
   projects,
-  more,  
+  more,
 ])

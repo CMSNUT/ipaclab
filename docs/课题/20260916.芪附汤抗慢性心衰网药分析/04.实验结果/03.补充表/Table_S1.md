@@ -1,7 +1,8 @@
 ---
 title: Table_S1
 createTime: 2026/09/17 05:29:02
-permalink: /projects/10e74a9s/
+index: false
+permalink: /projects/2b9rrs4x/
 ---
 | Medicinal Materials | Abbreviation | Ingredient | PubChem CID | InChIKey | Molecular Formula | Molecular Weight | SMILES |
 | --- | --- | --- | --- | --- | --- | --- | --- |

@@ -268,7 +268,7 @@ export default defineUserConfig({
 
   }),
 
-  extendsMarkdown: (md) => {
+  extendsMarkdown: (md) =>  {
     md.use(citationPlugin, {
       // 所有 .bib 文件都放在这个目录下
       bibDir: 'docs/.vuepress/data/bib',

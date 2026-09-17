@@ -13,8 +13,6 @@
  *     → docs/课题/20260916.芪附汤抗慢性心衰网药分析/
  *   npm run init:column -- 教程 Plume入门
  *     → docs/教程/20260916220123.Plume入门.md
- *   npm run init:column -- 工具 网络药理学工具集
- *     → docs/工具/网络药理学工具集/
  *   npm run init:column -- 更多 2026年度汇总
  *     → docs/更多/2026年度汇总/
  *
@@ -184,14 +182,12 @@ function printHelp() {
   console.log('  ✅ npm run init:column -- 课题 芪附汤抗慢性心衰网药分析 --force')
   console.log('  ✅ npm run init:column -- 课题 芪附汤抗慢性心衰网药分析 -f')
   console.log('  ❌ npm run init:column 课题 芪附汤抗慢性心衰网药分析 --force')
-  console.log('\n栏目：课题、教程、工具、更多')
+  console.log('\n栏目：课题、教程、更多')
   console.log('\n示例：')
   console.log('  npm run init:column -- 课题 芪附汤抗慢性心衰网药分析')
   console.log('    → docs/课题/20260916.芪附汤抗慢性心衰网药分析/')
   console.log('  npm run init:column -- 教程 Plume入门')
   console.log('    → docs/教程/20260916220123.Plume入门.md')
-  console.log('  npm run init:column -- 工具 网络药理学工具集')
-  console.log('    → docs/工具/网络药理学工具集/')
   console.log('  npm run init:column -- 更多 2026年度汇总')
   console.log('    → docs/更多/2026年度汇总/')
   console.log('\n选项：')

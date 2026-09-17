@@ -1,7 +1,7 @@
 ---
 title: 实验技术
-createTime: 2026/09/16 16:51:35
-permalink: /courses/实验技术/
+createTime: 2026/09/17 16:08:38
+permalink: /courses/d91faaac/
 comment: false
 ---
 

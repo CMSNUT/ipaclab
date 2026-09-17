@@ -3,51 +3,58 @@
  * 用法：npm run gen:readme
  *
  * permalink 规则：
- * - 段 `课题` → `projects`
- * - 段 `YYYYMMDD.xxx` → md5 前 8 位（同名同 hash，稳定不变）
- * - 其它段 → 剥掉"第一个 . 及之前"的部分
+ * - 顶层段：`课题` → `projects`，`教程` → `courses`，`更多` → `more`，`工具` → `tools`
+ * - 顶层段之后的整条相对路径 → md5 前 8 位（合并为一个 hash 段）
  *   例：docs/课题/20260916.芪附汤抗慢性心衰网药分析/01.研究计划
- *       → /projects/a1b2c3d4/研究计划/
+ *       → /projects/xxxxxxxx/
+ * - 已存在 permalink 的 README：原样保留
+ *   - 例外：如果 permalink 中连续 8 位 hex 段多于 1 个（旧格式），则丢弃并重算
+ * - 没有 permalink 的 README：按上面规则生成
  * - createTime 存在即保留
  * - tags 存在即保留
  * - pageClass 存在即保留
  * - comment 一律写 false（已存在的 README 也会被强制修正）
- * - permalink 与脚本重新计算的值一致（或以其为前缀）时保留，否则重建
  * - 生成后自动比对每条链接：目标文件/目录不存在即清除
  * - 排序：所有文件与目录混合，按名称中的数字前缀升序；无前缀者排最后
  * - 顺序修正：全仓库扫描时，README 条目顺序与期望不一致也会被重写
+ *
+ * 页面排除索引：
+ * - 页面 frontmatter 中写 `index: false`（兼容 `inIndex: false` / `list: false`）
+ *   则该页面不进入父级 README 索引
+ * - 目录的 README.md 中写同样的标识，则整个目录不进入父级索引
  */
 
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
 
-// ===== 配置要生成索引的目录（相对于 docs/)=====
+// ===== 配置要生成索引的目录（相对于 docs/) =====
 const TARGET_DIRS = [
   '教程',
   '工具',
   '课题',
-  '更多'
+  '更多',
 ]
 
 // 顶层目录名映射（路径段 → URL 段）
 const SEGMENT_MAP = {
   '课题': 'projects',
   '教程': 'courses',
-  '工具': 'tools',
   '更多': 'more',
+  '工具': 'tools',
 }
 
 // 遇到这些目录名跳过：不生成 README、不递归进入
 const SKIP_DIRNAMES = new Set([
-  '02.研究进度',
-  '09.里程碑',
   '_template',
   'scripts',
   'node_modules',
 ])
 
-// docs 根目录（脚本位于 docs/.vuepress/scripts/)
+// 页面 frontmatter 中用于排除索引的字段名（值为 false 时生效）
+const EXCLUDE_KEYS = ['index', 'inIndex', 'list']
+
+// docs 根目录（脚本位于 docs/.vuepress/scripts/）
 const DOCS_ROOT = path.resolve(__dirname, '../..')
 
 // ---------- 工具 ----------
@@ -61,17 +68,8 @@ function extractPrefix(name) {
   return match ? parseInt(match[1], 10) : Infinity
 }
 
-function stripFirstDotPrefix(seg) {
-  const idx = seg.indexOf('.')
-  return idx === -1 ? seg : seg.slice(idx + 1)
-}
-
 function hash8(input) {
   return crypto.createHash('md5').update(input).digest('hex').slice(0, 8)
-}
-
-function isDatedSegment(seg) {
-  return /^\d{8}\./.test(seg)
 }
 
 function extractKeyBlock(fm, key) {
@@ -97,33 +95,92 @@ function extractKeyBlock(fm, key) {
   return result.length ? result.join('\n') : null
 }
 
+/**
+ * 判断 permalink 是否为旧格式（多段 8 位 hex）。
+ *   /courses/cd5bbd35/ca3de5a3/9c47bde3/ → 3 段 → true（旧）
+ *   /projects/c2538985/                  → 1 段 → false（新）
+ *   /more/开源数据/                      → 0 段 → false（自定义）
+ */
+function isLegacyMultiHash(permalink) {
+  const segs = permalink.match(/\/[0-9a-f]{8}(?=\/|$)/g) || []
+  return segs.length > 1
+}
+
+// ---------- 文件内容缓存 + frontmatter 读取 ----------
+
+const contentCache = new Map()
+
+function readContent(filePath) {
+  if (path.basename(filePath) === 'README.md') {
+    try {
+      return fs.readFileSync(filePath, 'utf-8')
+    } catch {
+      return ''
+    }
+  }
+  if (contentCache.has(filePath)) return contentCache.get(filePath)
+  let content = ''
+  try {
+    content = fs.readFileSync(filePath, 'utf-8')
+  } catch {
+    content = ''
+  }
+  contentCache.set(filePath, content)
+  return content
+}
+
+function getFrontmatter(filePath) {
+  const content = readContent(filePath)
+  if (!content.startsWith('---')) return ''
+  const m = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
+  return m ? m[1] : ''
+}
+
+function isExcludedFromIndex(filePath) {
+  if (!filePath) return false
+  if (!fs.existsSync(filePath)) return false
+  const fm = getFrontmatter(filePath)
+  if (!fm) return false
+  for (const key of EXCLUDE_KEYS) {
+    if (new RegExp(`^${key}\\s*:\\s*false\\s*$`, 'm').test(fm)) {
+      return true
+    }
+  }
+  return false
+}
+
 // ---------- 路径 → URL 段 ----------
 
+/**
+ * 顶层段走 SEGMENT_MAP，其余整条路径 hash8 一次。
+ *   docs/课题                     → projects
+ *   docs/课题/20260916.芪附汤     → projects/c2538985
+ *   docs/课题/20260916.芪附汤/01.研究计划 → projects/xxxxxxxx
+ *   docs/更多/开源数据            → more/xxxxxxxx
+ */
 function relFromDocs(dir) {
-  return path.relative(DOCS_ROOT, dir)
-    .split(path.sep)
-    .map(seg => {
-      if (SEGMENT_MAP[seg]) return SEGMENT_MAP[seg]
-      if (isDatedSegment(seg)) return hash8(seg)
-      return stripFirstDotPrefix(seg)
-    })
-    .join('/')
+  const rel = path.relative(DOCS_ROOT, dir)
+  if (!rel) return ''
+
+  const segs = rel.split(path.sep).filter(Boolean)
+  if (segs.length === 0) return ''
+
+  const [top, ...rest] = segs
+  const mapped = SEGMENT_MAP[top] || top
+
+  if (rest.length === 0) return mapped
+  return mapped + '/' + hash8(rest.join('/'))
 }
 
 function buildPermalink(dir) {
-  return '/' + relFromDocs(dir) + '/'
-}
-
-function isPermalinkPrefixValid(value, dir) {
-  const expected = ('/' + relFromDocs(dir)).replace(/\/+$/, '')
-  const v = value.replace(/\/+$/, '') || '/'
-  return v === expected || v.startsWith(expected + '/')
+  const rel = relFromDocs(dir)
+  return rel ? '/' + rel + '/' : '/'
 }
 
 // ---------- 标题 / frontmatter ----------
 
 function getTitle(filePath) {
-  const content = fs.readFileSync(filePath, 'utf-8')
+  const content = readContent(filePath)
 
   const fmMatch = content.match(/^---\r?\n([\s\S]*?)\r?\n---/)
   if (fmMatch) {
@@ -155,15 +212,14 @@ function extractPreservedMeta(readmePath, dir) {
     preserved.createTime = ctMatch[1].trim().replace(/^["']|["']$/g, '')
   }
 
+  // permalink：存在即保留，但旧格式（多段 hash）丢弃以触发重算
   const plMatch = fm.match(/^permalink:\s*(.+)$/m)
   if (plMatch && plMatch[1].trim()) {
-    const value = plMatch[1].trim().replace(/^["']|["']$/g, '')
-    if (isPermalinkPrefixValid(value, dir)) {
-      preserved.permalink = value
+    const v = plMatch[1].trim().replace(/^["']|["']$/g, '')
+    if (isLegacyMultiHash(v)) {
+      preserved.permalinkOld = v          // 仅记录，用于日志
     } else {
-      preserved.permalink = buildPermalink(dir)
-      preserved.permalinkRebuilt = true
-      preserved.permalinkOld = value
+      preserved.permalink = v
     }
   }
 
@@ -311,13 +367,17 @@ function computeDirItems(dir) {
     if (entry.isDirectory()) {
       const fullPath = path.join(dir, entry.name)
       if (!hasContent(fullPath)) continue
+      const subReadme = path.join(fullPath, 'README.md')
+      if (isExcludedFromIndex(subReadme)) continue
       items.push({
         name: stripPrefix(entry.name),
         link: `${entry.name}/README.md`,
       })
     } else if (entry.name.endsWith('.md')) {
+      const fullPath = path.join(dir, entry.name)
+      if (isExcludedFromIndex(fullPath)) continue
       items.push({
-        name: getTitle(path.join(dir, entry.name)),
+        name: getTitle(fullPath),
         link: entry.name,
       })
     }
@@ -369,13 +429,17 @@ function fixReadmeOrder(dir) {
 
   const text = fs.readFileSync(readmePath, 'utf-8')
   const fmMatch = text.match(/^(---\r?\n[\s\S]*?\r?\n---\r?\n?)/)
-  const fm = fmMatch ? fmMatch[0] : ''
+  let fm = fmMatch ? fmMatch[0] : ''
   const displayName = stripPrefix(path.basename(dir))
 
   let newContent = fm
   if (!fm) {
+    const autoPermalink = buildPermalink(dir)
     newContent += '---\n'
     newContent += `title: ${displayName}\n`
+    if (autoPermalink && autoPermalink !== '/') {
+      newContent += `permalink: ${autoPermalink}\n`
+    }
     newContent += 'comment: false\n'
     newContent += '---\n\n'
   }
@@ -398,6 +462,7 @@ function generateReadme(dir, options = {}) {
   const items = []
 
   const readmePath = path.join(dir, 'README.md')
+  const readmeExisted = fs.existsSync(readmePath)
 
   for (const entry of sorted) {
     const fullPath = path.join(dir, entry.name)
@@ -405,10 +470,13 @@ function generateReadme(dir, options = {}) {
     if (entry.isDirectory()) {
       if (SKIP_DIRNAMES.has(entry.name)) {
         if (hasContent(fullPath)) {
-          items.push({
-            name: stripPrefix(entry.name),
-            link: `${entry.name}/README.md`,
-          })
+          const subReadme = path.join(fullPath, 'README.md')
+          if (!isExcludedFromIndex(subReadme)) {
+            items.push({
+              name: stripPrefix(entry.name),
+              link: `${entry.name}/README.md`,
+            })
+          }
         }
         continue
       }
@@ -421,12 +489,15 @@ function generateReadme(dir, options = {}) {
         ok = subItems.length > 0
       }
       if (ok) {
+        const subReadme = path.join(fullPath, 'README.md')
+        if (isExcludedFromIndex(subReadme)) continue
         items.push({
           name: stripPrefix(entry.name),
           link: `${entry.name}/README.md`,
         })
       }
     } else if (entry.name.endsWith('.md') && entry.name !== 'README.md') {
+      if (isExcludedFromIndex(fullPath)) continue
       items.push({
         name: getTitle(fullPath),
         link: entry.name,
@@ -435,6 +506,7 @@ function generateReadme(dir, options = {}) {
   }
 
   if (items.length === 0) {
+    console.log(`⏭️  跳过（无有效条目）: ${path.relative(DOCS_ROOT, dir)}`)
     const removed = cleanInvalidLinks(readmePath)
     const fixedComment = ensureCommentFalse(readmePath)
 
@@ -454,10 +526,15 @@ function generateReadme(dir, options = {}) {
   const dirName = path.basename(dir)
   const displayName = stripPrefix(dirName)
 
+  // permalink：有就保留（多段 hash 已在上一步丢弃），没有就生成
+  const autoPermalink = preserved.permalink ?? buildPermalink(dir)
+
   let content = '---\n'
   content += `title: ${displayName}\n`
   if (preserved.createTime) content += `createTime: ${preserved.createTime}\n`
-  if (preserved.permalink) content += `permalink: ${preserved.permalink}\n`
+  if (autoPermalink && autoPermalink !== '/') {
+    content += `permalink: ${autoPermalink}\n`
+  }
   if (preserved.tags) content += `${preserved.tags}\n`
   if (preserved.pageClass) content += `${preserved.pageClass}\n`
   content += 'comment: false\n'
@@ -470,6 +547,12 @@ function generateReadme(dir, options = {}) {
   }
 
   fs.writeFileSync(readmePath, content, 'utf-8')
+
+  console.log(
+    readmeExisted
+      ? `📝 更新: ${path.relative(DOCS_ROOT, readmePath)}`
+      : `🆕 创建: ${path.relative(DOCS_ROOT, readmePath)}`
+  )
 
   const removedLinks = cleanInvalidLinks(readmePath)
   if (removedLinks.length) {
@@ -498,10 +581,9 @@ function generateReadme(dir, options = {}) {
 
   const notes = []
   if (preserved.createTime) notes.push('保留 createTime')
-  if (preserved.permalink && !preserved.permalinkRebuilt) notes.push('保留 permalink')
-  if (preserved.permalinkRebuilt) {
-    notes.push(`重建 permalink(原 ${preserved.permalinkOld} → ${preserved.permalink})`)
-  }
+  if (preserved.permalink) notes.push('保留 permalink')
+  else if (preserved.permalinkOld) notes.push(`重建 permalink(旧 ${preserved.permalinkOld} → ${autoPermalink})`)
+  else if (autoPermalink && autoPermalink !== '/') notes.push('生成 permalink')
   if (preserved.tags) notes.push('保留 tags')
   if (preserved.pageClass) notes.push('保留 pageClass')
   notes.push('comment=false')

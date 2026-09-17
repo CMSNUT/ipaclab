@@ -17,8 +17,8 @@ config:
           link: /courses/
         -
           theme: brand
-          text: 工具
-          link: /tools/
+          text: 课题
+          link: /projects/
 comment: false
 ---
 # docs
@@ -27,6 +27,5 @@ comment: false
 :::
 
 - [更多](%E6%9B%B4%E5%A4%9A/README.md)
-- [工具](%E5%B7%A5%E5%85%B7/README.md)
 - [教程](%E6%95%99%E7%A8%8B/README.md)
 - [课题](%E8%AF%BE%E9%A2%98/README.md)

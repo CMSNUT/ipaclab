@@ -24,9 +24,11 @@ defineProps<{
         <a v-if="email" :href="`mailto:${email}`">
           <Icon icon="mdi:email-outline" /> {{ email }}
         </a>
+        
         <a v-if="homepage" :href="homepage" target="_blank">
           <Icon icon="mdi:link-variant" /> 个人主页
         </a>
+        
       </div>
     </div>
   </div>

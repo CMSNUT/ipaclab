@@ -9,7 +9,6 @@ import { defineNavbarConfig } from 'vuepress-theme-plume'
 export default defineNavbarConfig([
   { text: '团队', link: '/team/', icon: 'fluent-color:people-team-20'},
   { text: '设备', link: '/instruments/', icon: 'streamline-color:microscope-observation-sciene-flat'},
-  { text: '工具', link: '/tools/', icon: 'streamline-ultimate-color:science-molecule-strucutre'},
   { text: '教程', link: '/courses/', icon: 'fluent-color:book-open-lightbulb-20'},
   { text: '课题', link: '/projects/', icon: 'gcp:advanced-solutions-lab'},
   { text: '更多', link: '/more/', icon: 'fluent-color:chat-more-20'},
