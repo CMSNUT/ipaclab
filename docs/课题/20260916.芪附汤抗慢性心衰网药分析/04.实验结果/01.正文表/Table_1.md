@@ -1,48 +1,18 @@
 ---
 title: Table_1
-createTime: 2026/09/17 05:28:27
-index: false
-permalink: /projects/gdn61ms7/
----
-| Medicinal Materials | Abbreviation | Ingredient | PubChem CID | InChIKey | Molecular Formula | Molecular Weight | SMILES |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| Aconiti Lateralis Radix Praeparata | ALRP | songorine | 71456946 | CBOSLVQFGANWTL-DVPYZRQCSA-N | C22H31NO3 | 357.5 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2C[C@@H]([C@H]31)[C@]56[C@H]4CC(=O)[C@H](C5)C(=C)[C@H]6O)O)C` |
-| Aconiti Lateralis Radix Praeparata | ALRP | 16β-hydroxycardiopetaline | 177826959 | UMENVHXIPMXIRD-CCGCYRHKSA-N | C21H33NO4 | 363.5 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2C[C@@H](C31)[C@]5(C[C@@H](C6C[C@@H]4[C@@H]5[C@H]6O)O)O)O)C` |
-| Aconiti Lateralis Radix Praeparata | ALRP | karakolidine | 177825366 | PFSQFYVYGQKXRF-KDNJGJEFSA-N | C22H35NO5 | 393.5 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2C[C@@H](C31)[C@]5(C[C@@H](C6C[C@@]4([C@@H]5[C@H]6O)O)OC)O)O)C` |
-| Aconiti Lateralis Radix Praeparata | ALRP | chuanfumine | 177827759 | FPGSALFSCGNCNM-WUWFTZAFSA-N | C22H35NO5 | 393.5 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H]([C@H]31)[C@]56[C@H]4CC[C@H](C5)[C@@]([C@H]6O)(CO)O)O)O)C` |
-| Aconiti Lateralis Radix Praeparata | ALRP | isotalatizidine | 16401028 | RBSZCNOWHDHRFZ-JPAZAREGSA-N | C23H37NO5 | 407.5 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2C[C@@H](C31)[C@]5(C[C@@H]([C@H]6C[C@@H]4[C@@H]5[C@H]6O)OC)O)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | 14-acetylkarakoline | 177825823 | JTPMPHWGRDFFAC-YCSUEPHGSA-N | C24H37NO5 | 419.6 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2CC(C31)[C@]5(C[C@@H](C6C[C@@H]4[C@@H]5[C@H]6OC(=O)C)OC)O)O)C` |
-| Aconiti Lateralis Radix Praeparata | ALRP | talatisamine | 441761 | BDCURAWBZJMFIK-FLDLCTCNSA-N | C24H39NO5 | 421.6 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2C[C@@H](C31)[C@]5(C[C@@H]([C@H]6C[C@@H]4[C@@H]5[C@H]6O)OC)O)OC)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | senbusine A | 20056299 | FNRMXORIKJLSGX-LZJIYQGWSA-N | C23H37NO6 | 423.5 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@]5(C[C@@H]([C@H]6C[C@@H]4[C@@H]5[C@H]6O)OC)O)O)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | senbusine B | 158049 | VPFSENNXPMNKNH-UHFFFAOYSA-N | C23H37NO6 | 423.5 | CCN1CC2(CCC(C34C2CC(C31)C5(C6C4CC(C6O)C(C5O)OC)O)O)COC |
-| Aconiti Lateralis Radix Praeparata | ALRP | neoline | 10003218 | XRARAKHBJHWUHW-QVUBZLTISA-N | C24H39NO6 | 437.6 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@]5(C[C@@H]([C@H]6C[C@@H]4[C@@H]5[C@H]6O)OC)O)OC)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | chasmanine | 20055812 | DBODJJZRZFZBBD-RIVIBFSZSA-N | C25H41NO6 | 451.6 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@]5(C[C@@H]([C@H]6C[C@@H]4[C@@H]5[C@H]6O)OC)O)OC)OC)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | fuziline | 20056301 | FPECZWKKKKZPPP-KNWHKMNCSA-N | C24H39NO7 | 453.6 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@H]([C@@H]6O)[C@H]([C@@H]5O)OC)O)OC)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | 14-acetyltalatizamine | 13343321 | ZHYCSYOPFIUANO-KAJSKAFVSA-N | C26H41NO6 | 463.6 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2C[C@@H](C31)[C@]5(C[C@@H]([C@H]6C[C@@H]4[C@@H]5[C@H]6OC(=O)C)OC)O)OC)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | hypaconine | 123132014 | BQTYHFZQSAKNQU-WIGGLDDKSA-N | C24H39NO8 | 469.6 | `CN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6O)([C@H]([C@@H]5O)OC)O)O)OC)OC)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | mesaconine | 122391247 | GQRPJUIKGLHLLN-VSTHTWNCSA-N | C24H39NO9 | 485.6 | `CN1C[C@@]2([C@@H](C[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6O)([C@H]([C@@H]5O)OC)O)O)OC)OC)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | aconine | 20054813 | SQMGCPHFHQGPIF-JIOYIOPFSA-N | C25H41NO9 | 499.6 | `CCN1C[C@@]2([C@@H](C[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6O)([C@H]([C@@H]5O)OC)O)O)OC)OC)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | benzoylhypaconine | 123132012 | MDFCJNFOINXVSU-SQZQQIIISA-N | C31H43NO9 | 573.7 | `CN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6OC(=O)C7=CC=CC=C7)([C@H]([C@@H]5O)OC)O)O)OC)OC)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | benzoyldeoxyaconine | 21598996 | XZXSGRFMYXBLES-ZDLTZKRLSA-N | C32H45NO9 | 587.7 | `CCN1C[C@@]2(CC[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6OC(=O)C7=CC=CC=C7)([C@H]([C@@H]5O)OC)O)O)OC)OC)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | benzoylmesaconitine | 24832659 | PULWZCUZNRVAHT-IJNXHYLPSA-N | C31H43NO10 | 589.7 | `CN1C[C@@]2([C@@H](C[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6OC(=O)C7=CC=CC=C7)([C@H]([C@@H]5O)OC)O)O)OC)OC)O)COC` |
-| Aconiti Lateralis Radix Praeparata | ALRP | benzoylaconine | 20055771 | DHJXZSFKLJCHLH-KYSNEVMMSA-N | C32H45NO10 | 603.7 | `CCN1C[C@@]2([C@@H](C[C@@H]([C@@]34[C@@H]2[C@H]([C@@H](C31)[C@@]5([C@@H]6[C@H]4C[C@@]([C@@H]6OC(=O)C7=CC=CC=C7)([C@H]([C@@H]5O)OC)O)O)OC)OC)O)COC` |
-| Astragali Radix | AR | formononetin | 5280378 | HKQYGTCOTHHOMP-UHFFFAOYSA-N | C16H12O4 | 268.26 | COC1=CC=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O |
-| Astragali Radix | AR | calycosin | 5280448 | ZZAJQOPSWWVMBI-UHFFFAOYSA-N | C16H12O5 | 284.26 | COC1=C(C=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O)O |
-| Astragali Radix | AR | (-)-methylnissolin | 14077830 | UOVGCLXUTLXAEC-WFASDCNBSA-N | C17H16O5 | 300.3 | `COC1=C(C2=C(C=C1)[C@@H]3COC4=C([C@@H]3O2)C=CC(=C4)O)OC` |
-| Astragali Radix | AR | isomucronulatol | 602152 | NQRBAPDEZYMKFL-UHFFFAOYSA-N | C17H18O5 | 302.32 | COC1=C(C(=C(C=C1)C2CC3=C(C=C(C=C3)O)OC2)O)OC |
-| Astragali Radix | AR | formononetin-7-O-β-D-glucoside | 442813 | MGJLSBDCWOSMHL-MIUGBVLSSA-N | C22H22O9 | 430.4 | `COC1=CC=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)CO)O)O)O` |
-| Astragali Radix | AR | formononetin 7-O-β-D-glucuronide | 71316927 | UMBVLOHYPOQARY-SXFAUFNYSA-N | C22H20O10 | 444.4 | `COC1=CC=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)C(=O)O)O)O)O` |
-| Astragali Radix | AR | calycosin-7-O-β-D-glucoside | 5318267 | WACBUPFEGWUGPB-MIUGBVLSSA-N | C22H22O10 | 446.4 | `COC1=C(C=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)CO)O)O)O)O` |
-| Astragali Radix | AR | calycosin-7-O-β-D-glucuronide | 101396032 | PTHMLNIQOFQYSP-SXFAUFNYSA-N | C22H20O11 | 460.4 | `COC1=C(C=C(C=C1)C2=COC3=C(C2=O)C=CC(=C3)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)C(=O)O)O)O)O)O` |
-| Astragali Radix | AR | (-)-methylinissolin-3-O-β-D-glucoside | 101679160 | PCIXSTFFMHVOMF-PBGSHFJYSA-N | C23H26O10 | 462.4 | `COC1=C(C2=C(C=C1)[C@@H]3COC4=C([C@@H]3O2)C=CC(=C4)O[C@H]5[C@@H]([C@H]([C@@H]([C@H](O5)CO)O)O)O)OC` |
-| Astragali Radix | AR | isomucronulatol 7-O-glucoside | 15689656 | SXHOGLPTLQBGDO-ZVSSUSCDSA-N | C23H28O10 | 464.5 | `COC1=C(C(=C(C=C1)[C@H]2CC3=C(C=C(C=C3)O[C@H]4[C@@H]([C@H]([C@@H]([C@H](O4)CO)O)O)O)OC2)O)OC` |
-| Astragali Radix | AR | cycloastragenol | 13943286 | WENNXORDXYGDTP-UOUCMYEWSA-N | C30H50O5 | 490.7 | `C[C@]12CC[C@@]34C[C@@]35CC[C@@H](C([C@@H]5[C@H](C[C@H]4[C@@]1(C[C@@H]([C@@H]2[C@]6(CC[C@H](O6)C(C)(C)O)C)O)C)O)(C)C)O` |
-| Astragali Radix | AR | astragaloside IV | 13943297 | QMNWISYXSJWHRY-YLNUDOOFSA-N | C41H68O14 | 785 | `C[C@]12CC[C@@]34C[C@@]35CC[C@@H](C([C@@H]5[C@H](C[C@H]4[C@@]1(C[C@@H]([C@@H]2[C@]6(CC[C@H](O6)C(C)(C)O)C)O)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)(C)C)O[C@H]8[C@@H]([C@H]([C@@H](CO8)O)O)O` |
-| Astragali Radix | AR | astragaloside II | 13996693 | AYWNHWGQTMCQIV-PENCHUSISA-N | C43H70O15 | 827 | `CC(=O)O[C@@H]1[C@H]([C@@H](CO[C@H]1O[C@H]2CC[C@]34C[C@]35CC[C@@]6([C@H]([C@H](C[C@]6([C@@H]5C[C@@H]([C@H]4C2(C)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)C)O)[C@]8(CC[C@H](O8)C(C)(C)O)C)C)O)O` |
-| Astragali Radix | AR | isoastragaloside II | 60148655 | SMZYCXAYGPGYRS-NGTUZWGPSA-N | C43H70O15 | 827 | `CC(=O)O[C@H]1[C@@H](CO[C@H]([C@@H]1O)O[C@H]2CC[C@]34C[C@]35CC[C@@]6([C@H]([C@H](C[C@]6([C@@H]5C[C@@H]([C@H]4C2(C)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)C)O)[C@]8(CC[C@H](O8)C(C)(C)O)C)C)O` |
-| Astragali Radix | AR | astragaloside I | 13996685 | KXHCYYSIAXMSPA-OOCCOBHWSA-N | C45H72O16 | 869 | `CC(=O)O[C@H]1[C@@H](CO[C@H]([C@@H]1OC(=O)C)O[C@H]2CC[C@]34C[C@]35CC[C@@]6([C@H]([C@H](C[C@]6([C@@H]5C[C@@H]([C@H]4C2(C)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)C)O)[C@]8(CC[C@H](O8)C(C)(C)O)C)C)O` |
-| Astragali Radix | AR | isoastragaloside I | 60148697 | HVPKALQHGQMJER-XOUPSZAESA-N | C45H72O16 | 869 | `CC(=O)O[C@@H]1CO[C@H]([C@@H]([C@H]1O)OC(=O)C)O[C@H]2CC[C@]34C[C@]35CC[C@@]6([C@H]([C@H](C[C@]6([C@@H]5C[C@@H]([C@H]4C2(C)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)C)O)[C@]8(CC[C@H](O8)C(C)(C)O)C)C` |
-| Astragali Radix | AR | acetylastragaloside I | 101665834 | KWZSMZJAHIHRRT-OXLQADOBSA-N | C47H74O17 | 911.1 | `CC(=O)O[C@@H]1CO[C@H]([C@@H]([C@H]1OC(=O)C)OC(=O)C)O[C@H]2CC[C@]34C[C@]35CC[C@@]6([C@H]([C@H](C[C@]6([C@@H]5C[C@@H]([C@H]4C2(C)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)C)O)[C@]8(CC[C@H](O8)C(C)(C)O)C)C` |
-| Astragali Radix | AR | soyasaponin I | 122097 | PTDAHAWQAGSZDD-IOVCITQVSA-N | C48H78O18 | 943.1 | `C[C@H]1[C@@H]([C@H]([C@H]([C@@H](O1)O[C@@H]2[C@H]([C@H]([C@H](O[C@H]2O[C@@H]3[C@H]([C@@H]([C@H](O[C@H]3O[C@H]4CC[C@]5([C@H]([C@@]4(C)CO)CC[C@@]6([C@@H]5CC=C7[C@]6(CC[C@@]8([C@H]7CC(C[C@H]8O)(C)C)C)C)C)C)C(=O)O)O)O)CO)O)O)O)O)O` |
-| Astragali Radix | AR | agroastragaloside III | 101919088 | HOCJNIQHRKBJPF-ZJAHRDLLSA-N | C51H82O21 | 1031.2 | `CC(=O)O[C@H]1[C@@H](CO[C@H]([C@@H]1OC(=O)C)O[C@H]2CC[C@]34C[C@]35CC[C@@]6([C@H]([C@H](C[C@]6([C@@H]5C[C@@H]([C@H]4C2(C)C)O[C@H]7[C@@H]([C@H]([C@@H]([C@H](O7)CO)O)O)O)C)O)[C@]8(CC[C@H](O8)C(C)(C)O[C@H]9[C@@H]([C@H]([C@@H]([C@H](O9)CO)O)O)O)C)C)O` |
+createTime: 2026/09/18 10:07:51
+permalink: /projects/4y0o10jk/
 
+index: false
+---
+
+::: table fullwidth title="表1 候选治疗靶点归属分类汇总"
+|分类|	靶点数|	占候选靶点比例|	说明|
+|----|----|----|----|
+|AL-Specific|	13|	9.4%|	仅由附子成分作用|
+|AL-Dominant|	13|	9.4%|	共有靶点中附子成分主导|
+|AR-Dominant|	19|	13.8%|	共有靶点中黄芪成分主导|
+|AR-Specific|	69|	50.0%|	仅由黄芪成分作用|
+|Balanced|	24|	17.4%|	黄芪与附子成分贡献均衡|
+|合计|	138|	100%|
+:::
