@@ -21,5 +21,7 @@ git remote -v
 git remote add origin https://github.com/cmsnut/ipaclab.git
 
 # 4.
+git add .
+git commit -m "new"
 git push -f origin main
 ```
