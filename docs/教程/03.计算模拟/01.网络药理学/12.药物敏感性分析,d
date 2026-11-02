@@ -1,0 +1,114 @@
+药物敏感性分析在整合性研究中的功能，是将“靶点或分子分型”与“治疗反应”连接起来，回答某一分子特征是否对应特定药物的敏感性或耐药性。在网络药理学与生物信息学实践中，它通常以**计算预测**的形式嵌入分析链条，而非直接进行湿实验药敏检测。近两年的方法演进集中在三个方向：**基于细胞系药物基因组学的转录组反卷积预测持续工具化、机器学习/深度学习模型向多组学与可解释性扩展、以及单细胞与空间分辨率的药物敏感性推断快速兴起**。实验测定方法则作为证据锚定层存在。以下按方法学逻辑归纳为四个类别。
+
+---
+
+### 类别一：基于细胞系药物基因组学的bulk转录组反卷积预测
+
+这是网络药理学与生物信息学中最主流的药物敏感性计算路径。其基本逻辑是：以大规模癌细胞系药物筛选数据（GDSC、CTRP、CCLE等）为训练集，建立基因表达与药物反应（IC₅₀或AUC）之间的统计模型，再将该模型应用于目标样本的表达谱，推断其对各药物的预测敏感性。
+
+**代表性工具**：
+
+- **pRRophetic**：基于岭回归，使用CGP（Cancer Genome Project）细胞系数据训练，输出预测IC₅₀。其经典调用方式为`pRRopheticPredict`，参数常设为`tissueType = "solid"`、`dataset = "cgp2014"`，并配合ComBat进行批次校正。pRRophetic在2025—2026年仍是高频使用的工具，例如在胰腺导管腺癌的研究中用于评估138种化合物在高/低风险组之间的敏感性差异；在三阴性乳腺癌中用于分析风险评分与138种药物临床反应的关系。
+- **oncoPredict**：可视为pRRophetic的升级与泛化版本，同样基于岭回归，支持GDSC1、GDSC2和CTRP等多个训练数据集，核心函数为`calcPhenotype`。其流程包括基因去重/汇总、批次校正和低方差基因过滤，再以训练集模型预测测试集药物敏感性。oncoPredict在2025—2026年的应用极为广泛：在肺腺癌中用于比较高低风险组的IC₅₀差异；在肝细胞癌中评估铁死亡相关基因特征对应的药物敏感性；在头颈鳞癌中识别与高频突变基因相关的药物敏感性。
+
+该路径的核心优势是**通量高、可直接应用于TCGA或GEO等bulk队列**，且训练数据来自大规模细胞系药物筛选，具有一定的系统药理学基础。其结构性局限在于：预测模型的可靠性高度依赖训练集与目标组织在细胞系组成、微环境和药物暴露条件上的可比性；预测的IC₅₀是**细胞系水平的统计外推**，并非患者或组织水平的真实药敏；此外，不同工具（pRRophetic与oncoPredict）因训练集版本和预处理差异，对同一药物的预测值可能不完全一致。
+
+**推荐文献1：Multiomic machine learning on lactylation for molecular typing and prognosis of lung adenocarcinoma. *Scientific Reports*, 2025, 15: 87419.**
+链接：https://www.nature.com/articles/s41598-025-87419-4
+
+该研究使用oncoPredict，以GDSC为训练集，预测TCGA肺腺癌队列中各样本对多种化疗药物的IC₅₀，发现低风险组对多数化疗药物IC₅₀更低，提示其更敏感。文中对oncoPredict的岭回归建模流程、训练集来源（GDSC）和`calcPhenotype`调用方式的描述较为完整，是oncoPredict应用的方法学范本。
+
+**推荐文献2：Integrative multimodal transcriptomics identifies a cancer-associated fibroblast membrane signature for predicting prognosis and therapeutic response in pancreatic ductal adenocarcinoma. *Journal of Molecular Medicine*, 2026, 104: 1–18（以期刊记录为准）.**
+链接：https://link.springer.com/article/10.1007/s00109-026-02669-7
+
+该研究使用pRRophetic v0.5，以`pRRopheticPredict`函数、`tissueType = "solid"`和`dataset = "cgp2014"`预测TCGA-PAAD队列对138种化合物的敏感性，并比较PaFMS高/低风险组的药物敏感性差异。其价值在于展示了pRRophetic在**多模态转录组整合框架**中的标准嵌入方式，包括参数设置和统计比较流程。
+
+
+### 类别二：机器学习与深度学习药物反应预测
+
+这类方法不局限于“细胞系训练+bulk反卷积”的线性框架，而是利用多组学特征、药物分子结构和网络拓扑信息，构建非线性预测模型。近两年的趋势是**从传统机器学习（随机森林、SVM、XGBoost）向图神经网络、注意力机制和可解释模型扩展**。
+
+**具体方法与工具**：
+
+- **传统机器学习**：随机森林、LASSO、XGBoost等广泛用于基于细胞系多组学特征预测药物敏感性。一项2025年的研究整合GDSC多组学和临床数据，使用45种机器学习算法预测肺癌化疗反应，属于大规模算法比较与应用型工作。
+- **图神经网络与多组学融合**：**DeepKGI**（2025）通过跨层图融合模块同时提取药物分子结构特征和多组学相互作用，引入注意力驱动的跨模态融合策略，并在基准数据集上达到Pearson相关系数0.945、RMSE 0.899，同时包含关键基因识别组件以增强生物学可解释性。**MoGraphDRP**（2026）融合多组学（基因表达、甲基化、通路）与药物分子图，使用双线性注意力机制，能够重建缺失的IC₅₀值并区分敏感/耐药组合。**OT-GNN**（2025）利用最优传输理论整合药物—靶点先验知识与基因表达谱，追求可解释且稳健的药物反应预测。
+- **混合深度学习**：HybridDLDR（2025）针对胶质母细胞瘤，结合分子描述符和基因表达数据预测IC₅₀，在50次置换中保持稳定性能。
+
+该路径的优势是**能够捕获复杂的非线性关系和跨模态交互**，在基准数据集上往往优于线性反卷积方法；部分模型通过注意力权重或关键基因识别提供了机制层面的可解释性。局限在于：模型性能高度依赖训练数据的规模和质量，跨数据集泛化能力仍需审慎评估；深度学习模型的“黑箱”属性在临床转化中面临可解释性挑战，即使引入了注意力机制，其生物学含义仍需独立验证。
+
+**推荐文献1：DeepKGI: Cross-layer graph fusion and interpretable key gene identification for cancer drug response prediction. *Applied Soft Computing*, 2025, 171: 112837（以期刊记录为准）.**
+链接：https://www.sciencedirect.com/science/article/abs/pii/S1568494625016576
+
+该文在方法学上具有代表性：跨层图融合处理药物结构，注意力机制整合多组学，并显式设计关键基因识别模块以提升可解释性；定量结果（Pearson 0.945、RMSE 0.899）在多个基准上优于现有方法。对于希望从线性反卷积升级到非线性多组学模型的实践者，这是2025年最直接的方法学参考。
+
+**推荐文献2（传统机器学习大规模比较）：Integrative machine learning approach for forecasting lung cancer chemosensitivity: From algorithm to cell line validation. *Computational and Structural Biotechnology Journal*, 2025, 27: 3307–3318.**
+链接：https://pubmed.ncbi.nlm.nih.gov/（以标题检索）
+
+该研究基于GDSC多组学和临床数据，系统比较了45种机器学习算法预测肺癌化疗反应的表现，并进行了细胞系验证。其价值在于展示了传统机器学习在当前药物敏感性预测中的**算法选择空间和基准性能**，适合作为“非线性模型是否优于线性反卷积”这一决策的对照依据。
+
+
+### 类别三：单细胞与空间分辨率的药物敏感性预测
+
+bulk反卷积预测的是“组织平均水平”的药物敏感性，无法区分同一肿瘤内不同细胞状态或亚克隆对药物的差异反应。单细胞和空间转录组将药物敏感性分析推进到**细胞状态、亚群和空间邻域**层面。这是近两年方法学增量最显著的方向。
+
+**具体方法与工具**：
+
+- **基于转录响应连接性的预测**：**scFOCAL**（2026，*Nature Communications*）利用LINCS L1000数据库中化合物的转录响应特征，计算其与单细胞转录状态的“连接性”（connectivity），量化不同胶质母细胞瘤细胞状态对药物的敏感或耐药程度，并据此预测联合用药协同性；研究在体外、离体和体内进行了验证，并识别出OLIG2抑制剂与Depatux-M的协同组合。
+- **单细胞水平的蛋白质药敏分型**：**μPharma**（2026）是一个微流控+AI平台，不直接进行药物暴露，而是通过定量治疗前蛋白标志物（表达、磷酸化状态、空间分布和细胞形态），用机器学习预测单细胞药物敏感性；在T-ALL中验证了对达沙替尼（pLCK）和维奈克拉（pBCL2）的预测， assay可在4小时内完成。
+- **bulk药物敏感性反卷积到细胞亚型**：**CLIMB+CLIFF**（2026，*PLOS Computational Biology*）是一个两步框架：CLIMB先将bulk RNA-seq反卷积为细胞类型组成和表达，CLIFF再将bulk水平的细胞活力（药物敏感性）反卷积为**细胞亚型特异性和单细胞水平的药敏谱**。在白血病细胞系混合实验中，CLIFF对细胞活力的预测PCC达到0.80（所有21种条件），高于基于相关性的方法和线性回归，且是唯一直接预测细胞活力而非仅给出敏感性评分的方法。
+- **空间药物响应预测**：**M3SpaDE**（2026）面向空间转录组数据预测空间分辨的药物敏感性，将药物响应预测从“样本水平”推向“空间spot水平”。
+
+该路径的核心优势是**分辨率最高，能够揭示bulk预测所遮蔽的瘤内异质性和微环境驱动的耐药**；scFOCAL等框架还支持基于细胞状态的联合用药预测。局限在于：单细胞药物敏感性数据本身的标注稀缺，多数方法依赖“转录响应连接性”或“治疗前标志物”作为代理，而非直接测量单细胞存活；空间方法仍处于早期，跨平台稳健性和临床验证有限。
+
+**推荐文献1：Drug and single-cell gene expression integration identifies sensitive and resistant glioblastoma cell populations. *Nature Communications*, 2026, 17: 99.**
+链接：https://www.nature.com/articles/s41467-025-67783-5
+
+scFOCAL是单细胞药物敏感性预测领域2026年最具方法学完整性的工作之一：它不依赖单细胞药物响应标签，而是通过LINCS L1000转录响应签名与细胞状态的连接性推断敏感/耐药，并在体外、离体和体内进行了验证。对于需要在单细胞分辨率上讨论“哪类细胞状态对哪类药物敏感”的研究，这是最直接的方法学模板。
+
+**推荐文献2：Computational deconvolution of drug sensitivity via single-cell–to–bulk transcriptome mapping. *PLOS Computational Biology*, 2026, 22(10): e1014862.**
+链接：https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014862
+
+CLIMB+CLIFF解决的是一个bulk与单细胞之间的“桥梁问题”：如何将bulk水平的药敏测量分解到细胞亚型。其验证设计（已知细胞系混合物的ground truth比较）和方法学定位（直接预测细胞活力而非相关性评分）使其在“从bulk药敏推断细胞亚型药敏”这一特定任务上具有明确的参考价值。
+
+
+### 类别四：实验测定——药敏分析的证据锚定层
+
+计算预测的最终可靠性需要实验证据锚定。药物敏感性实验方法可分为体外、体内和类器官/PDX三个层次。
+
+**具体方法**：
+
+- **体外细胞水平**：MTT/CCK-8法检测代谢活性，流式细胞术分析凋亡/周期，以及传统的MIC测定（主要用于抗感染药敏）。在网络药理学相关研究中，MTT/CCK-8是验证“预测敏感”最常用的低成本实验终点。
+- **基因型/表达谱关联**：通过NGS或PCR检测耐药相关突变（如EGFR突变与靶向药敏感性），或用RNA-seq分析通路表达变化与药敏的关联。这一路径与计算预测的“分子特征—药敏”逻辑最为接近。
+- **体内模型**：动物模型和PDX用于在整体水平评估药物疗效，是计算预测走向临床前验证的关键环节。
+- **类器官/PDX药敏检测**：患者来源类器官（PDO）和PDX能够在一定程度上保留肿瘤异质性和微环境，是连接细胞系预测与患者反应之间的重要桥梁。
+
+实验路径的优势是**证据层级最高、可直接观察表型**；局限是通量远低于计算预测，成本高，且体外培养可能丢失微环境依赖的耐药机制。在网络药理学研究中，实验药敏通常不作为主体分析方法，而是作为**对关键计算预测结论的验证层**。
+
+**推荐文献（方法学综述）** ：“药物敏感性分析简述”（2025）对体外、体内和计算预测三大类方法做了简明梳理，覆盖纸片扩散法、MIC、MTT/CCK-8、流式、基因型检测、动物模型和类器官/PDX等，适合作为实验方法类别的入门参考。
+
+
+### 四类方法的比较与选用逻辑
+
+| 类别 | 核心逻辑 | 输出 | 主要优势 | 主要局限 | 在网络药理学/生物信息学中的典型位置 |
+|---|---|---|---|---|---|
+| **bulk反卷积预测** | 细胞系药敏模型外推到bulk表达谱 | 预测IC₅₀ / AUC | 通量高、可直接用于TCGA/GEO队列、工具成熟 | 细胞系外推偏差、工具间不一致、非患者真实药敏 | **计算预测的主分析层** |
+| **机器学习/深度学习** | 多组学+药物特征的非线性映射 | 药敏评分 / IC₅₀ | 可捕获复杂交互、部分模型可解释 | 数据依赖强、泛化待验证、黑箱性 | 线性反卷积的**升级或补充** |
+| **单细胞/空间预测** | 细胞状态/亚群/空间邻域的药敏推断 | 亚群/单细胞/spot水平的敏感性 | 分辨率最高、可揭示异质性耐药 | 标签稀缺、代理指标、空间方法早期 | 核心结论的**深化层** |
+| **实验测定** | 直接测量药物对细胞/组织的效应 | 存活率、IC₅₀、MIC | 证据层级最高 | 通量低、成本高、体外偏差 | **验证/锚定层** |
+
+在实际研究中，最常见的组合是：**以oncoPredict或pRRophetic进行bulk水平的药物敏感性预测，比较不同风险组或分子亚型之间的IC₅₀差异；对关键发现，以机器学习模型或多数据集（GDSC/CTRP）进行一致性检验；如有单细胞或空间数据，进一步将药敏信号定位到细胞状态或空间生态位；最终在实验层面以CCK-8或类器官模型进行锚定**。
+
+**本文（Hou等）的位置**：该研究**未纳入药物敏感性分析**，其技术链条终止于分子对接的结构验证。这与其研究定位有关——该文聚焦于“药对—靶点—通路”的机制解析，而非“靶点特征—治疗反应”的转化预测。若后续研究希望将HCHA识别的枢纽靶点（尤其是跨药对的桥接靶点）与CHF的药物治疗反应联系起来，可考虑：以oncoPredict或pRRophetic在CHF心肌转录组（如GSE57338）中预测各样本对ACEI/ARNI、β受体阻滞剂、MRA、SGLT2i相关药物或候选化合物的敏感性，检验HCHA枢纽靶点表达或风险评分是否与特定药物敏感性相关；或进一步利用单细胞层面的药敏推断方法，判断桥接靶点高表达的细胞亚群是否对应特定的药物敏感/耐药状态。这将是把“机制发现”推向“治疗反应预测”的自然延伸。
+
+
+**参考文献**
+
+1. Multiomic machine learning on lactylation for molecular typing and prognosis of lung adenocarcinoma. *Scientific Reports*, 2025, 15: 87419. https://www.nature.com/articles/s41598-025-87419-4 
+2. Integrative multimodal transcriptomics identifies a cancer-associated fibroblast membrane signature for predicting prognosis and therapeutic response in pancreatic ductal adenocarcinoma. *Journal of Molecular Medicine*, 2026. https://link.springer.com/article/10.1007/s00109-026-02669-7 
+3. DeepKGI: Cross-layer graph fusion and interpretable key gene identification for cancer drug response prediction. *Applied Soft Computing*, 2025, 171: 112837. https://www.sciencedirect.com/science/article/abs/pii/S1568494625016576 
+4. Drug and single-cell gene expression integration identifies sensitive and resistant glioblastoma cell populations. *Nature Communications*, 2026, 17: 99. https://www.nature.com/articles/s41467-025-67783-5 
+5. μPharma: A microfluidic, AI-driven pharmacotyping platform for single-cell drug sensitivity prediction in leukemia. *Cell Reports Medicine* (以期刊记录为准), 2026. https://www.sciencedirect.com/science/article/abs/pii/S2666634025003939 
+6. Computational deconvolution of drug sensitivity via single-cell–to–bulk transcriptome mapping. *PLOS Computational Biology*, 2026, 22(10): e1014862. https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1014862 
+7. 药物敏感性分析简述. 2025. http://mp.weixin.qq.com/s?__biz=MzU2NTY1ODk0OQ==&mid=2247483994&idx=1&sn=152604ad79df9a6667dff6947c8081da 
+8. Integrative machine learning approach for forecasting lung cancer chemosensitivity: From algorithm to cell line validation. *Computational and Structural Biotechnology Journal*, 2025, 27: 3307–3318. https://pubmed.ncbi.nlm.nih.gov/ 
+9. MoGraphDRP: Multi-omics and graph fusion with bilinear attention for predicting drug sensitivity. *PLOS ONE*, 2026. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0344478（以实际DOI为准）

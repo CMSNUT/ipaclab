@@ -21,6 +21,8 @@ git remote -v
 git remote add origin https://github.com/cmsnut/ipaclab.git
 
 # 4.
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
 git add .
 git commit -m "new"
 git push -f origin main
