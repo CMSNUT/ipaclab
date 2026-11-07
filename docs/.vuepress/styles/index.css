@@ -669,3 +669,216 @@
 [class*="table-container"] > *:last-child {
   order: -1;  /* 把最后一个子元素（标题）提到最前 */
 }
+
+/* 自定义摘要容器样式 */
+/* 摘要容器整体样式 */
+.custom-summary-box {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden; /* 确保子元素背景不溢出圆角 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 标题栏：核心的渐变背景 */
+.custom-summary-title {
+  background: linear-gradient(90deg,  #4b3c83 0%, #7686e0 100%); /* 示例渐变，可按需调整 */
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 内容区域背景 */
+.custom-summary-content {
+  background-color: #f9f9f9;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* 适配深色模式（可选） */
+html.dark .custom-summary-content {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+}
+
+/* ==========================================
+   1. 标题主容器（居中，宽度随文字自适应）
+   ========================================== */
+/* ==========================================
+   标题主容器：调整上下间距
+   ========================================== */
+.custom-title-block {
+  display: table;        
+  /* 修改这里：上方留 3rem，下方留 1rem（根据需要微调） */
+  margin: 3rem auto 1rem auto;     
+  position: relative;    
+  padding: 12px 40px;
+  
+  background: linear-gradient(90deg, #473d75 0%, #8a90d9 100%);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* ==========================================
+   🚨 新增：清除紧跟在标题后面的正文的默认上边距
+   ========================================== */
+.custom-title-block + p,
+.custom-title-block + ul,
+.custom-title-block + ol,
+.custom-title-block + div {
+  margin-top: 0.5rem !important; /* 只保留一点点，或者直接写 0 */
+}
+
+/* ==========================================
+   上下线条（保持不变）
+   ========================================== */
+.custom-title-block::before,
+.custom-title-block::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #e2e8f0; 
+}
+
+.custom-title-block::before {
+  top: -8px;
+  left: 0;
+  background-image: linear-gradient(to left, #3b82f6, #3b82f6);
+  background-repeat: no-repeat;
+  background-position: right center;
+  animation: stretchLine 4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.custom-title-block::after {
+  bottom: -8px;
+  left: 0;
+  background-image: linear-gradient(to right, #3b82f6, #3b82f6);
+  background-repeat: no-repeat;
+  background-position: left center;
+  animation: stretchLine 4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes stretchLine {
+  0% { background-size: 0px 100%; }
+  100% { background-size: 100% 100%; }
+}
+
+/* 二级标题：渐变标题栏样式 */
+/* 二级标题：渐变卡片样式（极粗字体版） */
+h2 {
+  background: linear-gradient(90deg, #4b3c83 0%, #7686e0 100%) !important;
+  color: #fff !important;
+  padding: 8px 20px !important; 
+  font-size: 1.1rem !important;
+  
+  /* 💡 1. 加粗核心修改 */
+  font-weight: 900 !important; /* 设为最高字重 */
+  -webkit-text-stroke: 0.5px #fff; /* 文字描边，视觉上更粗更饱满 */
+  /* 建议指定粗体支持较好的中文字体 */
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif !important; 
+  
+  letter-spacing: 1px !important;
+  border-radius: 8px 8px 0 0 !important; 
+  margin: 1.5rem 0 0 0 !important;
+  border: none !important;
+  line-height: 1.4 !important;
+  box-shadow: none !important; 
+}
+
+/* 覆盖标题内子元素的颜色和字重 */
+h2 a,
+h2 a:visited,
+h2 a:hover,
+h2 span,
+h2 strong,
+h2 em,
+h2 code {
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: inherit !important; /* 继承 h2 的极粗字重 */
+}
+
+/* 深色模式保持白色 */
+html.dark h2,
+html.dark h2 a,
+html.dark h2 span,
+html.dark h2 strong {
+  color: #fff !important;
+}
+
+/* ========================================
+   H3：三级标题（左侧强调线 + 浅色底）
+   ======================================== */
+h3 {
+  /* 浅紫色背景，与 H2 呼应 */
+  background-color: #f4f3f9 !important; 
+  /* 左侧紫色粗实线（取 H2 渐变起始色） */
+  border-left: 5px solid #4b3c83 !important; 
+  color: #4b3c83 !important; /* 文字使用深紫色 */
+  padding: 6px 15px !important; 
+  font-size: 1.05rem !important;
+  font-weight: 800 !important; /* 次极粗 */
+  border-radius: 0 6px 6px 0 !important; /* 只有右侧有圆角 */
+  margin: 1.2rem 0 0.8rem !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  line-height: 1.4 !important;
+}
+
+/* 覆盖 H3 内部子元素的颜色 */
+h3 a, h3 span, h3 strong { 
+  color: #4b3c83 !important; 
+  font-weight: inherit !important;
+  text-decoration: none !important;
+}
+
+/* ========================================
+   H4：四级标题（左侧细线 + 极简风格）
+   ======================================== */
+h4 {
+  background: transparent !important; /* 无背景色 */
+  color: #4b3c83 !important;
+  font-size: 1rem !important;
+  font-weight: bold !important;
+  /* 左侧亮紫色细线（取 H2 渐变结束色） */
+  border-left: 4px solid #7686e0 !important; 
+  padding: 2px 0 2px 10px !important; 
+  margin: 1rem 0 0.5rem !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  line-height: 1.4 !important;
+}
+
+/* 覆盖 H4 内部子元素 */
+h4 a, h4 span, h4 strong { 
+  color: #4b3c83 !important; 
+  font-weight: inherit !important;
+  text-decoration: none !important;
+}
+
+/* ========================================
+   深色模式适配 (Dark Mode)
+   ======================================== */
+html.dark h3 {
+  background-color: #2a2538 !important; /* 深色模式下的暗紫色背景 */
+  border-left-color: #7686e0 !important;
+  color: #e0e0e0 !important; /* 文字变浅 */
+}
+html.dark h3 a, html.dark h3 span, html.dark h3 strong {
+  color: #e0e0e0 !important;
+}
+
+html.dark h4 {
+  border-left-color: #7686e0 !important;
+  color: #e0e0e0 !important;
+}
+html.dark h4 a, html.dark h4 span, html.dark h4 strong {
+  color: #e0e0e0 !important;
+}

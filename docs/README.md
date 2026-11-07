@@ -23,9 +23,11 @@ comment: false
 ---
 # docs
 
-::: info 本目录下共 4 个条目
+::: info 本目录下共 5 个条目
 :::
 
+- [案例](%E6%A1%88%E4%BE%8B/README.md)
 - [更多](%E6%9B%B4%E5%A4%9A/README.md)
+- [技术](%E6%8A%80%E6%9C%AF/README.md)
 - [教程](%E6%95%99%E7%A8%8B/README.md)
 - [课题](%E8%AF%BE%E9%A2%98/README.md)
