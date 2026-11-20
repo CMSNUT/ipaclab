@@ -1,0 +1,48 @@
+{
+  "name": "ipac",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "a web of IPAC Lab",
+  "author": "CMSNUT <dhxia@snut.edu.cn>",
+  "license": "MIT",
+  "scripts": {
+    "gen:readme": "node ./docs/.vuepress/scripts/genReadme.cjs",
+    "gen:instruments": "node ./docs/.vuepress/scripts/genInstruments.cjs",
+    "add:file": "node ./docs/.vuepress/scripts/addFile.cjs",
+    "init:column": "node ./docs/.vuepress/scripts/initColumn.cjs",
+    "convert:table": "node ./docs/.vuepress/scripts/convertTable.cjs",
+    "docs:build": "npm run gen:instruments && npm run gen:readme && vuepress build docs --clean-cache --clean-temp",
+    "docs:dev": "npm run gen:instruments && npm run gen:readme && vuepress dev docs",
+    "docs:dev-clean": "npm run gen:instruments && npm run gen:readme && vuepress dev docs --clean-cache --clean-temp",
+    "docs:preview": "http-server docs/.vuepress/dist",
+    "vp-update": "npx vp-update"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.2.0",
+    "@vuepress/bundler-vite": "2.0.0-rc.31",
+    "@vuepress/plugin-markdown-container": "^2.0.0-rc.137",
+    "http-server": "^14.1.1",
+    "typescript": "^6.0.3",
+    "vue": "^3.5.42",
+    "vuepress": "2.0.0-rc.31",
+    "vuepress-theme-plume": "1.0.0-rc.210"
+  },
+  "engines": {
+    "node": "^20.19.0 || >=22.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "citation-js": "^0.8.2",
+    "echarts": "^6.1.0",
+    "flowchart.ts": "^3.0.1",
+    "markmap-lib": "^0.18.12",
+    "markmap-toolbar": "^0.18.12",
+    "markmap-view": "^0.18.12",
+    "mermaid": "^11.17.2",
+    "ogl": "^1.0.11",
+    "xlsx": "^0.18.5"
+  },
+  "allowScripts": {
+    "citation-js@0.8.2": true
+  }
+}

@@ -1,0 +1,93 @@
+name: deploy
+
+on:
+  # 每当 push 到 main 分支时触发部署
+  # Deployment is triggered whenever a push is made to the main branch.
+  push:
+    branches: [main]
+  # 手动触发部署
+  # Manually trigger deployment
+  workflow_dispatch:
+
+# 新添加的
+permissions:
+  contents: write
+  deployments: write   # ← 清理部署记录需要此权限
+  actions: write        # ← 删除 workflow runs 需要此权限
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      # - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          # "Last updated time" and other git log-related information require fetching all commit records.
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          # 选择要使用的 node 版本
+          node-version: 24
+
+      # 安装依赖
+      # Install dependencies
+      - name: Install Dependencies
+        run: npm ci
+
+
+
+      # 运行构建脚本
+      # Run the build script
+      - name: Build VuePress site
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: npm run docs:build
+
+
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
+      - name: Deploy to GitHub Pages
+        # uses: crazy-max/ghaction-github-pages@v4
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          # 部署到 gh-pages 分支
+          target_branch: gh-pages
+          # 部署目录为 VuePress 的默认输出目录
+          build_dir: docs/.vuepress/dist
+        env:
+          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ↓↓↓ 清理旧部署记录，加在部署步骤之后 ↓↓↓
+      - name: 清理旧部署记录
+        uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: github-pages
+          onlyRemoveDeployments: true
+
+      # ↓↓↓ 清理旧的 workflow runs，保留最新 1 条 ↓↓↓
+      - name: 清理旧运行记录
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+             // workflow_id: context.workflow,
+	      workflow_id: 'deploy.yml',
+              per_page: 100,
+            })
+            // 跳过最新一条，删除其余
+            for (const run of runs.data.workflow_runs.slice(1)) {
+              await github.rest.actions.deleteWorkflowRun({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: run.id,
+              })
+              console.log(`已删除 run #${run.run_number}`)
+            }
