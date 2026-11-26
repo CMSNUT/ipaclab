@@ -33,6 +33,7 @@
   "dependencies": {
     "chart.js": "^4.5.1",
     "citation-js": "^0.8.2",
+    "diskpart": "^1.0.2",
     "echarts": "^6.1.0",
     "flowchart.ts": "^3.0.1",
     "markmap-lib": "^0.18.12",
